@@ -38,6 +38,10 @@ module.exports = {
         test: /\.html$/,
         loader: 'file-loader?name=[name].[ext]',
       },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
   },
 };

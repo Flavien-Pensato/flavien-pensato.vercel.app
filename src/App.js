@@ -1,28 +1,40 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link,
+  NavLink,
 } from 'react-router-dom';
 
-const App = () => (
-  <Router>
-    <div className="app">
-      <div className="app__menu">
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/topics">Topics</Link></li>
-        </ul>
-      </div>
+import Footer from './modules/footer.component';
 
-      <div className="app__content">
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/topics" component={Topics} />
-      </div>
-    </div>
-  </Router>
-);
+import './app.scss';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    console.log('hello');
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="app">
+          <div className="app__menu">
+            <nav className="menu">
+              <ul>
+                <li><NavLink to="/" className="menu__link" activeClassName="menu__link--selected">Home</NavLink></li>
+              </ul>
+            </nav>
+          </div>
+
+          <div className="app__content">
+            Content
+          </div>
+          <div className="app__footer"><Footer /></div>
+        </div>
+      </Router>
+    );
+  }
+}
 
 export default App;
