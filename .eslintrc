@@ -1,0 +1,11 @@
+{
+  "extends": "m6web",
+  "rules": {
+    "jsx-a11y/anchor-is-valid": false
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jasmine": true
+  },
+}
