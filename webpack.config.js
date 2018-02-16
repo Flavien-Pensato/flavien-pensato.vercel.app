@@ -18,8 +18,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-    new UglifyJSPlugin(),
-    new CleanWebpackPlugin(['dist']),
+    // new UglifyJSPlugin(),
+    // new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: 'index.template.ejs',
