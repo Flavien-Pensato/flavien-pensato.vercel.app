@@ -11,6 +11,8 @@ footer {
 
 .footer__title {
   font-size: 3rem;
+  color: gold;
+
 }
 
 .footer__list-logos {
@@ -35,12 +37,19 @@ footer {
   border: 5px solid gold;
   border-radius: 50%;
 
-  transition: transform .6s ease; 
+  background-color: white;
+
+  transition: all .6s ease; 
 
   &:hover {
-    background-color: black;
+    border-color: rgb(255, 225, 57);
     color: white;
 
     transform: scale(1.2);
+
+    img {
+      filter: invert(.5) sepia(255)
+    }  
   }
 }
+

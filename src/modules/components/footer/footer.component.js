@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import github from './github.svg';
 import twitter from './twitter.svg';
@@ -19,19 +20,25 @@ class Footer extends React.Component {
         <h1 className="footer__title">Get in touch</h1>
         <ul className="footer__list-logos">
           <li>
-            <span className="footer__social-network-logo">
-              <img alt="Github" src={github} />
-            </span>
+            <a href="https://github.com/Flavien-Pensato">
+              <span className="footer__social-network-logo">
+                <img alt="Github" src={github} />
+              </span>
+            </a>
           </li>
           <li>
-            <span className="footer__social-network-logo">
-              <img alt="Twitter" src={twitter} />
-            </span>
+            <a href="https://twitter.com/Flavien_Pensato">
+              <span className="footer__social-network-logo">
+                <img alt="Twitter" src={twitter} />
+              </span>
+            </a>
           </li>
           <li>
-            <span className="footer__social-network-logo">
-              <img alt="Linkedin"src={linkedin} />
-            </span>
+            <a href="https://www.linkedin.com/in/flavien-pensato-708190a7/">
+              <span className="footer__social-network-logo">
+                <img alt="Linkedin"src={linkedin} />
+              </span>
+            </a>
           </li>
         </ul>
       </footer>
