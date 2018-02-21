@@ -8,54 +8,35 @@ import './footer.scss';
 
 
 class Footer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  hoverHandler = (event) => {
-    const { target } = event;
-    if (target.tagName === "SPAN") {
-      console.log('in');
-      target.classList.remove('.footer__social-network-logo--blur');
-      window.requestAnimationFrame(() => {
-        target.classList.add('.footer__social-network-logo--hover');
-      });
-    }
-  };
-  
-  blurHandler = (event) => {
-    const { target } = event;
-    
-    if (target.tagName === "SPAN") {
-      console.log('out');
-      target.classList.remove('.footer__social-network-logo--hover');
-      window.requestAnimationFrame(() => {
-        target.classList.add('.footer__social-network-logo--blur');
-      });
-    }
-  };
-  
+    console.log('hello');
+  }
   render() {
     return (
       <footer>
-      <h1 className="footer__title">Get in touch</h1>
-      <ul className="footer__list-logos">
-        <li>
-          <span className="footer__social-network-logo" ref='logo' onMouseOver={this.hoverHandler} onMouseLeave={this.blurHandler}>
-            <img src={github}/>
-          </span>
-        </li>   
-        <li>
-          <span className="footer__social-network-logo" ref='logo' onMouseOver={this.hoverHandler} onMouseLeave={this.blurHandler}>
-            <img src={twitter}/>
-          </span>
-        </li>
-        <li>
-          <span className="footer__social-network-logo" ref='logo' onMouseOver={this.hoverHandler} onMouseLeave={this.blurHandler}>
-             <img src={twitter}/>
-          </span>
-        </li>
-      </ul>
-    </footer>
-  
-    )
+        <h1 className="footer__title">Get in touch</h1>
+        <ul className="footer__list-logos">
+          <li>
+            <span className="footer__social-network-logo">
+              <img alt="Github" src={github} />
+            </span>
+          </li>
+          <li>
+            <span className="footer__social-network-logo">
+              <img alt="Twitter" src={twitter} />
+            </span>
+          </li>
+          <li>
+            <span className="footer__social-network-logo">
+              <img alt="Linkedin"src={linkedin} />
+            </span>
+          </li>
+        </ul>
+      </footer>
+
+    );
   }
 }
 
