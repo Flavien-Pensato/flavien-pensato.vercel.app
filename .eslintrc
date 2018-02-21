@@ -7,5 +7,5 @@
     "browser": true,
     "node": true,
     "jasmine": true
-  },
+  }
 }

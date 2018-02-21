@@ -18,8 +18,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-    new UglifyJSPlugin(),
-    new CleanWebpackPlugin(['dist']),
+    // new UglifyJSPlugin(),
+    // new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       inject: 'body',
       template: 'index.template.ejs',
@@ -41,6 +41,10 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
       },
     ],
   },

@@ -1,0 +1,46 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  > * {
+    margin: 25px 0;
+  }
+
+}
+
+.footer__title {
+  font-size: 3rem;
+}
+
+.footer__list-logos {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+
+
+  li {
+    width: 100px;
+  }
+}
+
+.footer__social-network-logo {
+  display: inline-block;
+  padding: 3px;
+  
+  height: 50px;
+  width: 50px;
+
+  border: 5px solid gold;
+  border-radius: 50%;
+
+  transition: transform .6s ease; 
+
+  &:hover {
+    background-color: black;
+    color: white;
+
+    transform: scale(1.2);
+  }
+}

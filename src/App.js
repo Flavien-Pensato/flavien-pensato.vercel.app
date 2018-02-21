@@ -4,7 +4,7 @@ import {
   NavLink,
 } from 'react-router-dom';
 
-import Footer from './modules/footer.component';
+import Footer from './modules/components/footer/footer.component';
 
 import './app.scss';
 
