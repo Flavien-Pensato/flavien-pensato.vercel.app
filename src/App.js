@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  NavLink,
+  Route,
 } from 'react-router-dom';
 
 import Footer from './modules/components/footer/footer.component';
+import Menu from './modules/components/menu/menu.component';
 
 import './app.scss';
 
@@ -20,16 +21,30 @@ class App extends React.Component {
       <Router>
         <div className="app">
           <div className="app__menu">
-            <nav className="menu">
-              <ul>
-                <li><NavLink to="/" className="menu__link" activeClassName="menu__link--selected">Home</NavLink></li>
-              </ul>
-            </nav>
+            <Menu />
           </div>
 
-          <div className="app__content">
-            Content
-          </div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <div className="app__content">
+                Content
+              </div>
+              )}
+          />
+          <Route />
+          <Route
+            exact
+            path="/projects"
+            render={() => (
+              <div className="app__content">
+                Projects
+              </div>
+              )}
+          />
+          <Route />
+
           <div className="app__footer"><Footer /></div>
         </div>
       </Router>
