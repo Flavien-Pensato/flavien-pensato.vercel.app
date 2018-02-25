@@ -6,6 +6,7 @@ import {
 
 import Footer from './modules/components/footer/footer.component';
 import Menu from './modules/components/menu/menu.component';
+import Clouds from './modules/components/clouds/clouds.component';
 
 import './app.scss';
 
@@ -21,7 +22,9 @@ class App extends React.Component {
       <Router>
         <div className="app">
           <div className="app__menu">
-            <Menu />
+            <Clouds>
+              <Menu />
+            </Clouds>
           </div>
 
           <Route

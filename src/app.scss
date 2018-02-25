@@ -1,5 +1,6 @@
 body {
   background-color: black;
+  font-family: sans-serif;
   color: white;
 
   margin: 0;
@@ -24,8 +25,7 @@ body {
   }
 }
 
-.app > * {
-  background-color: black;
+.app > *, {
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -36,6 +36,8 @@ body {
 
 .app__menu {
   grid-area: menu;
+
+  background-color: skyblue;
 }
 
 .app__content {

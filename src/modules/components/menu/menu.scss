@@ -1,36 +1,25 @@
 .menu {
   width: 100%;
+  justify-content: center;
+
+  nav {
+    height: 100%;
+  }
 }
 
 .menu__list {
   display: flex;
-  flex-direction: column;
-
   width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .menu__link {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 30px;
+  font-weight: 600;
 
-  width: 100%;
-
-  padding: 16px 0;
-  border-top: rgba(255, 255, 255, 0.8) solid 1px;
-  border-bottom: rgba(255, 255, 255, 0.8) solid 1px;
-  background-color: rgba(255, 255, 255, 0.8);
-
-  color: black;
-
-  &.menu__link--selected,
-  &:hover {
-    border-top: black solid 1px;
-    border-bottom: black solid 1px;
-    background-color: rgba(255, 255, 255, 0.9);
-    color: black;
-  }
+  margin: 10px 0;
 }
-
-
-

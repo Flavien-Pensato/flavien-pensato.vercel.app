@@ -1,0 +1,49 @@
+.clouds {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  
+  &:hover .cloud-one {
+    animation: 3s ease-in wind forwards;
+  }
+
+  &:hover {
+    transform: translateX(100%);
+  }
+}
+
+.cloud {
+  position: absolute;
+  height: 125px;
+  flex: none;
+}
+
+.cloud-one {
+  top: 50px;
+  left: 60px;
+  transform-origin: center;
+  height: 100px;
+}
+
+.cloud-two {
+  top: 100px;
+  right: 50px;
+}
+
+.cloud-three {
+  bottom: 70px;
+  left: 50px;
+  transform: scale(0.5);
+}
+
+.cloud-four {
+  bottom: 30px;
+  right: 20px;
+  transform: scale(1.5);
+}
+
+@keyframes wind {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
