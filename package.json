@@ -1,0 +1,13 @@
+{
+  "name": "flavien.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Flavien-Pensato/flavien.github.io.git",
+  "author": "f-pensato <flavien.pensato@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@m6web/eslint-config": "3.1.0",
+    "eslint": "5.9.0"
+  }
+}
