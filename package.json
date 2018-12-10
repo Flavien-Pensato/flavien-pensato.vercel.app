@@ -33,6 +33,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --watch --open ",
+    "test": "echo `Test ok`",
     "build": "webpack",
     "server": "node server.js"
   }
