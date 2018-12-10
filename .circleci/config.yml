@@ -33,7 +33,7 @@ jobs:
               git config --global user.email $GH_EMAIL
               git config --global user.name $GH_NAME
 
-              git clone $CIRCLE_REPOSITORY_URL out
+              git clone https://${GH_TOKEN}@github.com/Flavien-Pensato/flavien.github.io.git out
 
               cd out
               git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
