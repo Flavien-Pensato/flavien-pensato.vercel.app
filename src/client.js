@@ -1,24 +1,12 @@
-function client(title) {
-  let scripts = '';
-    scripts = ' <script src="assets/bundle.js"> </script> ';
-  }
-  const page = `
-  <!DOCTYPE html>
-              <html lang="en">
-              <head>
-                <meta charset="utf-8">
-                <title> ${title} </title>
-              </head>
-              <body>
-                <div id="app">
-                  ${content}
-                </div>
-                ${scripts}
-              </body>
-              </html>
-              `;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-  return page;
-}
+import { App } from './App';
 
-module.exports = client;
+ReactDOM.hydrate(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root'),
+);

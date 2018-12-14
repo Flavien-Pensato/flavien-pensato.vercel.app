@@ -26,18 +26,21 @@
     "webpack-bundle-analyzer": "3.0.3",
     "webpack-cli": "3.1.2",
     "webpack-dev-server": "3.1.10",
-    "webpack-merge": "4.1.5"
+    "webpack-merge": "4.1.5",
+    "webpack-node-externals": "1.7.2"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "prop-types": "15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
+    "react-router-dom": "4.3.1",
     "styled-components": "4.1.2"
   },
   "scripts": {
     "start": "webpack-dev-server --watch --open --config webpack.dev.js",
     "test": "echo `Test ok`",
     "build": "webpack --config webpack.prod.js",
-    "server": "node server.js"
+    "server": "node dist/server.js"
   }
 }

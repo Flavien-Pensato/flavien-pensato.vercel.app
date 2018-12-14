@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 
 import background from '../public/assets/background.png';
@@ -29,17 +28,12 @@ const Wrapper = styled.div`
 `;
 
 
-const App = () => (
-  <Wrapper>
-    <Title />
-    <Contact />
-  </Wrapper>
-);
-
-ReactDOM.render(
+export const App = () => (
   <Fragment>
     <GlobalStyle />
-    <App />
-  </Fragment>,
-  document.getElementById('root'),
+    <Wrapper>
+      <Title />
+      <Contact />
+    </Wrapper>
+  </Fragment>
 );
