@@ -6,38 +6,20 @@
   "author": "f-pensato <flavien.pensato@gmail.com>",
   "license": "MIT",
   "private": true,
-  "devDependencies": {
-    "@babel/core": "7.2.0",
-    "@babel/plugin-transform-arrow-functions": "7.2.0",
-    "@babel/preset-env": "7.2.0",
-    "@babel/preset-react": "7.0.0",
-    "@m6web/eslint-config": "3.1.0",
-    "babel-eslint": "10.0.1",
-    "babel-loader": "8.0.4",
-    "babel-plugin-styled-components": "1.9.2",
-    "clean-webpack-plugin": "1.0.0",
-    "eslint": "5.9.0",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.2",
-    "eslint-plugin-react": "7.11.1",
-    "file-loader": "2.0.0",
-    "html-webpack-plugin": "3.2.0",
-    "webpack": "4.27.1",
-    "webpack-bundle-analyzer": "3.0.3",
-    "webpack-cli": "3.1.2",
-    "webpack-dev-server": "3.1.10",
-    "webpack-merge": "4.1.5"
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "export": "next export",
+    "start": "next start",
+    "test": "echo \"OK\""
   },
   "dependencies": {
-    "prop-types": "15.6.2",
+    "next": "7.0.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "styled-components": "4.1.2"
   },
-  "scripts": {
-    "start": "webpack-dev-server --watch --open --config webpack.dev.js",
-    "test": "echo `Test ok`",
-    "build": "webpack --config webpack.prod.js",
-    "server": "node server.js"
+  "devDependencies": {
+    "babel-plugin-styled-components": "1.9.4"
   }
 }

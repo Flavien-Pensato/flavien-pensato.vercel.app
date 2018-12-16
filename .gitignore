@@ -60,4 +60,4 @@ typings/
 .env
 
 # build
-dist/
+.next/

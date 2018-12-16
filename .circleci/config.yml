@@ -40,9 +40,7 @@ jobs:
               git rm -rf .
               cd ..
 
-              yarn build
-
-              cp -a dist/. out/.
+              yarn build && yarn export
 
               mkdir -p out/.circleci && cp -a .circleci/. out/.circleci/.
               cd out
