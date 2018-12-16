@@ -30,7 +30,7 @@ export const Title = () => (
       <br />
     </H1>
     <P>
-      A enthusiastic Frontend developper
+      An enthusiastic Frontend developper
     </P>
   </Header>
 );
