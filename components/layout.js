@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 
 import { Contacts } from './contacts.component';
 import { Title } from './title.component';
 
-export const Layout = ({ children }) => (
-  <Fragment>
+export const Layout = ({ children, className }) => (
+  <main className={className}>
     <Head>
       <title>Flavien Pensato</title>
       <meta charSet='utf-8' />
@@ -16,5 +16,5 @@ export const Layout = ({ children }) => (
     <Title />
     {children}
     <Contacts />
-  </Fragment>
+  </main>
 )
