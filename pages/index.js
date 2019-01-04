@@ -6,9 +6,16 @@ import { Title } from '../modules/components/title.component';
 import { Contact } from '../modules/components/contacts.component';
 
 const Wrapper = styled.div`
-  background-image: url('/static/assets/background.png');
-  background-size: cover;
-  background-position: left;
+  img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+  }
 
   display: flex;
   justify-content: space-between;
@@ -17,13 +24,11 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
-
-  height: 100vh;
-  width: 100vw;
 `;
 
 const App = () => (
   <Wrapper>
+    <img async src="/static/assets/background.png" />
     <Title />
     <Contact />
   </Wrapper>
