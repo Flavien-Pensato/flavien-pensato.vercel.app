@@ -24,7 +24,7 @@ const In = styled.button`
   margin-left: 20px;
 `;
 
-export const Contact = () => (
+export const Contacts = () => (
   <Footer>
     <a title="Github link" href="https://github.com/Flavien-Pensato">
       <i className="icon github is-medium" />
