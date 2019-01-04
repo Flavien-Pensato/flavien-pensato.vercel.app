@@ -3,13 +3,13 @@ jobs:
   build:
     branches:
       ignore:
-        - gh-pages
+        - master
     docker:
       - image: circleci/node:latest
     working_directory: ~/repo
     environment:
-      - SOURCE_BRANCH: master
-      - TARGET_BRANCH: gh-pages
+      - SOURCE_BRANCH: developement
+      - TARGET_BRANCH: master
     steps:
       - checkout
       - restore_cache:
