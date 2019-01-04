@@ -2,10 +2,9 @@ import React, { Fragment } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
 
-import { Title } from '../modules/components/title.component';
-import { Contact } from '../modules/components/contacts.component';
+import { Layout } from '../components/layout';
 
-const Wrapper = styled.div`
+const Wrapper = styled(Layout)`
   img {
     display: block;
     position: absolute;
@@ -29,8 +28,6 @@ const Wrapper = styled.div`
 const App = () => (
   <Wrapper>
     <img async src="/static/assets/background.png" />
-    <Title />
-    <Contact />
   </Wrapper>
 );
 
