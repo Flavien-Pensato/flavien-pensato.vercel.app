@@ -1,7 +1,6 @@
 import React from 'react';
+import { OutboundLink } from 'react-ga';
 import styled from 'styled-components';
-
-import { logEvent } from '../utils/analytics';
 
 const Footer = styled.footer`
   display: flex;
@@ -21,17 +20,13 @@ const Footer = styled.footer`
   }
 `;
 
-const handleClick = (category, action, label) => () => {
-  logEvent(category, action, label);
-};
-
 export const Contacts = () => (
   <Footer>
-    <a title="Github link" href="https://github.com/Flavien-Pensato" onClick={handleClick('Social', 'Clicked Github', 'Contacts')}>
+    <OutboundLink title="Github link" to="https://github.com/Flavien-Pensato" target="_blank" eventLabel="Github">
       <i className="nes-icon github is-medium" />
-    </a>
-    <a title="Linkedin link" href="https://www.linkedin.com/in/flavien-pensato-708190a7" onClick={handleClick('Social', 'Clicked Linkedin', 'Contacts')}>
+    </OutboundLink>
+    <OutboundLink title="Linkedin link" to="https://www.linkedin.com/in/flavien-pensato-708190a7" target="_blank" eventLabel="Linkedin">
       <i className="nes-icon linkedin is-medium" />
-    </a>
+    </OutboundLink>
   </Footer>
 );
