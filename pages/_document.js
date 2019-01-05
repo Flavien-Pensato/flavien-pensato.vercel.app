@@ -31,6 +31,7 @@ export default class MyDocument extends Document {
           <meta property="og:description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
           <meta property="og:url" content="https://flavien-pensato.github.io/" />
           <meta name="Description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
+          <meta name="google-site-verification" content="2RJBcD18niAoUj4fFJpy7yMCvFn0h7tiB0ip884Ykng" />
           <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
