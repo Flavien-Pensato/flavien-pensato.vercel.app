@@ -20,20 +20,13 @@ const Footer = styled.footer`
   }
 `;
 
-const In = styled.button`
-  height: 42px;
-  width: 42px;
-  padding: 9px 0px;
-  margin-left: 20px;
-`;
-
 export const Contacts = () => (
   <Footer>
     <a title="Github link" href="https://github.com/Flavien-Pensato">
-      <i className="icon github is-medium" />
+      <i className="nes-icon github is-medium" />
     </a>
     <a title="Linkedin link" href="https://www.linkedin.com/in/flavien-pensato-708190a7">
-      <In className="btn is-success">IN</In>
+      <i className="nes-icon linkedin is-medium" />
     </a>
   </Footer>
 );
