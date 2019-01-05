@@ -13,8 +13,11 @@ const Footer = styled.footer`
     right: 20px;
   }
 
-
   text-align: right;
+
+  & > a {
+    margin-left: 10px;
+  }
 `;
 
 const In = styled.button`
