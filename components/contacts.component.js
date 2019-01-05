@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { logEvent } from '../utils/analytics';
 
 const Footer = styled.footer`
   display: flex;
@@ -20,12 +21,16 @@ const Footer = styled.footer`
   }
 `;
 
+const handleClick = (category, action, label) => () => {
+  logEvent(category, action, label);
+};
+
 export const Contacts = () => (
   <Footer>
-    <a title="Github link" href="https://github.com/Flavien-Pensato">
+    <a title="Github link" href="https://github.com/Flavien-Pensato" onClick={handleClick('Social', 'Clicked Github', 'Contacts')}>
       <i className="nes-icon github is-medium" />
     </a>
-    <a title="Linkedin link" href="https://www.linkedin.com/in/flavien-pensato-708190a7">
+    <a title="Linkedin link" href="https://www.linkedin.com/in/flavien-pensato-708190a7" onClick={handleClick('Social', 'Clicked Linkedin', 'Contacts')}>
       <i className="nes-icon linkedin is-medium" />
     </a>
   </Footer>
