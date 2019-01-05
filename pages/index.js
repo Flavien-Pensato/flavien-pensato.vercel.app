@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-
+import React from 'react';
+import styled from 'styled-components';
 
 import { Layout } from '../components/layout';
 
@@ -23,11 +22,11 @@ const Background = styled.img`
   height: 100vh;
   object-fit: cover;
   z-index: -1;
-`
+`;
 
 const App = () => (
   <Wrapper>
-    <Background async src="/static/assets/background.png" />
+    <Background async src="/static/assets/background.png" alt="Game background" />
   </Wrapper>
 );
 
