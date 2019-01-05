@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          <link rel="preload" href="https://unpkg.com/nes.css@0.0.2/css/nes.min.css" />
+          <link rel="preload" href="https://unpkg.com/nes.css@0.0.2/css/nes.min.css" as="style" onLoad="this.rel='stylesheet'" />
         </Head>
         <body>
           <Main />
