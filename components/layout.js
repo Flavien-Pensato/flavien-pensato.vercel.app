@@ -27,7 +27,7 @@ export const Layout = ({ children, className }) => (
     </Head>
 
     <Title />
-    {children}
+    {React.Children.only(children)}
     <Contacts />
   </main>
 );
