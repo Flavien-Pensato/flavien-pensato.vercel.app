@@ -3,15 +3,9 @@ import { OutboundLink } from 'react-ga';
 import styled from 'styled-components';
 
 const Footer = styled.footer`
-  display: flex;
-  padding-top: 20px;
-  padding-right: 20px;
-
-  @media (max-width: 700px) {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
+  position: absolute;
+  top: 20px;
+  right: 20px;
 
   text-align: right;
 

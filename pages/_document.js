@@ -7,6 +7,7 @@ export default class MyDocument extends Document {
     const sheet = new ServerStyleSheet();
 
     const originalRenderPage = ctx.renderPage;
+
     ctx.renderPage = () => originalRenderPage({
       enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
     });
@@ -38,6 +39,7 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#000000" />
         </Head>
+
         <body>
           <Main />
           <NextScript />
