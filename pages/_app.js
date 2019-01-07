@@ -3,7 +3,7 @@ import App, { Container } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import { initGA, logPageView } from '../utils/analytics';
 import { Contacts } from '../components/contacts.component';
@@ -25,6 +25,32 @@ const GlobalStyle = createGlobalStyle`
     transform: translateY(-100vh);
     transition: transform 1000ms ease-in-out;
   }
+
+  .revfade-enter {
+    transform: translateY(-100vh);
+    /*transition: transform 1000ms ease-in-out;*/
+  }
+  .revfade-enter.revfade-enter-active {
+    transform: translateY(0vh);
+    transition: transform 1000ms ease-in-out;
+  }
+  .revfade-exit {
+    transform: translateY(0vh);
+    /*transition: 0.3s transform ease-in-out;*/
+  }
+  .revfade-exit.revfade-exit-active {
+    transform: translateY(100vh);
+    transition: transform 1000ms ease-in-out;
+  }
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
 `;
 
 export default class MyApp extends App {
@@ -46,7 +72,7 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, router } = this.props;
+    const { Component, pageProps, router: { route } } = this.props;
 
     return (
       <Container>
@@ -59,11 +85,13 @@ export default class MyApp extends App {
 
         <TransitionGroup>
           <CSSTransition
-            classNames="fade"
+            classNames={route === '/' ? 'revfade' : 'fade'}
             timeout={1000}
-            key={router.route}
+            key={route}
           >
-            <Component {...pageProps} />
+            <Wrapper>
+              <Component {...pageProps} />
+            </Wrapper>
           </CSSTransition>
         </TransitionGroup>
         <Contacts />

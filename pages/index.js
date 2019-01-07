@@ -5,14 +5,8 @@ import Link from 'next/link';
 import { Title } from '../components/title.component';
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   align-items: center;
-  z-index: -1;
 
   @media (max-width: 700px) {
     align-items: flex-end;
