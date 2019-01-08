@@ -29,9 +29,6 @@ const App = () => (
     <Head>
       <title>Flavien Pensato</title>
       <meta name="Description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
-      <meta property="og:image" content="/static/favicons/og-image.jpg" />
-      <meta property="og:image:height" content="209" />
-      <meta property="og:image:width" content="400" />
       <meta property="og:title" content="Homepage Flavien Pensato" />
       <meta property="og:description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
       <meta property="og:url" content="https://flavien-pensato.github.io/" />
