@@ -10,12 +10,12 @@ import { Contacts } from '../components/contacts.component';
 
 const GlobalStyle = createGlobalStyle`
   .fade-enter {
-    transform: translateY(100vh);
-    /*transition: transform 1000ms ease-in-out;*/
+    transform: translateY(-100vh);
+    transition: transform 1000ms ease-in-out;
   }
   .fade-enter.fade-enter-active {
     transform: translateY(0vh);
-    transition: transform 1000ms ease-in-out;
+    /* transition: transform 1000ms ease-in-out; */
   }
   .fade-exit {
     transform: translateY(0vh);
@@ -27,12 +27,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .revfade-enter {
-    transform: translateY(-100vh);
-    /*transition: transform 1000ms ease-in-out;*/
+    transform: translateY(100vh);
+    transition: transform 1000ms ease-in-out;
   }
   .revfade-enter.revfade-enter-active {
     transform: translateY(0vh);
-    transition: transform 1000ms ease-in-out;
+    /* transition: transform 1000ms ease-in-out; */
   }
   .revfade-exit {
     transform: translateY(0vh);
@@ -85,7 +85,7 @@ export default class MyApp extends App {
 
         <TransitionGroup>
           <CSSTransition
-            classNames={route === '/' ? 'revfade' : 'fade'}
+            classNames={route === '/' ? 'fade' : 'revfade'}
             timeout={1000}
             key={route}
           >
