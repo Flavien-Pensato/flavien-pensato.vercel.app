@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { OutboundLink } from 'react-ga';
+import Head from 'next/head';
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,6 +21,16 @@ const Container = styled.p`
 
 const About = () => (
   <Wrapper>
+    <Head>
+      <title>About Flavien Pensato</title>
+      <meta name="Description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. I work for M6 web as a Peaks consultant." />
+      <meta property="og:image" content="/static/favicons/og-image.jpg" />
+      <meta property="og:image:height" content="209" />
+      <meta property="og:image:width" content="400" />
+      <meta property="og:title" content="About Flavien Pensato" />
+      <meta property="og:description" content="Check my actual Job is you want to know more about Flavien Pensato. I work for M6 web as a Peaks consultant." />
+      <meta property="og:url" content="https://flavien-pensato.github.io/about" />
+    </Head>
     <div>
       <div className="nes-container with-title">
         <h2 className="title">
