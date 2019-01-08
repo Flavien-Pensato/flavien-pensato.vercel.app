@@ -25,6 +25,9 @@ export default class MyDocument extends Document {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="msapplication-TileColor" content="#00aba9" />
           <meta name="theme-color" content="#ffffff" />
+          <meta property="og:image" content="/static/favicons/og-image.jpg" />
+          <meta property="og:image:height" content="209" />
+          <meta property="og:image:width" content="400" />
           <meta name="google-site-verification" content="2RJBcD18niAoUj4fFJpy7yMCvFn0h7tiB0ip884Ykng" />
           <link rel="apple-touch-icon" sizes="180x180" href="/static/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
