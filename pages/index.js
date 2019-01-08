@@ -1,18 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Head from 'next/head';
 
 import { Title } from '../components/title.component';
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   align-items: center;
-  z-index: -1;
 
   @media (max-width: 700px) {
     align-items: flex-end;
@@ -31,6 +26,13 @@ const Background = styled.img`
 
 const App = () => (
   <Wrapper>
+    <Head>
+      <title>Flavien Pensato</title>
+      <meta name="Description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
+      <meta property="og:title" content="Homepage Flavien Pensato" />
+      <meta property="og:description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
+      <meta property="og:url" content="https://flavien-pensato.github.io/" />
+    </Head>
     <Link href="/about">
       <a style={{ zIndex: 10 }}>
         <Title />
