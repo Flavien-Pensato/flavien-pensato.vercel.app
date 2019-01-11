@@ -23,7 +23,8 @@ const About = () => (
   <Wrapper>
     <Head>
       <title>About Flavien Pensato</title>
-      <meta name="Description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. I work for M6 web as a Peaks consultant." />
+      <meta name="title" content="About Flavien Pensato" />
+      <meta name="description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. I work for M6 web as a Peaks consultant." />
       <meta property="og:title" content="About Flavien Pensato" />
       <meta property="og:description" content="Check my actual Job is you want to know more about Flavien Pensato. I work for M6 web as a Peaks consultant." />
       <meta property="og:url" content="https://flavien-pensato.github.io/about" />
