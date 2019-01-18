@@ -1,60 +1,29 @@
-const keysMap = {
-  39: 'right',
-  37: 'left',
-  38: 'up',
-  40: 'down',
-};
-
-const keydown = state => (event) => {
-  const key = keysMap[event.keyCode];
-  state.pressedKeys[key] = true;
-};
-
-const keyup = state => (event) => {
-  const key = keysMap[event.keyCode];
-  state.pressedKeys[key] = false;
-};
-
-const update = (state, progress) => {
-  if (state.pressedKeys.left) {
-    state.X -= progress;
-  }
-  if (state.pressedKeys.right) {
-    state.X += progress;
-  }
-  if (state.pressedKeys.up) {
-    state.Y -= progress;
-  }
-  if (state.pressedKeys.down) {
-    state.Y += progress;
-  }
-};
+import { defaultCaracter, update } from './caracter';
+import { keydown, keyup, defaultControlsStatus } from './controls';
 
 class Engine {
   constructor(canvasId) {
     this.Canvas = document.getElementById(canvasId);
     this.Context2D = this.Canvas.getContext('2d');
-    this.LastRender = 0;
-    this.Mario = {
-      X: 32,
-      Y: 0,
-      pressedKeys: {
-        left: false,
-        right: false,
-        up: false,
-        down: false,
-      },
-    };
+    this.Delta = 0;
+    this.Interval = 1000 / 30;
+    this.LastTime = (new Date()).getTime();
+    this.CurrentTime = 0;
+    this.Mario = defaultCaracter(32, this.Canvas.height - 32);
+    this.Controls = defaultControlsStatus;
   }
 
-  loop = (timestamp) => {
-    const progress = timestamp - this.LastRender;
-
-    update(this.Mario, progress);
-    this.draw();
-
-    this.LastRender = timestamp;
+  loop = () => {
     window.requestAnimationFrame(this.loop);
+
+    this.CurrentTime = (new Date()).getTime();
+    this.Delta = (this.CurrentTime - this.LastTime);
+
+    if (this.Delta > this.Interval) {
+      update(this.Mario, this.Controls, this.Canvas.height - 32);
+      this.draw();
+      this.LastTime = this.CurrentTime - (this.Delta % this.Interval);
+    }
   }
 
    init = () => {
@@ -68,8 +37,13 @@ class Engine {
 
          this.Context2D.drawImage(this.Mario.mariosheet, 0, 0, 32, 32, this.Mario.X, this.Mario.Y, 32, 32);
 
-         window.addEventListener('keydown', keydown(this.Mario), false);
-         window.addEventListener('keyup', keyup(this.Mario), false);
+         window.addEventListener('keydown', (event) => {
+           this.Controls = keydown(event, this.Controls);
+         }, false);
+
+         window.addEventListener('keyup', (event) => {
+           this.Controls = keyup(event, this.Controls);
+         }, false);
 
          window.requestAnimationFrame(this.loop);
 
