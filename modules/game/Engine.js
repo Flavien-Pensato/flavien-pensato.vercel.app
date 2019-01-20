@@ -5,61 +5,62 @@ class Engine {
   constructor(canvasId) {
     this.Canvas = document.getElementById(canvasId);
     this.Context2D = this.Canvas.getContext('2d');
+    this.LastFrameTimeMs = 0;
+    this.Timestep = 1000 / 60;
     this.Delta = 0;
-    this.Interval = 1000 / 30;
-    this.LastTime = (new Date()).getTime();
-    this.CurrentTime = 0;
     this.Mario = defaultCaracter(32, this.Canvas.height - 32);
     this.Controls = defaultControlsStatus;
   }
 
-  loop = () => {
+  loop = (timestamp) => {
     window.requestAnimationFrame(this.loop);
 
-    this.CurrentTime = (new Date()).getTime();
-    this.Delta = (this.CurrentTime - this.LastTime);
+    this.Delta += timestamp - this.LastFrameTimeMs;
+    this.LastFrameTimeMs = timestamp;
 
-    if (this.Delta > this.Interval) {
-      update(this.Mario, this.Controls, this.Canvas.height - 32);
-      this.draw();
-      this.LastTime = this.CurrentTime - (this.Delta % this.Interval);
+    while (this.Delta >= this.Timestep) {
+      update(this.Mario, this.Controls, this.Canvas.height - 32, this.Timestep);
+      this.Delta -= this.Timestep;
     }
+
+    this.draw(this.Mario);
   }
 
-   init = () => {
-     this.Mario.mariosheet = new Image();
+  init = () => {
+    this.Mario.mariosheet = new Image();
 
-     return new Promise((resolve, reject) => {
-       const setTimeoutID = setTimeout(() => reject(Error('Timeout exceed 2sec')), 2000);
+    return new Promise((resolve, reject) => {
+      const setTimeoutID = setTimeout(() => reject(Error('Timeout exceed 2sec')), 2000);
 
-       this.Mario.mariosheet.onload = () => {
-         clearTimeout(setTimeoutID);
+      this.Mario.mariosheet.onload = () => {
+        clearTimeout(setTimeoutID);
+        this.Context2D.mozImageSmoothingEnabled = true;
+        this.Context2D.webkitImageSmoothingEnabled = true;
+        this.Context2D.msImageSmoothingEnabled = true;
+        this.Context2D.imageSmoothingEnabled = true;
 
-         this.Context2D.drawImage(this.Mario.mariosheet, 0, 0, 32, 32, this.Mario.X, this.Mario.Y, 32, 32);
+        window.addEventListener('keydown', (event) => {
+          this.Controls = keydown(event, this.Controls);
+        }, false);
 
-         window.addEventListener('keydown', (event) => {
-           this.Controls = keydown(event, this.Controls);
-         }, false);
+        window.addEventListener('keyup', (event) => {
+          this.Controls = keyup(event, this.Controls);
+        }, false);
 
-         window.addEventListener('keyup', (event) => {
-           this.Controls = keyup(event, this.Controls);
-         }, false);
-
-         window.requestAnimationFrame(this.loop);
+        window.requestAnimationFrame(this.loop);
 
 
-         resolve();
-       };
+        resolve();
+      };
 
-       this.Mario.mariosheet.src = '/static/game/mariosheet.png';
-     });
-   }
+      this.Mario.mariosheet.src = '/static/game/mariosheet.png';
+    });
+  }
 
-   draw = () => {
-     this.Context2D.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
-
-     this.Context2D.drawImage(this.Mario.mariosheet, 0, 0, 32, 32, this.Mario.X, this.Mario.Y, 32, 32);
-   }
+  draw = () => {
+    this.Context2D.clearRect(this.Mario.X - 4, this.Mario.Y - 4, 14 + 8, 27 + 8);
+    this.Context2D.drawImage(this.Mario.mariosheet, 10, 5, 14, 27, this.Mario.X, this.Mario.Y, 14, 27);
+  }
 }
 
 export default Engine;
