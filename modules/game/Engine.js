@@ -6,13 +6,15 @@ class Engine {
   constructor(canvasId, canvaDecorsId) {
     this.Canvas = document.getElementById(canvasId);
     this.Context2D = this.Canvas.getContext('2d');
-    this.CanvasDecors = document.getElementById(canvaDecorsId);
-    this.Context2DDecors = this.CanvasDecors.getContext('2d');
     this.LastFrameTimeMs = 0;
     this.Timestep = 1000 / 60;
     this.Delta = 0;
     this.Mario = defaultCaracter(32, this.Canvas.height - 32);
-    this.Decors = {};
+    this.Decors = {
+      Canvas: document.getElementById(canvaDecorsId),
+      Context2D: document.getElementById(canvaDecorsId).getContext('2d'),
+
+    };
     this.Controls = defaultControlsStatus;
   }
 
@@ -69,16 +71,16 @@ class Engine {
 
       this.Decors.sheet.onload = () => {
         clearTimeout(setTimeoutID);
-        this.Context2D.mozImageSmoothingEnabled = true;
-        this.Context2D.webkitImageSmoothingEnabled = true;
-        this.Context2D.msImageSmoothingEnabled = true;
-        this.Context2D.imageSmoothingEnabled = true;
-        defaultDecors(this.Context2DDecors, this.CanvasDecors);
+        this.Decors.Context2D.mozImageSmoothingEnabled = true;
+        this.Decors.Context2D.webkitImageSmoothingEnabled = true;
+        this.Decors.Context2D.msImageSmoothingEnabled = true;
+        this.Decors.Context2D.imageSmoothingEnabled = true;
+        defaultDecors(this.Decors);
 
         resolve();
       };
 
-      this.Decors.sheet.src = '/static/game/brick.png';
+      this.Decors.sheet.src = '/static/game/sprite.png';
     });
   }
 

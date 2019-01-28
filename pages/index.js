@@ -23,15 +23,14 @@ const Canvas = styled.canvas`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
 `;
 
 class App extends Component {
   componentDidMount() {
-    const engine = new Engine('canvas');
+    const engine = new Engine('canvas', 'background');
 
     engine.init();
+    engine.initDecors();
   }
 
   render() {
@@ -46,6 +45,7 @@ class App extends Component {
           <meta property="og:url" content="https://flavien-pensato.github.io/" />
         </Head>
         <Canvas id="canvas" />
+        <Canvas id="background" />
         <Link href="/about">
           <a style={{ zIndex: 10 }}>
             <Title />
