@@ -44,8 +44,8 @@ class App extends Component {
           <meta property="og:description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
           <meta property="og:url" content="https://flavien-pensato.github.io/" />
         </Head>
-        <Canvas id="canvas" />
         <Canvas id="background" />
+        <Canvas id="canvas" />
         <Link href="/about">
           <a style={{ zIndex: 10 }}>
             <Title />
