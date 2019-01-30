@@ -12,13 +12,13 @@ export const defaultCaracter = (positionX = 32, positionY = 0) => ({
   Y: positionY,
   gravity: {
     value: 0,
-    speed: 0.01,
-    max: 0.08,
+    speed: 0.02,
+    max: 0.35,
   },
   motion: {
     value: 0,
-    speed: 0.006,
-    max: 0.08,
+    speed: 0.008,
+    max: 0.3,
   },
   direction: directions.right,
 });
