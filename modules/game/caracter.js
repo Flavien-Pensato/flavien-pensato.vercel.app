@@ -24,9 +24,10 @@ export const defaultCaracter = (positionX = 32, positionY = 0) => ({
 });
 
 export const update = (caracter, controls, canvasHeight, delta) => {
-  if (controls[keys.up]) {
-    caracter.gravity.value = -caracter.gravity.max;
+  if (controls[keys.up] && caracter.onGround) {
+    caracter.gravity.value = -caracter.gravity.max - 0.2;
     caracter.Y += caracter.gravity.value * delta;
+    caracter.onGround = false;
   }
 
   if (controls[keys.right] || controls[keys.left]) {
@@ -62,6 +63,7 @@ export const update = (caracter, controls, canvasHeight, delta) => {
   if (caracter.Y > rockbottom) {
     caracter.Y = rockbottom;
     caracter.gravity.value = 0;
+    caracter.onGround = true;
   }
 
   return caracter;
