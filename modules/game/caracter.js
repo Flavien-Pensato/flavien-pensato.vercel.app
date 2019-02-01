@@ -1,4 +1,5 @@
 import { keys } from './controls';
+// import { map } from './decors';
 
 export const directions = {
   up: 'up',
@@ -7,7 +8,7 @@ export const directions = {
   left: 'left',
 };
 
-export const defaultCaracter = (positionX = 32, positionY = 0) => ({
+export const defaultCaracter = (positionX = 32, positionY = 60) => ({
   X: positionX,
   Y: positionY,
   gravity: {
@@ -23,12 +24,18 @@ export const defaultCaracter = (positionX = 32, positionY = 0) => ({
   direction: directions.right,
 });
 
+// const checkCollisionUpDown = (nextPosition, currentPosition) => position;
+
 export const update = (caracter, controls, canvasHeight, delta) => {
   if (controls[keys.up] && caracter.onGround) {
     caracter.gravity.value = -caracter.gravity.max - 0.2;
+
     caracter.Y += caracter.gravity.value * delta;
+
     caracter.onGround = false;
   }
+
+  // caracter.Y checkCollisionUpDown(caracter.gravity.value * delta, ;
 
   if (controls[keys.right] || controls[keys.left]) {
     caracter.motion.value += caracter.motion.speed;
@@ -54,16 +61,6 @@ export const update = (caracter, controls, canvasHeight, delta) => {
 
   if (caracter.gravity.value >= caracter.gravity.max) {
     caracter.gravity.value = caracter.gravity.max;
-  }
-
-  caracter.Y += caracter.gravity.value * delta;
-
-  const rockbottom = canvasHeight;
-
-  if (caracter.Y > rockbottom) {
-    caracter.Y = rockbottom;
-    caracter.gravity.value = 0;
-    caracter.onGround = true;
   }
 
   return caracter;

@@ -9,7 +9,7 @@ class Engine {
     this.LastFrameTimeMs = 0;
     this.Timestep = 1000 / 60;
     this.Delta = 0;
-    this.Mario = defaultCaracter(54, window.innerHeight - 54);
+    this.Mario = defaultCaracter(54, window.innerHeight - 54 - 60);
     this.Decors = {
       Canvas: document.getElementById(canvaDecorsId),
       Context2D: document.getElementById(canvaDecorsId).getContext('2d'),
