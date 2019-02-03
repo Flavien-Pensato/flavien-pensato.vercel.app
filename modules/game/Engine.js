@@ -9,13 +9,16 @@ class Engine {
     this.LastFrameTimeMs = 0;
     this.Timestep = 1000 / 60;
     this.Delta = 0;
-    this.Mario = defaultCaracter(54, window.innerHeight - 54);
+    this.Mario = defaultCaracter(54, window.innerHeight - 54 - 60);
     this.Decors = {
       Canvas: document.getElementById(canvaDecorsId),
       Context2D: document.getElementById(canvaDecorsId).getContext('2d'),
 
     };
     this.Controls = defaultControlsStatus;
+
+    this.Decors.Canvas.width = window.innerWidth;
+    this.Decors.Canvas.height = window.innerHeight;
   }
 
   loop = (timestamp) => {
@@ -25,7 +28,7 @@ class Engine {
     this.LastFrameTimeMs = timestamp;
 
     while (this.Delta >= this.Timestep) {
-      update(this.Mario, this.Controls, this.Canvas.height - 114, this.Timestep);
+      update(this.Mario, this.Controls, this.Decors, this.Timestep);
       this.Delta -= this.Timestep;
     }
 
@@ -77,8 +80,6 @@ class Engine {
         this.Decors.Context2D.webkitImageSmoothingEnabled = true;
         this.Decors.Context2D.msImageSmoothingEnabled = true;
         this.Decors.Context2D.imageSmoothingEnabled = true;
-        this.Decors.Canvas.width = window.innerWidth;
-        this.Decors.Canvas.height = window.innerHeight;
         defaultDecors(this.Decors);
 
         resolve();

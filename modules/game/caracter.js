@@ -1,4 +1,5 @@
 import { keys } from './controls';
+import { map } from './decors';
 
 export const directions = {
   up: 'up',
@@ -7,9 +8,11 @@ export const directions = {
   left: 'left',
 };
 
-export const defaultCaracter = (positionX = 32, positionY = 0) => ({
+export const defaultCaracter = (positionX = 32, positionY = 60) => ({
   X: positionX,
   Y: positionY,
+  height: 54,
+  width: 28,
   gravity: {
     value: 0,
     speed: 0.02,
@@ -23,12 +26,47 @@ export const defaultCaracter = (positionX = 32, positionY = 0) => ({
   direction: directions.right,
 });
 
-export const update = (caracter, controls, canvasHeight, delta) => {
+const findCase = (Y, X) => {
+  const caseY = Math.floor(Y / 30);
+  const caseX = Math.floor(X / 30);
+
+  if (map[caseY]) {
+    return map[caseY][caseX];
+  }
+
+  return null;
+};
+
+const checkCollisionUpDown = (caracter, decors, delta) => {
+  const nextPositionY = caracter.Y + caracter.gravity.value * delta;
+  let caseType = null;
+
+  if (caracter.gravity.value > 0) {
+    caseType = findCase(decors.Canvas.height - nextPositionY - caracter.height, caracter.X)
+              || findCase(decors.Canvas.height - nextPositionY - caracter.height, caracter.X + caracter.width);
+    if (caseType === 'brick' || caseType === 'ground' || caseType === 'question') {
+      caracter.onGround = true;
+    }
+  } else {
+    caseType = findCase(decors.Canvas.height - nextPositionY, caracter.X)
+              || findCase(decors.Canvas.height - nextPositionY, caracter.X + caracter.width);
+  }
+
+  if (caseType === 'brick' || caseType === 'ground' || caseType === 'question') {
+    caracter.gravity.value = 0;
+
+    return caracter.Y;
+  }
+
+  return nextPositionY;
+};
+
+export const update = (caracter, controls, decors, delta) => {
   if (controls[keys.up] && caracter.onGround) {
     caracter.gravity.value = -caracter.gravity.max - 0.2;
-    caracter.Y += caracter.gravity.value * delta;
     caracter.onGround = false;
   }
+
 
   if (controls[keys.right] || controls[keys.left]) {
     caracter.motion.value += caracter.motion.speed;
@@ -56,15 +94,7 @@ export const update = (caracter, controls, canvasHeight, delta) => {
     caracter.gravity.value = caracter.gravity.max;
   }
 
-  caracter.Y += caracter.gravity.value * delta;
-
-  const rockbottom = canvasHeight;
-
-  if (caracter.Y > rockbottom) {
-    caracter.Y = rockbottom;
-    caracter.gravity.value = 0;
-    caracter.onGround = true;
-  }
+  caracter.Y = checkCollisionUpDown(caracter, decors, delta);
 
   return caracter;
 };
