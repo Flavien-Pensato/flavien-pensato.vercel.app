@@ -13,6 +13,8 @@ export const defaultCaracter = (positionX = 32, positionY = 60) => ({
   Y: positionY,
   height: 54,
   width: 28,
+  collisionLeft: 5,
+  collisionRight: -10,
   gravity: {
     value: 0,
     speed: 0.02,
@@ -23,6 +25,7 @@ export const defaultCaracter = (positionX = 32, positionY = 60) => ({
     speed: 0.008,
     max: 0.3,
   },
+  collisionCaseTypes: ['brick', 'ground', 'question', 'pipe'],
   direction: directions.right,
 });
 
@@ -42,17 +45,25 @@ const checkCollisionUpDown = (caracter, decors, delta) => {
   let caseType = null;
 
   if (caracter.gravity.value > 0) {
-    caseType = findCase(decors.Canvas.height - nextPositionY - caracter.height, caracter.X)
-              || findCase(decors.Canvas.height - nextPositionY - caracter.height, caracter.X + caracter.width);
-    if (caseType === 'brick' || caseType === 'ground' || caseType === 'question') {
+    caseType = findCase(decors.Canvas.height - nextPositionY - caracter.height, caracter.X + caracter.collisionLeft);
+
+    if (!caseType) {
+      caseType = findCase(decors.Canvas.height - nextPositionY - caracter.height, caracter.X
+        + caracter.width + caracter.collisionRight);
+    }
+
+    if (caracter.collisionCaseTypes.indexOf(caseType) >= 0) {
       caracter.onGround = true;
     }
   } else {
-    caseType = findCase(decors.Canvas.height - nextPositionY, caracter.X)
-              || findCase(decors.Canvas.height - nextPositionY, caracter.X + caracter.width);
+    caseType = findCase(decors.Canvas.height - nextPositionY, caracter.X + caracter.collisionLeft);
+
+    if (!caseType) {
+      caseType = findCase(decors.Canvas.height - nextPositionY, caracter.X + caracter.width + caracter.collisionRight);
+    }
   }
 
-  if (caseType === 'brick' || caseType === 'ground' || caseType === 'question') {
+  if (caracter.collisionCaseTypes.indexOf(caseType) >= 0) {
     caracter.gravity.value = 0;
 
     return caracter.Y;
