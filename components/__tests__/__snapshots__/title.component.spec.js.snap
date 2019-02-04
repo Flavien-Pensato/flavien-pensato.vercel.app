@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Title /> should match snapshot 1`] = `
+<titlecomponent__Header>
+  <titlecomponent__H1>
+    <titlecomponent__I
+      className="snes-jp-logo brand"
+    />
+    Hello,
+    <br />
+    I'm Flavien!
+    <br />
+  </titlecomponent__H1>
+  <titlecomponent__P>
+    An enthusiastic Frontend developper
+  </titlecomponent__P>
+</titlecomponent__Header>
+`;

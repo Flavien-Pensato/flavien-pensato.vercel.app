@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Contacts /> should match snapshot 1`] = `
+<contactscomponent__Footer>
+  <OutboundLink
+    eventLabel="Github"
+    onClick={null}
+    target="_blank"
+    title="Github link"
+    to="https://github.com/Flavien-Pensato"
+  >
+    <i
+      className="nes-icon github is-medium"
+    />
+  </OutboundLink>
+  <OutboundLink
+    eventLabel="Linkedin"
+    onClick={null}
+    target="_blank"
+    title="Linkedin link"
+    to="https://www.linkedin.com/in/flavien-pensato-708190a7"
+  >
+    <i
+      className="nes-icon linkedin is-medium"
+    />
+  </OutboundLink>
+</contactscomponent__Footer>
+`;

@@ -36,7 +36,7 @@ export const Title = () => (
       <I className="snes-jp-logo brand" />
       Hello,
       <br />
-I'm Flavien!
+      I'm Flavien!
       <br />
     </H1>
     <P>
