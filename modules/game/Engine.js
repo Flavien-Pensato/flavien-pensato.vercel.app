@@ -1,24 +1,104 @@
-import { defaultCaracter, update } from './caracter';
+import debugFactory from 'debug';
+
+import { update } from './caracter';
 import { defaultDecors } from './decors';
 import { keydown, keyup, defaultControlsStatus } from './controls';
 
+export const debug = debugFactory('engine');
+
+export const getCanvas = (canvasId) => {
+  const canvas = document.getElementById(canvasId);
+
+  if (!canvas) {
+    debug(`'${canvasId}' canvas not found.`);
+  }
+
+  return canvas;
+};
+
+export const loadSprite = (spriteSource) => {
+  const Sprite = new Image();
+
+  return new Promise((resolve, reject) => {
+    const setTimeoutID = setTimeout(() => reject(Error('Timeout exceed 2sec')), 2000);
+
+    Sprite.onload = () => {
+      clearTimeout(setTimeoutID);
+
+      resolve(Sprite);
+    };
+
+    Sprite.src = spriteSource;
+  });
+};
+
+
 class Engine {
-  constructor(canvasId, canvaDecorsId) {
-    this.Canvas = document.getElementById(canvasId);
-    this.Context2D = this.Canvas.getContext('2d');
+  constructor() {
     this.LastFrameTimeMs = 0;
     this.Timestep = 1000 / 60;
     this.Delta = 0;
-    this.Mario = defaultCaracter(54, window.innerHeight - 54 - 60);
-    this.Decors = {
-      Canvas: document.getElementById(canvaDecorsId),
-      Context2D: document.getElementById(canvaDecorsId).getContext('2d'),
-
-    };
+    this.decors = [];
+    this.characters = [];
     this.Controls = defaultControlsStatus;
+  }
 
-    this.Decors.Canvas.width = window.innerWidth;
-    this.Decors.Canvas.height = window.innerHeight;
+  start = () => {
+
+  }
+
+  stop = () => {
+
+  }
+
+  addDecors = async (canvasId, decor, spriteSource) => {
+    const Canvas = getCanvas(canvasId);
+
+    try {
+      const Sprite = await loadSprite(spriteSource);
+
+      if (Canvas && decor) {
+        Canvas.width = window.innerWidth;
+        Canvas.height = window.innerHeight;
+
+        const newDecor = {
+          ...decor,
+          Canvas,
+          Context2D: Canvas.getContext('2d'),
+          Sprite,
+        };
+        this.decors.push(newDecor);
+      }
+      debug(`No Decor added. Missing element '${Canvas ? 'Decor' : 'Canvas'}'.`);
+    } catch (error) {
+      debug('No Decor added. Missing element `Sprite`.');
+    }
+  }
+
+  addCharacter = async (canvasId, character, spriteSource) => {
+    const Canvas = getCanvas(canvasId);
+
+    try {
+      const Sprite = await loadSprite(spriteSource);
+
+      if (Canvas && character) {
+        Canvas.width = window.innerWidth;
+        Canvas.height = window.innerHeight;
+
+        const newCharacter = {
+          ...character,
+          Canvas,
+          Context2D: Canvas.getContext('2d'),
+          Sprite,
+        };
+
+        this.characters.push(newCharacter);
+      }
+
+      debug(`No Character added. Missing element '${Canvas ? 'Character' : 'Canvas'}'.`);
+    } catch (error) {
+      debug('No Character added. Missing element `Sprite`.');
+    }
   }
 
   loop = (timestamp) => {
