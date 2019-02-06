@@ -20,7 +20,7 @@ Object.defineProperty(global.Image.prototype, 'src', {
 const CANVAS_SUCCESS = 'canvasId';
 
 Object.defineProperty(document, 'getElementById', {
-  get(arg) {
+  value: (arg) => {
     if (arg === CANVAS_SUCCESS) {
       return {
         getContext: jest.fn(),
