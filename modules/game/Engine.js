@@ -4,42 +4,44 @@ import { addElement } from './utils';
 
 import { update } from './caracter';
 // import { defaultDecors } from './decors';
-import { keydown, keyup, defaultControlsStatus } from './controls';
+import Controller from './Controller';
 
 export const debug = debugFactory('engine');
 
 
-export const draw = (element) => {
-  element.Context2D.clearRect(element.X - 20, element.Y - 20, 54 + 40, 54 + 40);
-  element.Context2D.drawImage(element.Sprite, 10, 5, 14, 27, element.X, element.Y, 28, 54);
+export const clear = (elements) => {
+  elements.forEach((element) => {
+    element.Context2D.clearRect(element.X, element.Y, element.width, element.height);
+  });
+};
+export const draw = (elements) => {
+  elements.forEach((element) => {
+    element.Context2D.drawImage(element.Sprite, element.Sx, element.Sy, element.Swidth,
+      element.Sheight, element.X, element.Y, element.width, element.height);
+  });
 };
 
 class Engine {
   constructor() {
     this.playing = false;
-    this.LastFrameTimeMs = 0;
-    this.Timestep = 1000 / 60;
-    this.Delta = 0;
+    this.lastFrameTimeMs = 0;
+    this.fps = 1000 / 60;
+    this.delta = 0;
     this.decors = [];
     this.characters = [];
-    this.Controls = defaultControlsStatus;
-
-    window.addEventListener('keydown', (event) => {
-      this.Controls = keydown(event, this.Controls);
-    }, false);
-
-    window.addEventListener('keyup', (event) => {
-      this.Controls = keyup(event, this.Controls);
-    }, false);
   }
 
   start = () => {
     this.playing = true;
+    this.Controller = new Controller();
     window.requestAnimationFrame(this.loop);
   }
 
   stop = () => {
+    this.Controller.destroy();
     this.playing = false;
+
+    delete this.Controller;
   }
 
   addDecors = async (canvasId, decor, spriteSource) => {
@@ -59,20 +61,67 @@ class Engine {
   }
 
   loop = (timestamp) => {
-    this.Delta += timestamp - this.LastFrameTimeMs;
-    this.LastFrameTimeMs = timestamp;
-
-    while (this.Delta >= this.Timestep) {
-      update(this.Mario, this.Controls, this.Decors, this.Timestep);
-      this.Delta -= this.Timestep;
-    }
-
-    this.draw(this.Mario);
+    this.delta += timestamp - this.lastFrameTimeMs;
+    this.lastFrameTimeMs = timestamp;
 
     if (this.playing) {
+      clear(this.characters);
+
+      while (this.delta >= this.fps) {
+        this.elements.forEach((element) => {
+          update(element);
+        });
+
+        this.delta -= this.fps;
+      }
+
+      draw(this.characters);
+
       window.requestAnimationFrame(this.loop);
     }
   }
+
+  update = (caracter) => {
+    const activeKey = this.Controller.getActiveKey();
+
+    switch (activeKey) {
+      case 'up': {
+        if (caracter.onGround) {
+          caracter.gravity.value = -caracter.gravity.max - 0.2;
+          caracter.onGround = false;
+        }
+        break;
+      }
+      case 'right':
+      case 'left': {
+        caracter.motion.value += caracter.motion.speed;
+
+        if (caracter.motion.value >= caracter.motion.max) {
+          caracter.motion.value = caracter.motion.max;
+        }
+
+        const motion = caracter.motion.value * this.delta;
+
+        caracter.direction = this.Controller.getActiveKey();
+        caracter.X += activeKey === 'right' ? motion : (-1 * motion);
+        break;
+      }
+
+      default:
+        caracter.motion.value = 0;
+        break;
+    }
+
+    caracter.gravity.value += caracter.gravity.speed;
+
+    if (caracter.gravity.value >= caracter.gravity.max) {
+      caracter.gravity.value = caracter.gravity.max;
+    }
+
+    // caracter.Y = checkCollisionUpDown(caracter, decors, this.delta);
+
+    return caracter;
+  };
 }
 
 export default Engine;
