@@ -9,9 +9,9 @@ const LOAD_SUCCESS_SRC = 'src/sprite.png';
 Object.defineProperty(global.Image.prototype, 'src', {
   set(src) {
     if (src === LOAD_FAILURE_SRC) {
-      setTimeout(() => this.onerror(new Error('mocked error')));
+      setTimeout(() => (this.onerror ? this.onerror(new Error('mocked error')) : null));
     } else if (src === LOAD_SUCCESS_SRC) {
-      setTimeout(() => this.onload());
+      setTimeout(() => (this.onload ? this.onload() : null));
     }
   },
 });
