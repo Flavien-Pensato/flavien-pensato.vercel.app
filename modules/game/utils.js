@@ -28,26 +28,19 @@ export const loadSprite = (spriteSource) => {
   });
 };
 
-export const addElement = async (canvasId, element, spriteSource) => {
-  const Canvas = getCanvas(canvasId);
-
+export const addElement = async (element, spriteSource) => {
   try {
     const Sprite = await loadSprite(spriteSource);
 
-    if (Canvas && element) {
-      Canvas.width = window.innerWidth;
-      Canvas.height = window.innerHeight;
-
+    if (element) {
       const newElement = {
         ...element,
-        Canvas,
-        Context2D: Canvas.getContext('2d'),
         Sprite,
       };
 
       return newElement;
     }
-    debug(`No Element added. Missing '${Canvas ? 'Decor' : 'Canvas'}'.`);
+    debug('No Element added. Missing \'Decor\'.');
   } catch (error) {
     debug('No Element added. Missing `Sprite`.');
   }

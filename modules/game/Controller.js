@@ -44,7 +44,7 @@ class Controller {
     }, false);
   }
 
-  getActiveKey = () => keys.some(key => this.statusKeys[key])
+  getActiveKey = () => Object.keys(keys).find(key => (this.statusKeys[key] ? key : null))
 
   destroy = () => {
     window.removeEventListener('keydown');

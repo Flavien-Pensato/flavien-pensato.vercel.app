@@ -23,7 +23,7 @@ export const map = [
 ];
 
 const brick = {
-  id: 'brick',
+  name: 'brick',
   sx: 1050,
   sy: 60,
   sHeight: 116,
@@ -33,7 +33,7 @@ const brick = {
 };
 
 const ground = {
-  id: 'ground',
+  name: 'ground',
   sx: 872,
   sy: 60,
   sHeight: 119,
@@ -43,7 +43,7 @@ const ground = {
 };
 
 const question = {
-  id: 'question',
+  name: 'question',
   sx: 699,
   sy: 63,
   sHeight: 116,
@@ -53,7 +53,7 @@ const question = {
 };
 
 const hill = {
-  id: 'hill',
+  name: 'hill',
   sx: 0,
   sy: 44,
   sHeight: 135,
@@ -63,7 +63,7 @@ const hill = {
 };
 
 const bush = {
-  id: 'bush',
+  name: 'bush',
   sx: 409,
   sy: 63,
   sHeight: 114,
@@ -73,7 +73,7 @@ const bush = {
 };
 
 const littleCloud = {
-  id: 'littleCloud',
+  name: 'littleCloud',
   sx: 1781,
   sy: 0,
   sHeight: 178,
@@ -82,7 +82,7 @@ const littleCloud = {
   width: 120,
 };
 
-const drawDecor = (dx, dy, type, Context2DDecors, image) => {
+export const drawDecor = (dx, dy, type, Context2DDecors, image) => {
   switch (type) {
     case 'brick':
       Context2DDecors.drawImage(image, brick.sx, brick.sy, brick.sWidth, brick.sHeight,
