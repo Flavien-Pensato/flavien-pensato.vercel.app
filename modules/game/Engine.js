@@ -1,98 +1,178 @@
-import { defaultCaracter, update } from './caracter';
-import { defaultDecors } from './decors';
-import { keydown, keyup, defaultControlsStatus } from './controls';
+import debugFactory from 'debug';
+
+import { loadSprite, addElement } from './utils';
+
+import { drawDecor } from './decors';
+import { checkCollisionUpDown } from './caracter';
+import Controller from './Controller';
+
+export const debug = debugFactory('engine');
+
+
+export const clear = (elements) => {
+  elements.forEach((element) => {
+    element.Context2D.clearRect(element.X, element.Y, element.width, element.height);
+  });
+};
+export const draw = (elements) => {
+  elements.forEach((element) => {
+    element.Context2D.drawImage(element.Sprite, element.Sx, element.Sy, element.Swidth,
+      element.Sheight, element.X, element.Y, element.width, element.height);
+  });
+};
 
 class Engine {
-  constructor(canvasId, canvaDecorsId) {
-    this.Canvas = document.getElementById(canvasId);
-    this.Context2D = this.Canvas.getContext('2d');
-    this.LastFrameTimeMs = 0;
-    this.Timestep = 1000 / 60;
-    this.Delta = 0;
-    this.Mario = defaultCaracter(54, window.innerHeight - 54 - 60);
-    this.Decors = {
-      Canvas: document.getElementById(canvaDecorsId),
-      Context2D: document.getElementById(canvaDecorsId).getContext('2d'),
+  constructor(domId) {
+    this.dom = document.getElementById(domId);
+    this.playing = false;
+    this.lastFrameTimeMs = 0;
+    this.imageBySecond = 0;
+    this.fps = 60;
+    this.timestep = 1000 / this.fps;
+    this.delta = 0;
+    this.sprites = [];
+    this.decors = [];
+    this.characters = [];
+    this.world = null;
+  }
 
-    };
-    this.Controls = defaultControlsStatus;
+  start = () => {
+    this.playing = true;
+    this.Controller = new Controller();
+    this.Controller.init();
+    window.requestAnimationFrame(this.loop);
+  }
 
-    this.Decors.Canvas.width = window.innerWidth;
-    this.Decors.Canvas.height = window.innerHeight;
+  stop = () => {
+    this.Controller.destroy();
+    this.playing = false;
+
+    delete this.Controller;
+  }
+
+  addCharacter = async (character, spriteSource) => {
+    let player = this.dom.querySelector('.player');
+
+    if (!player) {
+      player = document.createElement('canvas');
+      player.classList.add('player');
+      player.height = this.dom.offsetHeight;
+      player.width = this.dom.offsetWidth;
+
+      this.dom.appendChild(player);
+    }
+
+
+    const element = await addElement(character, spriteSource);
+
+    if (element) {
+      this.characters.push({ ...element, Context2D: player.getContext('2d') });
+    }
+  }
+
+  loadWorld = async (map) => {
+    this.map = map;
+    const oldWold = this.dom.querySelector('.world');
+    const newWorld = document.createElement('canvas');
+    const sprite = await loadSprite('/static/game/sprite.png');
+
+    newWorld.classList.add('world');
+    newWorld.height = this.dom.offsetHeight;
+    newWorld.width = this.dom.offsetWidth;
+
+    if (oldWold) {
+      oldWold.remove();
+    }
+
+    this.dom.appendChild(newWorld);
+
+    let x = 0;
+    let y = newWorld.height;
+
+    this.map.forEach((line) => {
+      line.forEach((value) => {
+        drawDecor(x, y, value, newWorld.getContext('2d'), sprite);
+        x += 30;
+      });
+
+      y -= 30;
+      x = 0;
+    });
   }
 
   loop = (timestamp) => {
-    window.requestAnimationFrame(this.loop);
+    let numUpdateSteps = 0;
+    this.delta += timestamp - this.lastFrameTimeMs;
+    this.lastFrameTimeMs = timestamp;
 
-    this.Delta += timestamp - this.LastFrameTimeMs;
-    this.LastFrameTimeMs = timestamp;
+    if (this.playing) {
+      clear(this.characters);
 
-    while (this.Delta >= this.Timestep) {
-      update(this.Mario, this.Controls, this.Decors, this.Timestep);
-      this.Delta -= this.Timestep;
+      while (this.delta >= this.timestep) {
+        this.characters.forEach((element) => {
+          this.update(element);
+        });
+
+        this.delta -= this.timestep;
+
+        if (++numUpdateSteps >= 240) {
+          this.delta = 0;
+          window.requestAnimationFrame(this.loop);
+          break;
+        }
+      }
+
+      if (this.imageBySecond >= 60) {
+        this.imageBySecond = 0;
+      }
+
+      draw(this.characters);
+      this.imageBySecond++;
+
+      window.requestAnimationFrame(this.loop);
+    }
+  }
+
+  update = (character) => {
+    const activeKey = this.Controller.getActiveKey();
+    switch (activeKey) {
+      case 'up': {
+        if (character.onGround) {
+          character.gravity.value = -character.gravity.max - 0.2;
+          character.onGround = false;
+        }
+        break;
+      }
+      case 'right':
+      case 'left': {
+        character.motion.value += character.motion.speed;
+
+        if (character.motion.value >= character.motion.max) {
+          character.motion.value = character.motion.max;
+        }
+
+        const motion = character.motion.value * this.timestep;
+
+        character.direction = this.Controller.getActiveKey();
+        character.X += activeKey === 'right' ? motion : (-1 * motion);
+        break;
+      }
+
+      default:
+        character.motion.value = 0;
+        break;
     }
 
-    this.draw(this.Mario);
-  }
+    character.gravity.value += character.gravity.speed;
 
-  init = () => {
-    this.Mario.mariosheet = new Image();
+    if (character.gravity.value >= character.gravity.max) {
+      character.gravity.value = character.gravity.max;
+    }
 
-    return new Promise((resolve, reject) => {
-      const setTimeoutID = setTimeout(() => reject(Error('Timeout exceed 2sec')), 2000);
+    character.Y = checkCollisionUpDown(character, this.dom.offsetHeight, this.timestep);
 
-      this.Mario.mariosheet.onload = () => {
-        clearTimeout(setTimeoutID);
-        this.Context2D.mozImageSmoothingEnabled = true;
-        this.Context2D.webkitImageSmoothingEnabled = true;
-        this.Context2D.msImageSmoothingEnabled = true;
-        this.Context2D.imageSmoothingEnabled = true;
-        this.Canvas.width = window.innerWidth;
-        this.Canvas.height = window.innerHeight;
-
-        window.addEventListener('keydown', (event) => {
-          this.Controls = keydown(event, this.Controls);
-        }, false);
-
-        window.addEventListener('keyup', (event) => {
-          this.Controls = keyup(event, this.Controls);
-        }, false);
-
-        window.requestAnimationFrame(this.loop);
-
-
-        resolve();
-      };
-
-      this.Mario.mariosheet.src = '/static/game/mariosheet.png';
-    });
-  }
-
-  initDecors = () => {
-    this.Decors.sheet = new Image();
-
-    return new Promise((resolve, reject) => {
-      const setTimeoutID = setTimeout(() => reject(Error('Timeout exceed 2sec')), 2000);
-
-      this.Decors.sheet.onload = () => {
-        clearTimeout(setTimeoutID);
-        this.Decors.Context2D.mozImageSmoothingEnabled = true;
-        this.Decors.Context2D.webkitImageSmoothingEnabled = true;
-        this.Decors.Context2D.msImageSmoothingEnabled = true;
-        this.Decors.Context2D.imageSmoothingEnabled = true;
-        defaultDecors(this.Decors);
-
-        resolve();
-      };
-
-      this.Decors.sheet.src = '/static/game/sprite.png';
-    });
-  }
-
-  draw = () => {
-    this.Context2D.clearRect(this.Mario.X - 20, this.Mario.Y - 20, 54 + 40, 54 + 40);
-    this.Context2D.drawImage(this.Mario.mariosheet, 10, 5, 14, 27, this.Mario.X, this.Mario.Y, 28, 54);
-  }
+    return character;
+  };
 }
 
 export default Engine;

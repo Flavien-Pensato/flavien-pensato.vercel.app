@@ -123,7 +123,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['<rootDir>config/jest.js'],
+  setupFilesAfterEnv: ['<rootDir>/config/jest.js'],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   snapshotSerializers: ['enzyme-to-json/serializer'],
@@ -132,7 +132,7 @@ module.exports = {
   testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
-  // testEnvironmentOptions: {},
+  testEnvironmentOptions: { resources: 'usable' },
 
   // Adds a location field to test results
   // testLocationInResults: false,
@@ -144,9 +144,7 @@ module.exports = {
   // ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-  ],
+  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   testRegex: '__tests__/.*\\.spec\\.(json|js)$',
@@ -169,7 +167,7 @@ module.exports = {
   // An array of regexp pattern strings that are matched against all source file paths,
   // matched files will skip transformation
   transformIgnorePatterns: [
-    '/node_modules/',
+    '<rootDir>/node_modules/',
   ],
 
   // An array of regexp pattern strings that are matched against all modules before
