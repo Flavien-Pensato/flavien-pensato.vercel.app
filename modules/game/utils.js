@@ -16,13 +16,9 @@ export const loadSprite = (spriteSource) => {
   const Sprite = new Image();
 
   return new Promise((resolve, reject) => {
-    const setTimeoutID = setTimeout(() => reject(Error('Timeout exceed 2sec')), 2000);
+    Sprite.onload = () => resolve(Sprite);
 
-    Sprite.onload = () => {
-      clearTimeout(setTimeoutID);
-
-      resolve(Sprite);
-    };
+    Sprite.onerror = error => reject(error);
 
     Sprite.src = spriteSource;
   });

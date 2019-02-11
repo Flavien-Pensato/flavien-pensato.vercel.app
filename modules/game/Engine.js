@@ -117,6 +117,7 @@ class Engine {
 
         if (++numUpdateSteps >= 240) {
           this.delta = 0;
+          window.requestAnimationFrame(this.loop);
           break;
         }
       }

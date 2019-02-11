@@ -1,5 +1,5 @@
 import {
-  debug, getCanvas, addElement,
+  debug, getCanvas, loadSprite, addElement,
 } from '../utils';
 
 jest.unmock('../utils.js');
@@ -17,7 +17,29 @@ describe('utils', () => {
     });
   });
 
-  describe('loadSprite', () => {});
+  describe('loadSprite', () => {
+    it('should load my image', async () => {
+      expect.assertions(1);
+
+      try {
+        const sprite = await loadSprite('src/sprite.png');
+
+        expect(sprite).toBeDefined();
+      } catch (error) {
+        throw new Error(error);
+      }
+    });
+
+    it('should throw error when image not found', async () => {
+      expect.assertions(1);
+
+      try {
+        await loadSprite('src/bad_sprite.png');
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
+    });
+  });
 
 
   describe('addElement', () => {
