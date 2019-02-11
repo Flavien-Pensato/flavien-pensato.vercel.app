@@ -3,7 +3,9 @@ import debugFactory from 'debug';
 import { loadSprite, addElement } from './utils';
 
 import { drawDecor } from './decors';
-import { checkCollisionUpDown } from './caracter';
+import {
+  checkCollisionUpDown, stop, running1, running2,
+} from './caracter';
 import Controller from './Controller';
 
 export const debug = debugFactory('engine');
@@ -11,13 +13,13 @@ export const debug = debugFactory('engine');
 
 export const clear = (elements) => {
   elements.forEach((element) => {
-    element.Context2D.clearRect(element.X, element.Y, element.width, element.height);
+    element.Context2D.clearRect(element.X, element.Y, element.canvas.width, element.canvas.height);
   });
 };
 export const draw = (elements) => {
   elements.forEach((element) => {
-    element.Context2D.drawImage(element.Sprite, element.Sx, element.Sy, element.Swidth,
-      element.Sheight, element.X, element.Y, element.width, element.height);
+    element.Context2D.drawImage(element.Sprite, element.canvas.Sx, element.canvas.Sy, element.canvas.Swidth,
+      element.canvas.Sheight, element.X, element.Y, element.canvas.width, element.canvas.height);
   });
 };
 
@@ -153,6 +155,12 @@ class Engine {
 
         const motion = character.motion.value * this.timestep;
 
+        if (this.imageBySecond < 15 || (this.imageBySecond >= 30 && this.imageBySecond < 45)) {
+          character.canvas = running1;
+        } else if ((this.imageBySecond >= 15 && this.imageBySecond < 30)
+        || (this.imageBySecond >= 45 && this.imageBySecond <= 60)) {
+          character.canvas = running2;
+        }
         character.direction = this.Controller.getActiveKey();
         character.X += activeKey === 'right' ? motion : (-1 * motion);
         break;
@@ -160,6 +168,7 @@ class Engine {
 
       default:
         character.motion.value = 0;
+        character.canvas = stop;
         break;
     }
 

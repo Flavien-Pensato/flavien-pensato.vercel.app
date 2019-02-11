@@ -16,11 +16,11 @@ export const checkCollisionUpDown = (caracter, height, delta) => {
   let caseType = null;
 
   if (caracter.gravity.value > 0) {
-    caseType = findCase(height - nextPositionY - caracter.height, caracter.X + caracter.collisionLeft);
+    caseType = findCase(height - nextPositionY - caracter.canvas.height, caracter.X + caracter.collisionLeft);
 
     if (!caseType) {
-      caseType = findCase(height - nextPositionY - caracter.height, caracter.X
-        + caracter.width + caracter.collisionRight);
+      caseType = findCase(height - nextPositionY - caracter.canvas.height, caracter.X
+        + caracter.canvas.width + caracter.collisionRight);
     }
 
     if (caracter.collisionCaseTypes.indexOf(caseType) >= 0) {
@@ -30,7 +30,7 @@ export const checkCollisionUpDown = (caracter, height, delta) => {
     caseType = findCase(height - nextPositionY, caracter.X + caracter.collisionLeft);
 
     if (!caseType) {
-      caseType = findCase(height - nextPositionY, caracter.X + caracter.width + caracter.collisionRight);
+      caseType = findCase(height - nextPositionY, caracter.X + caracter.canvas.width + caracter.collisionRight);
     }
   }
 
@@ -41,4 +41,31 @@ export const checkCollisionUpDown = (caracter, height, delta) => {
   }
 
   return nextPositionY;
+};
+
+export const stop = {
+  height: 54,
+  width: 28,
+  Sx: 10,
+  Sy: 5,
+  Swidth: 14,
+  Sheight: 27,
+};
+
+export const running1 = {
+  height: 54,
+  width: 28,
+  Sx: 40,
+  Sy: 5,
+  Swidth: 16,
+  Sheight: 27,
+};
+
+export const running2 = {
+  height: 54,
+  width: 28,
+  Sx: 72,
+  Sy: 5,
+  Swidth: 16,
+  Sheight: 26,
 };
