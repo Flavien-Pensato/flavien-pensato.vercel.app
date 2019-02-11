@@ -45,29 +45,7 @@ class App extends Component {
 
     engine.loadWorld(map);
     engine.addCharacter({
-      X: 32,
-      Y: 60,
-      height: 54,
-      width: 28,
-      Sx: 10,
-      Sy: 5,
-      Swidth: 14,
-      Sheight: 27,
-      collisionLeft: 5,
-      collisionRight: -10,
-      onGround: true,
-      gravity: {
-        value: 0,
-        speed: 0.02,
-        max: 0.35,
-      },
-      motion: {
-        value: 0,
-        speed: 0.008,
-        max: 0.3,
-      },
-      collisionCaseTypes: ['brick', 'ground', 'question', 'pipe'],
-      direction: 'right',
+      name: 'mario',
     }, '/static/game/mariosheet.png');
 
     engine.start();

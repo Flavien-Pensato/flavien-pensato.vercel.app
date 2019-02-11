@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils addElement should add my element with his sprite 1`] = `
+Object {
+  "Sheight": 27,
+  "Sprite": <img />,
+  "Swidth": 14,
+  "Sx": 10,
+  "Sy": 5,
+  "X": 32,
+  "Y": 60,
+  "collisionCaseTypes": Array [
+    "brick",
+    "ground",
+    "question",
+    "pipe",
+  ],
+  "collisionLeft": 5,
+  "collisionRight": -10,
+  "direction": "right",
+  "gravity": Object {
+    "max": 0.35,
+    "speed": 0.02,
+    "value": 0,
+  },
+  "height": 54,
+  "motion": Object {
+    "max": 0.3,
+    "speed": 0.008,
+    "value": 0,
+  },
+  "name": "toto",
+  "onGround": true,
+  "width": 28,
+}
+`;

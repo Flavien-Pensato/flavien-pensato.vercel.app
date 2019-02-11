@@ -4,7 +4,6 @@ import {
 
 jest.unmock('../utils.js');
 
-
 describe('utils', () => {
   describe('getCanvas', () => {
     it('should return canvas if exist', () => {
@@ -43,27 +42,23 @@ describe('utils', () => {
 
 
   describe('addElement', () => {
-    it('should not add decors when canvasId not existing', async () => {
-      const element = await addElement(undefined, {}, 'src/sprite.png');
-      expect(element).toBeNull();
+    it('should add my element with his sprite', async () => {
+      const element = await addElement({ name: 'toto' }, 'src/sprite.png');
+      expect(element).toMatchSnapshot();
     });
 
-    it('should not add decors when decor is undefined', async () => {
-      const element = await addElement('canvasId', undefined, 'src/sprite.png');
+    it('should fail because of sprite and return null', async () => {
+      const element = await addElement({ name: 'toto' }, 'src/bad_sprite.png');
 
       expect(element).toBeNull();
+      expect(debug).toHaveBeenCalledWith('No Element added. Missing `Sprite`.');
     });
 
-    it('should not add decors when sprite isn\'t found', async () => {
-      const element = await addElement('canvasId', {}, 'src/bad_sprite.png');
+    it('should fail because of element and return null', async () => {
+      const element = await addElement(undefined, 'src/sprite.png');
 
       expect(element).toBeNull();
-    });
-
-    it('should add a new decor', async () => {
-      const element = await addElement('canvasId', {}, 'src/sprite.png');
-
-      expect(element).toBeDefined();
+      expect(debug).toHaveBeenCalledWith('No Element added. Missing `Element`.');
     });
   });
 });
