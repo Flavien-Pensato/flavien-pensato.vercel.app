@@ -4,7 +4,7 @@ import { loadSprite, addElement } from './utils';
 
 import { drawDecor } from './decors';
 import {
-  checkCollisionUpDown, stop, running1, running2,
+  checkCollisionUpDown, stop, running1, running2, running3, running4,
 } from './caracter';
 import Controller from './Controller';
 
@@ -155,10 +155,13 @@ class Engine {
 
         const motion = character.motion.value * this.timestep;
 
-        if (this.imageBySecond < 15 || (this.imageBySecond >= 30 && this.imageBySecond < 45)) {
+        if (this.imageBySecond < 15) {
           character.canvas = running1;
-        } else if ((this.imageBySecond >= 15 && this.imageBySecond < 30)
-        || (this.imageBySecond >= 45 && this.imageBySecond <= 60)) {
+        } else if (this.imageBySecond >= 30 && this.imageBySecond < 45) {
+          character.canvas = running4;
+        } else if (this.imageBySecond >= 15 && this.imageBySecond < 30) {
+          character.canvas = running3;
+        } else if (this.imageBySecond >= 45 && this.imageBySecond <= 60) {
           character.canvas = running2;
         }
         character.direction = this.Controller.getActiveKey();

@@ -69,3 +69,21 @@ export const running2 = {
   Swidth: 16,
   Sheight: 26,
 };
+
+export const running3 = {
+  height: 54,
+  width: 28,
+  Sx: 361,
+  Sy: 5,
+  Swidth: 15,
+  Sheight: 28,
+};
+
+export const running4 = {
+  height: 54,
+  width: 28,
+  Sx: 392,
+  Sy: 5,
+  Swidth: 16,
+  Sheight: 26,
+};
