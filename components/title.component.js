@@ -20,14 +20,11 @@ const I = styled.i`
 const Header = styled.header`
   min-width: 320px;
   padding: 20px;
+  padding-top: 100px;
   color: black;
 
   text-align: left;
   text-shadow: 2px 2px 5px white;
-
-  @media (max-width: 700px) {
-    padding-bottom: 100px;
-  }
 `;
 
 export const Title = () => (

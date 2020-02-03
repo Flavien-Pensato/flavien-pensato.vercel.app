@@ -2,31 +2,6 @@ import debugFactory from 'debug';
 
 export const debug = debugFactory('engine');
 
-const defaultCharacter = {
-  X: 32,
-  Y: 60,
-  height: 54,
-  width: 28,
-  Sx: 10,
-  Sy: 5,
-  Swidth: 14,
-  Sheight: 27,
-  collisionLeft: 5,
-  collisionRight: -10,
-  onGround: true,
-  gravity: {
-    value: 0,
-    speed: 0.02,
-    max: 0.35,
-  },
-  motion: {
-    value: 0,
-    speed: 0.008,
-    max: 0.3,
-  },
-  collisionCaseTypes: ['brick', 'ground', 'question', 'pipe'],
-  direction: 'right',
-};
 
 export const getCanvas = (canvasId) => {
   const canvas = document.getElementById(canvasId);
@@ -44,29 +19,21 @@ export const loadSprite = (spriteSource) => {
   return new Promise((resolve, reject) => {
     Sprite.onload = () => resolve(Sprite);
 
-    Sprite.onerror = error => reject(error);
+    Sprite.onerror = (error) => reject(error);
 
     Sprite.src = spriteSource;
   });
 };
 
-export const addElement = async (element, spriteSource) => {
-  try {
-    const Sprite = await loadSprite(spriteSource);
+export const clear = (elements) => {
+  elements.forEach((element) => {
+    element.canvas.clearRect(element.X, element.Y, element.width, element.height);
+  });
+};
 
-    if (element) {
-      const newElement = {
-        ...defaultCharacter,
-        ...element,
-        Sprite,
-      };
-
-      return newElement;
-    }
-    debug('No Element added. Missing `Element`.');
-  } catch (error) {
-    debug('No Element added. Missing `Sprite`.');
-  }
-
-  return null;
+export const draw = (elements) => {
+  elements.forEach((element) => {
+    element.canvas.drawImage(element.sprite, element.Sx, element.Sy, element.Swidth,
+      element.Sheight, element.X, element.Y, element.width, element.height);
+  });
 };

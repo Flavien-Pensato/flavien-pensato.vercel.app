@@ -1,178 +1,158 @@
 import debugFactory from 'debug';
 
-import { loadSprite, addElement } from './utils';
+import {
+  loadSprite, draw,
+} from './utils';
+// import {
+//   loadSprite, addElement, draw, clean,
+// } from './utils';
 
 import { drawDecor } from './decors';
-import { checkCollisionUpDown } from './caracter';
-import Controller from './Controller';
+// import { checkCollisionUpDown } from './caracter';
+// import Controller from './Controller';
 
 export const debug = debugFactory('engine');
 
-
-export const clear = (elements) => {
-  elements.forEach((element) => {
-    element.Context2D.clearRect(element.X, element.Y, element.width, element.height);
-  });
-};
-export const draw = (elements) => {
-  elements.forEach((element) => {
-    element.Context2D.drawImage(element.Sprite, element.Sx, element.Sy, element.Swidth,
-      element.Sheight, element.X, element.Y, element.width, element.height);
-  });
-};
+let instance = null;
 
 class Engine {
-  constructor(domId) {
-    this.dom = document.getElementById(domId);
-    this.playing = false;
-    this.lastFrameTimeMs = 0;
-    this.imageBySecond = 0;
-    this.fps = 60;
-    this.timestep = 1000 / this.fps;
-    this.delta = 0;
-    this.sprites = [];
-    this.decors = [];
-    this.characters = [];
-    this.world = null;
+  static create() {
+    if (!instance) {
+      instance = new Engine();
+    }
+
+    return instance;
   }
 
-  start = () => {
-    this.playing = true;
-    this.Controller = new Controller();
-    this.Controller.init();
-    window.requestAnimationFrame(this.loop);
+  constructor() {
+    this.lastTick = window.performance.now();
+    this.lastRender = this.lastTick;
+    this.tickLength = 50;
+    this.worlds = [];
+    this.characters = [];
+    this.loop(this.lastTick);
   }
 
   stop = () => {
-    this.Controller.destroy();
-    this.playing = false;
-
-    delete this.Controller;
+    window.cancelAnimationFrame(this.lastRequedtId);
   }
 
-  addCharacter = async (character, spriteSource) => {
-    let player = this.dom.querySelector('.player');
+  addCharacter = async (character, config) => {
+    const sprite = await loadSprite(config.sprite);
+    character.height = character.offsetHeight;
+    character.width = character.offsetWidth;
 
-    if (!player) {
-      player = document.createElement('canvas');
-      player.classList.add('player');
-      player.height = this.dom.offsetHeight;
-      player.width = this.dom.offsetWidth;
-
-      this.dom.appendChild(player);
+    if (character) {
+      this.characters.push({
+        ...config, sprite, Y: (this.worlds[0].ratioY - 4) * 30 + config.Sy, canvas: character.getContext('2d'),
+      });
     }
 
 
-    const element = await addElement(character, spriteSource);
-
-    if (element) {
-      this.characters.push({ ...element, Context2D: player.getContext('2d') });
-    }
+    draw(this.characters);
   }
 
-  loadWorld = async (map) => {
-    this.map = map;
-    const oldWold = this.dom.querySelector('.world');
-    const newWorld = document.createElement('canvas');
+  loadWorld = async (world, config) => {
+    world.height = world.offsetHeight;
+    world.width = world.offsetWidth;
+    const ratioY = Math.ceil(world.height / 30);
+    const ratioX = Math.ceil(world.width / 30);
+
     const sprite = await loadSprite('/static/game/sprite.png');
 
-    newWorld.classList.add('world');
-    newWorld.height = this.dom.offsetHeight;
-    newWorld.width = this.dom.offsetWidth;
-
-    if (oldWold) {
-      oldWold.remove();
+    if (config && world) {
+      this.worlds.push({
+        map: config, ratioX, ratioY, canvas: world, sprite,
+      });
     }
 
-    this.dom.appendChild(newWorld);
+    const ctx = world.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    const margeY = ratioY - config.length + 1;
 
-    let x = 0;
-    let y = newWorld.height;
-
-    this.map.forEach((line) => {
-      line.forEach((value) => {
-        drawDecor(x, y, value, newWorld.getContext('2d'), sprite);
-        x += 30;
-      });
-
-      y -= 30;
-      x = 0;
-    });
+    for (let y = 0; y < ratioY; y++) {
+      for (let x = 0; x < ratioX; x++) {
+        const elem = config[y] ? config[y][x] : null;
+        // ctx.strokeRect(x * 30, y * 30, 30, 30);
+        if (elem) {
+          drawDecor(x * 30, (y + margeY) * 30, elem, world.getContext('2d'), sprite);
+        }
+      }
+    }
+    ctx.closePath();
   }
 
   loop = (timestamp) => {
-    let numUpdateSteps = 0;
-    this.delta += timestamp - this.lastFrameTimeMs;
-    this.lastFrameTimeMs = timestamp;
+    this.lastRequedtId = window.requestAnimationFrame(this.loop);
 
-    if (this.playing) {
-      clear(this.characters);
+    const nextTick = this.lastTick + this.tickLength;
+    let numTicks = 0;
 
-      while (this.delta >= this.timestep) {
-        this.characters.forEach((element) => {
-          this.update(element);
-        });
+    if (timestamp >= nextTick) {
+      numTicks = Math.floor((timestamp - this.lastTick) / this.tickLength);
+    }
 
-        this.delta -= this.timestep;
+    this.queueUpdates(numTicks);
+    this.render(timestamp);
+    this.lastRender = timestamp;
+  }
 
-        if (++numUpdateSteps >= 240) {
-          this.delta = 0;
-          window.requestAnimationFrame(this.loop);
-          break;
-        }
-      }
-
-      if (this.imageBySecond >= 60) {
-        this.imageBySecond = 0;
-      }
-
-      draw(this.characters);
-      this.imageBySecond++;
-
-      window.requestAnimationFrame(this.loop);
+  queueUpdates = (numTicks) => {
+    for (let i = 0; i < numTicks; i++) {
+      this.lastTick += this.tickLength;
+      this.update(this.lastTick);
     }
   }
 
-  update = (character) => {
-    const activeKey = this.Controller.getActiveKey();
-    switch (activeKey) {
-      case 'up': {
-        if (character.onGround) {
-          character.gravity.value = -character.gravity.max - 0.2;
-          character.onGround = false;
-        }
-        break;
-      }
-      case 'right':
-      case 'left': {
-        character.motion.value += character.motion.speed;
+  update = () => {
+    // console.log(`Update delta: ${delta}`);
+  }
 
-        if (character.motion.value >= character.motion.max) {
-          character.motion.value = character.motion.max;
-        }
+  render = () => {
+    // console.log(`Render delta: ${delta}`);
+  }
 
-        const motion = character.motion.value * this.timestep;
+  // update = (character) => {
+  //   const activeKey = this.Controller.getActiveKey();
+  //   switch (activeKey) {
+  //     case 'up': {
+  //       if (character.onGround) {
+  //         character.gravity.value = -character.gravity.max - 0.2;
+  //         character.onGround = false;
+  //       }
+  //       break;
+  //     }
+  //     case 'right':
+  //     case 'left': {
+  //       character.motion.value += character.motion.speed;
 
-        character.direction = this.Controller.getActiveKey();
-        character.X += activeKey === 'right' ? motion : (-1 * motion);
-        break;
-      }
+  //       if (character.motion.value >= character.motion.max) {
+  //         character.motion.value = character.motion.max;
+  //       }
 
-      default:
-        character.motion.value = 0;
-        break;
-    }
+  //       const motion = character.motion.value * this.timestep;
 
-    character.gravity.value += character.gravity.speed;
+  //       character.direction = this.Controller.getActiveKey();
+  //       character.X += activeKey === 'right' ? motion : (-1 * motion);
+  //       break;
+  //     }
 
-    if (character.gravity.value >= character.gravity.max) {
-      character.gravity.value = character.gravity.max;
-    }
+  //     default:
+  //       character.motion.value = 0;
+  //       break;
+  //   }
 
-    character.Y = checkCollisionUpDown(character, this.dom.offsetHeight, this.timestep);
+  //   character.gravity.value += character.gravity.speed;
 
-    return character;
-  };
+  //   if (character.gravity.value >= character.gravity.max) {
+  //     character.gravity.value = character.gravity.max;
+  //   }
+
+  //   character.Y = checkCollisionUpDown(character, this.dom.offsetHeight, this.timestep);
+
+  //   return character;
+  // };
 }
 
 export default Engine;

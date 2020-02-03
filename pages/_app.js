@@ -1,5 +1,5 @@
-import React from 'react';
-import App, { Container } from 'next/app';
+import React, { Fragment } from 'react';
+import App from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -75,7 +75,7 @@ export default class MyApp extends App {
     const { Component, pageProps, router: { route } } = this.props;
 
     return (
-      <Container>
+      <Fragment>
         <GlobalStyle />
         <Head>
           <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
@@ -94,7 +94,7 @@ export default class MyApp extends App {
           </CSSTransition>
         </TransitionGroup>
         <Contacts />
-      </Container>
+      </Fragment>
     );
   }
 }

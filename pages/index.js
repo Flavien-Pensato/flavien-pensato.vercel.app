@@ -7,6 +7,9 @@ import Engine from '../modules/game/Engine';
 import { map } from '../modules/game/decors';
 
 import { Title } from '../components/title.component';
+import { Game } from '../components/Game';
+import { Map } from '../components/Map';
+import { Character } from '../components/Character';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,9 +17,7 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
 
-  @media (max-width: 700px) {
-    align-items: flex-end;
-  }
+  align-items: flex-start;
 `;
 
 const Mario = styled.div`
@@ -40,17 +41,6 @@ const Mario = styled.div`
 `;
 
 class App extends Component {
-  componentDidMount() {
-    const engine = new Engine('mario');
-
-    engine.loadWorld(map);
-    engine.addCharacter({
-      name: 'mario',
-    }, '/static/game/mariosheet.png');
-
-    engine.start();
-  }
-
   render() {
     return (
       <Wrapper>
@@ -62,7 +52,11 @@ class App extends Component {
           <meta property="og:description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
           <meta property="og:url" content="https://flavien-pensato.github.io/" />
         </Head>
-        <Mario id="mario" />
+        <Game>
+          <Map id="level-1" config={map}>
+          </Map>
+            <Character id="mario"/>
+        </Game>
         <Link href="/about">
           <a style={{ zIndex: 10 }}>
             <Title />
