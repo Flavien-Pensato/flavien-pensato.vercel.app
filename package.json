@@ -14,7 +14,7 @@
     "test": "jest --detectOpenHandles"
   },
   "dependencies": {
-    "acorn": "7.1.1",
+    "acorn": "8.0.1",
     "debug": "4.1.1",
     "next": "9.5.2",
     "prop-types": "15.7.2",
