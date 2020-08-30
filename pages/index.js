@@ -54,8 +54,8 @@ class App extends Component {
         </Head>
         <Game>
           <Map id="level-1" config={map}>
-          </Map>
             <Character id="mario"/>
+          </Map>
         </Game>
         <Link href="/about">
           <a style={{ zIndex: 10 }}>
