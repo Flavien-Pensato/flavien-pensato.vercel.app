@@ -1,58 +1,83 @@
 {
-  "extends": "@m6web",
-  "parser": "babel-eslint",
-  "env": {
-    "browser": true,
-    "jasmine": true
-  },
-  "rules": {
-    "class-methods-use-this": "off",
-    "func-names": "off",
-    "global-require": "off",
-    "import/no-dynamic-require": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true,
-        "optionalDependencies": true,
-        "peerDependencies": false
-      }
-    ],
-    "import/prefer-default-export": "off",
-    "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/label-has-for": "off",
-    "jsx-a11y/aria-role": "off",
-    "jsx-a11y/alt-text": "off",
-    "jsx-a11y/media-has-caption": "off",
-    "jsx-a11y/iframe-has-title": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/mouse-events-have-key-events": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/label-has-associated-control": "off",
-    "no-underscore-dangle": "off",
-    "no-param-reassign": ["error", { "props": false }],
-    "no-plusplus": "off",
-    "no-script-url": "off",
-    "prefer-arrow-callback": "off",
-    "react/forbid-prop-types": "off",
-    "react/jsx-no-target-blank": "off",
-    "react/no-string-refs": "off",
-    "react/no-danger": "off",
-    "react/no-unescaped-entities": "off",
-    "react/require-default-props": "off",
-    "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
-    "react/sort-comp": "off",
-    "react/no-this-in-sfc": "off",
-    "react/no-deprecated": "off"
-  },
-  "settings": {
-    "react": {
-      "pragma": "React",
-      "version": "16.5.4"
-    }
-  },
-  "globals": {
-    "jest": true
-  }
+	"parser": "babel-eslint",
+	"extends": [
+		"airbnb",
+		"prettier",
+		"prettier/react",
+		"prettier/standard",
+		"plugin:jest/recommended",
+		"plugin:compat/recommended"
+	],
+	"plugins": [
+		"emotion",
+		"jest",
+		"prettier"
+	],
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true,
+		"jest": true
+	},
+	"rules": {
+		"no-underscore-dangle": "off",
+		"class-methods-use-this": "off",
+		"prefer-promise-reject-errors": "off",
+		"arrow-body-style": [
+			"error",
+			"as-needed"
+		],
+		"no-console": "error",
+		// Emotion
+		"emotion/jsx-import": "error",
+		"emotion/no-vanilla": "error",
+		"emotion/import-from-emotion": "error",
+		"emotion/styled-import": "error",
+		// JSX
+		"jsx-a11y/click-events-have-key-events": "off",
+		"jsx-a11y/interactive-supports-focus": "off",
+		"jsx-a11y/anchor-is-valid": [
+			"error",
+			{
+				"components": [
+					"Link"
+				],
+				"specialLink": [
+					"to"
+				]
+			}
+		],
+		// Import
+		"import/prefer-default-export": "off",
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"devDependencies": true,
+				"optionalDependencies": true,
+				"peerDependencies": true
+			}
+		],
+		"import/no-named-as-default": "off",
+		"import/no-cycle": "off",
+		// React
+		"react/jsx-filename-extension": "off",
+		"react/style-prop-object": "off",
+		"react/no-multi-comp": "off",
+		"react/jsx-props-no-spreading": "off",
+		// Prettier
+		"prettier/prettier": [
+			"error",
+			{
+				"singleQuote": true,
+				"trailingComma": "all",
+				"printWidth": 120,
+				// No parentheses with one arg
+				"arrowParens": "avoid",
+				"semi": false
+			}
+		]
+	},
+	"globals": {
+		"jest": true
+	}
 }
