@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Link from 'next/link';
-import Head from 'next/head';
+import React, { Component } from 'react'
+import styled from '@emotion/styled'
+import Link from 'next/link'
+import Head from 'next/head'
 
-import Engine from '../modules/game/Engine';
-import { map } from '../modules/game/decors';
+import Engine from '../modules/game/Engine'
+import { map } from '../modules/game/decors'
 
-import { Title } from '../components/title.component';
+import { Title } from '../components/title.component'
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   @media (max-width: 700px) {
     align-items: flex-end;
   }
-`;
+`
 
 const Mario = styled.div`
   position: absolute;
@@ -37,18 +37,21 @@ const Mario = styled.div`
   .player {
     z-index: 2;
   }
-`;
+`
 
 class App extends Component {
   componentDidMount() {
-    const engine = new Engine('mario');
+    const engine = new Engine('mario')
 
-    engine.loadWorld(map);
-    engine.addCharacter({
-      name: 'mario',
-    }, '/static/game/mariosheet.png');
+    engine.loadWorld(map)
+    engine.addCharacter(
+      {
+        name: 'mario',
+      },
+      '/game/mariosheet.png',
+    )
 
-    engine.start();
+    engine.start()
   }
 
   render() {
@@ -57,20 +60,26 @@ class App extends Component {
         <Head>
           <title>Flavien Pensato</title>
           <meta name="title" content="Homepage Flavien Pensato" />
-          <meta name="description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
+          <meta
+            name="description"
+            content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript"
+          />
           <meta property="og:title" content="Homepage Flavien Pensato" />
-          <meta property="og:description" content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript" />
+          <meta
+            property="og:description"
+            content="Hey, I'm Flavien Pensato. I'm a 24 years old boys working as a Frontend developer. Always bet on Javascript"
+          />
           <meta property="og:url" content="https://flavien-pensato.github.io/" />
         </Head>
         <Mario id="mario" />
         <Link href="/about">
-          <a style={{ zIndex: 10 }}>
+          <a href="/" style={{ zIndex: 10 }}>
             <Title />
           </a>
         </Link>
       </Wrapper>
-    );
+    )
   }
 }
 
-export default App;
+export default App

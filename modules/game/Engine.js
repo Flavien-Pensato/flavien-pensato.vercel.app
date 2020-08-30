@@ -1,178 +1,189 @@
-import debugFactory from 'debug';
+/* eslint-disable no-param-reassign */
 
-import { loadSprite, addElement } from './utils';
+import debugFactory from 'debug'
 
-import { drawDecor } from './decors';
-import { checkCollisionUpDown } from './caracter';
-import Controller from './Controller';
+import { loadSprite, addElement } from './utils'
 
-export const debug = debugFactory('engine');
+import { drawDecor } from './decors'
+import { checkCollisionUpDown } from './caracter'
+import Controller from './Controller'
 
+export const debug = debugFactory('engine')
 
-export const clear = (elements) => {
-  elements.forEach((element) => {
-    element.Context2D.clearRect(element.X, element.Y, element.width, element.height);
-  });
-};
-export const draw = (elements) => {
-  elements.forEach((element) => {
-    element.Context2D.drawImage(element.Sprite, element.Sx, element.Sy, element.Swidth,
-      element.Sheight, element.X, element.Y, element.width, element.height);
-  });
-};
+export const clear = elements => {
+  elements.forEach(element => {
+    element.Context2D.clearRect(element.X, element.Y, element.width, element.height)
+  })
+}
+
+export const draw = elements => {
+  elements.forEach(element => {
+    element.Context2D.drawImage(
+      element.Sprite,
+      element.Sx,
+      element.Sy,
+      element.Swidth,
+      element.Sheight,
+      element.X,
+      element.Y,
+      element.width,
+      element.height,
+    )
+  })
+}
 
 class Engine {
   constructor(domId) {
-    this.dom = document.getElementById(domId);
-    this.playing = false;
-    this.lastFrameTimeMs = 0;
-    this.imageBySecond = 0;
-    this.fps = 60;
-    this.timestep = 1000 / this.fps;
-    this.delta = 0;
-    this.sprites = [];
-    this.decors = [];
-    this.characters = [];
-    this.world = null;
+    this.dom = document.getElementById(domId)
+    this.playing = false
+    this.lastFrameTimeMs = 0
+    this.imageBySecond = 0
+    this.fps = 60
+    this.timestep = 1000 / this.fps
+    this.delta = 0
+    this.sprites = []
+    this.decors = []
+    this.characters = []
+    this.world = null
   }
 
   start = () => {
-    this.playing = true;
-    this.Controller = new Controller();
-    this.Controller.init();
-    window.requestAnimationFrame(this.loop);
+    this.playing = true
+    this.Controller = new Controller()
+    this.Controller.init()
+    window.requestAnimationFrame(this.loop)
   }
 
   stop = () => {
-    this.Controller.destroy();
-    this.playing = false;
+    this.Controller.destroy()
+    this.playing = false
 
-    delete this.Controller;
+    delete this.Controller
   }
 
   addCharacter = async (character, spriteSource) => {
-    let player = this.dom.querySelector('.player');
+    let player = this.dom.querySelector('.player')
 
     if (!player) {
-      player = document.createElement('canvas');
-      player.classList.add('player');
-      player.height = this.dom.offsetHeight;
-      player.width = this.dom.offsetWidth;
+      player = document.createElement('canvas')
+      player.classList.add('player')
+      player.height = this.dom.offsetHeight
+      player.width = this.dom.offsetWidth
 
-      this.dom.appendChild(player);
+      this.dom.appendChild(player)
     }
 
-
-    const element = await addElement(character, spriteSource);
+    const element = await addElement(character, spriteSource)
 
     if (element) {
-      this.characters.push({ ...element, Context2D: player.getContext('2d') });
+      this.characters.push({ ...element, Context2D: player.getContext('2d') })
     }
   }
 
-  loadWorld = async (map) => {
-    this.map = map;
-    const oldWold = this.dom.querySelector('.world');
-    const newWorld = document.createElement('canvas');
-    const sprite = await loadSprite('/static/game/sprite.png');
+  loadWorld = async map => {
+    this.map = map
+    const oldWold = this.dom.querySelector('.world')
+    const newWorld = document.createElement('canvas')
+    const sprite = await loadSprite('/game/sprite.png')
 
-    newWorld.classList.add('world');
-    newWorld.height = this.dom.offsetHeight;
-    newWorld.width = this.dom.offsetWidth;
+    newWorld.classList.add('world')
+    newWorld.height = this.dom.offsetHeight
+    newWorld.width = this.dom.offsetWidth
 
     if (oldWold) {
-      oldWold.remove();
+      oldWold.remove()
     }
 
-    this.dom.appendChild(newWorld);
+    this.dom.appendChild(newWorld)
 
-    let x = 0;
-    let y = newWorld.height;
+    let x = 0
+    let y = newWorld.height
 
-    this.map.forEach((line) => {
-      line.forEach((value) => {
-        drawDecor(x, y, value, newWorld.getContext('2d'), sprite);
-        x += 30;
-      });
+    this.map.forEach(line => {
+      line.forEach(value => {
+        drawDecor(x, y, value, newWorld.getContext('2d'), sprite)
+        x += 30
+      })
 
-      y -= 30;
-      x = 0;
-    });
+      y -= 30
+      x = 0
+    })
   }
 
-  loop = (timestamp) => {
-    let numUpdateSteps = 0;
-    this.delta += timestamp - this.lastFrameTimeMs;
-    this.lastFrameTimeMs = timestamp;
+  loop = timestamp => {
+    let numUpdateSteps = 0
+    this.delta += timestamp - this.lastFrameTimeMs
+    this.lastFrameTimeMs = timestamp
 
     if (this.playing) {
-      clear(this.characters);
+      clear(this.characters)
 
       while (this.delta >= this.timestep) {
-        this.characters.forEach((element) => {
-          this.update(element);
-        });
+        this.characters.forEach(element => {
+          this.update(element)
+        })
 
-        this.delta -= this.timestep;
+        this.delta -= this.timestep
+        numUpdateSteps += 1
 
-        if (++numUpdateSteps >= 240) {
-          this.delta = 0;
-          window.requestAnimationFrame(this.loop);
-          break;
+        if (numUpdateSteps >= 240) {
+          this.delta = 0
+          window.requestAnimationFrame(this.loop)
+          break
         }
       }
 
       if (this.imageBySecond >= 60) {
-        this.imageBySecond = 0;
+        this.imageBySecond = 0
       }
 
-      draw(this.characters);
-      this.imageBySecond++;
+      draw(this.characters)
+      this.imageBySecond += 1
 
-      window.requestAnimationFrame(this.loop);
+      window.requestAnimationFrame(this.loop)
     }
   }
 
-  update = (character) => {
-    const activeKey = this.Controller.getActiveKey();
+  update = character => {
+    const activeKey = this.Controller.getActiveKey()
     switch (activeKey) {
       case 'up': {
         if (character.onGround) {
-          character.gravity.value = -character.gravity.max - 0.2;
-          character.onGround = false;
+          character.gravity.value = -character.gravity.max - 0.2
+          character.onGround = false
         }
-        break;
+        break
       }
       case 'right':
       case 'left': {
-        character.motion.value += character.motion.speed;
+        character.motion.value += character.motion.speed
 
         if (character.motion.value >= character.motion.max) {
-          character.motion.value = character.motion.max;
+          character.motion.value = character.motion.max
         }
 
-        const motion = character.motion.value * this.timestep;
+        const motion = character.motion.value * this.timestep
 
-        character.direction = this.Controller.getActiveKey();
-        character.X += activeKey === 'right' ? motion : (-1 * motion);
-        break;
+        character.direction = this.Controller.getActiveKey()
+        character.X += activeKey === 'right' ? motion : -1 * motion
+        break
       }
 
       default:
-        character.motion.value = 0;
-        break;
+        character.motion.value = 0
+        break
     }
 
-    character.gravity.value += character.gravity.speed;
+    character.gravity.value += character.gravity.speed
 
     if (character.gravity.value >= character.gravity.max) {
-      character.gravity.value = character.gravity.max;
+      character.gravity.value = character.gravity.max
     }
 
-    character.Y = checkCollisionUpDown(character, this.dom.offsetHeight, this.timestep);
+    character.Y = checkCollisionUpDown(character, this.dom.offsetHeight, this.timestep)
 
-    return character;
-  };
+    return character
+  }
 }
 
-export default Engine;
+export default Engine

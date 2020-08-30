@@ -1,21 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from '@emotion/styled'
 
 const H1 = styled.h1`
   @media (max-width: 700px) {
-    font-size: 20px
+    font-size: 20px;
   }
-`;
+`
 
 const P = styled.p`
   @media (max-width: 700px) {
-    font-size: 12px
+    font-size: 12px;
   }
-`;
+`
 
 const I = styled.i`
   margin-right: 1rem;
-`;
+`
 
 const Header = styled.header`
   min-width: 320px;
@@ -28,7 +28,7 @@ const Header = styled.header`
   @media (max-width: 700px) {
     padding-bottom: 100px;
   }
-`;
+`
 
 export const Title = () => (
   <Header>
@@ -36,11 +36,9 @@ export const Title = () => (
       <I className="snes-jp-logo brand" />
       Hello,
       <br />
-      I'm Flavien!
+      I&apos;m Flavien!
       <br />
     </H1>
-    <P>
-      An enthusiastic Frontend developper
-    </P>
+    <P>An enthusiastic Frontend developper</P>
   </Header>
-);
+)
