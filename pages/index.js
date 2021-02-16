@@ -30,7 +30,7 @@ const Home = () => (
           <h3>Unow</h3>
           <p>
             Unow est une startup parisienne et lyonnaise créée en 2013.
-            C&apos;est un organisme de formation digital et spécialisé sur le
+            C&apos;est un organisme de formation digital spécialisé sur le
             format{" "}
             <a
               href="https://fr.wikipedia.org/wiki/SPOC"
