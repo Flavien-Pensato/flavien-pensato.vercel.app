@@ -1,83 +1,57 @@
 {
 	"parser": "babel-eslint",
 	"extends": [
-		"airbnb",
-		"prettier",
-		"prettier/react",
-		"prettier/standard",
-		"plugin:jest/recommended",
-		"plugin:compat/recommended"
-	],
-	"plugins": [
-		"emotion",
-		"jest",
+		"eslint:recommended",
+		"plugin:react/recommended",
 		"prettier"
 	],
 	"env": {
-		"browser": true,
 		"es6": true,
 		"node": true,
-		"jest": true
+		"browser": true
+	},
+	"plugins": [
+		"react",
+		"prettier"
+	],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		}
 	},
 	"rules": {
-		"no-underscore-dangle": "off",
-		"class-methods-use-this": "off",
-		"prefer-promise-reject-errors": "off",
-		"arrow-body-style": [
-			"error",
-			"as-needed"
-		],
-		"no-console": "error",
-		// Emotion
-		"emotion/jsx-import": "error",
-		"emotion/no-vanilla": "error",
-		"emotion/import-from-emotion": "error",
-		"emotion/styled-import": "error",
-		// JSX
-		"jsx-a11y/click-events-have-key-events": "off",
-		"jsx-a11y/interactive-supports-focus": "off",
-		"jsx-a11y/anchor-is-valid": [
-			"error",
+		"prettier/prettier": "error"
+	},
+	"settings": {
+		"react": {
+			"createClass": "createReactClass", // Regex for Component Factory to use,
+			// default to "createReactClass"
+			"pragma": "React", // Pragma to use, default to "React"
+			"fragment": "Fragment", // Fragment to use (may be a property of <pragma>), default to "Fragment"
+			"version": "detect", // React version. "detect" automatically picks the version you have installed.
+			// You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+			// default to latest and warns if missing
+			// It will default to "detect" in the future
+			"flowVersion": "0.53" // Flow version
+		},
+		"propWrapperFunctions": [
+			// The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
+			"forbidExtraProps",
 			{
-				"components": [
-					"Link"
-				],
-				"specialLink": [
-					"to"
-				]
+				"property": "freeze",
+				"object": "Object"
+			},
+			{
+				"property": "myFavoriteWrapper"
 			}
 		],
-		// Import
-		"import/prefer-default-export": "off",
-		"import/no-extraneous-dependencies": [
-			"error",
+		"linkComponents": [
+			// Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+			"Hyperlink",
 			{
-				"devDependencies": true,
-				"optionalDependencies": true,
-				"peerDependencies": true
-			}
-		],
-		"import/no-named-as-default": "off",
-		"import/no-cycle": "off",
-		// React
-		"react/jsx-filename-extension": "off",
-		"react/style-prop-object": "off",
-		"react/no-multi-comp": "off",
-		"react/jsx-props-no-spreading": "off",
-		// Prettier
-		"prettier/prettier": [
-			"error",
-			{
-				"singleQuote": true,
-				"trailingComma": "all",
-				"printWidth": 120,
-				// No parentheses with one arg
-				"arrowParens": "avoid",
-				"semi": false
+				"name": "Link",
+				"linkAttribute": "to"
 			}
 		]
-	},
-	"globals": {
-		"jest": true
 	}
 }

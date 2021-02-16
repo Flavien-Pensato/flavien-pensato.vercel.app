@@ -1,0 +1,8 @@
+:root {
+  --container: 800px;
+  --primary: 30, 144, 255;
+  --text: 0, 0, 0;
+  --background: 255, 255, 255;
+  --dark: 0, 0, 0;
+  --white: 255, 255, 255;
+}

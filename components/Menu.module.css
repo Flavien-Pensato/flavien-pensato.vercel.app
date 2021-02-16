@@ -1,0 +1,32 @@
+.nav {
+  /* Box Model */
+  max-width: var(--container);
+  margin: auto;
+  padding: 2rem;
+
+  /* Typography */
+  text-align: right;
+}
+
+.link {
+  /* Box Model */
+  margin: 1rem 2rem;
+
+  /* Typography */
+  text-decoration: none;
+
+  /* Animation */
+  transition: all 0.3s;
+}
+
+.link:visited {
+  /* Typography */
+  color: rgb(var(--text));
+}
+
+.link:hover {
+  /* Typography */
+  color: rgb(var(--primary));
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
