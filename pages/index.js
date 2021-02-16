@@ -15,7 +15,7 @@ const Home = () => (
         Je m&apos;appelle Flavien&nbsp;Pensato
       </h1>
       <p>
-        Je suis un développeur passioné et enthousiaste !
+        Je suis un développeur passionné et enthousiaste !
         <br />
         J&apos;habite à Lyon et je travaille actuellement chez Unow.
       </p>
@@ -29,7 +29,7 @@ const Home = () => (
         <li>
           <h3>Unow</h3>
           <p>
-            Unow est une startup Parisienne et Lyonnaise créée en 2013.
+            Unow est une startup parisienne et lyonnaise créée en 2013.
             C&apos;est un organisme de formation digital et spécialisé sur le
             format{" "}
             <a
@@ -43,9 +43,8 @@ const Home = () => (
             (Small Private Online Course) et les soft-skills.
           </p>
           <p>
-            J&apos;y travaille actuellement en tant que développeur front-end
-            sur un ensemble de projet (plateforme de formation, backoffice,
-            etc.).
+            Je travaille actuellement en tant que développeur front-end sur un
+            ensemble de projets (plateforme de formation, backoffice, etc.).
           </p>
           <div className={styles.startAt}>
             Depuis <time dateTime="2019-03-01">2019</time>
@@ -62,7 +61,7 @@ const Home = () => (
             >
               Peaks
             </a>{" "}
-            est une ESN Lyonnaise en plus d&apos;être une agence numérique.
+            est une ESN lyonnaise en plus d&apos;être une agence numérique.
           </p>
           <p>
             J&apos;ai pu y travailler pendant deux ans. J&apos;étais en mission
@@ -85,8 +84,8 @@ const Home = () => (
         <li>
           <h3>Freelance</h3>
           <p>
-            J&apos;ai pu, pendant ma scolarité, créer ma micro-entreprise et
-            proposer mon expertise{" "}
+            Pendant ma scolarité, j&apos;ai créé ma micro-entreprise et proposé
+            mon expertise{" "}
             <a
               href="https://www.meteor.com/"
               target="_blank"
@@ -106,7 +105,7 @@ const Home = () => (
           <h3>Epitech</h3>
           <p>Bac +5. Expert en Technologies de l’Information. Niveau 1.</p>
           <p>
-            En <time dateTime="2016-10-01">2016</time>, j&apos;ai étudier dans
+            En <time dateTime="2016-10-01">2016</time>, j&apos;ai étudié dans
             l&apos;
             <a
               href="https://fr.wikipedia.org/wiki/Universit%C3%A9_Tongji"
@@ -118,7 +117,7 @@ const Home = () => (
             </a>
             .
             <br />
-            Cela a été une des meilleurs années de ma vie ou j&apos;ai pu y
+            Cela a été une des meilleures années de ma vie où j&apos;ai pu y
             découvrir une culture, des gens ainsi qu&apos;un pays magnifique.
           </p>
           <div className={styles.startAt}>
