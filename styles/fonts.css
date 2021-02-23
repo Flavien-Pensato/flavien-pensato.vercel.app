@@ -2,6 +2,7 @@
   font-weight: normal;
   font-family: 'Glyphter';
   font-style: normal;
+  font-display: swap;
   src:
     url('/fonts/glyphter/Glyphter.eot?#iefix') format('embedded-opentype'),
     url('/fonts/glyphter/Glyphter.woff') format('woff'),
