@@ -6,13 +6,4 @@ module.exports = {
   ...withMDX({
     pageExtensions: ["js", "jsx", "mdx"],
   }),
-  async redirects() {
-    return [
-      {
-        source: "/:slug",
-        destination: "/",
-        permanent: false,
-      },
-    ];
-  },
 };
