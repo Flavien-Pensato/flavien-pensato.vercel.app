@@ -6,7 +6,11 @@ import styles from "./index.module.css";
 
 const Home = () => (
   <Layout
-    meta={{ title: "Flavien Pensato - Frontend développeur", description: "" }}
+    meta={{
+      title: "Flavien Pensato - Frontend développeur",
+      description:
+        "Salut, je m'appelle Flavien Pensato. Je suis un développeur passionné et enthousiaste ! J'habite à Lyon et je travaille actuellement chez Unow.",
+    }}
   >
     <section className={styles.presentation}>
       <h1>
