@@ -1,8 +1,8 @@
 import React from "react";
 
 import Layout from "../layouts";
-
-import styles from "./index.module.css";
+import ArticleDate from "../components/ArticleDate";
+import Separator from "../components/Separator";
 
 const Home = () => (
   <Layout
@@ -12,7 +12,7 @@ const Home = () => (
         "Salut, je m'appelle Flavien Pensato. Je suis un développeur passionné et enthousiaste ! J'habite à Lyon et je travaille actuellement chez Unow.",
     }}
   >
-    <section className={styles.presentation}>
+    <section>
       <h1>
         Salut,
         <br />
@@ -24,10 +24,8 @@ const Home = () => (
         J&apos;habite à Lyon et je travaille actuellement chez Unow.
       </p>
     </section>
-    <div className={styles["separator-wrapper"]}>
-      <hr className={styles.separator} />
-    </div>
-    <section className={styles.chronology}>
+    <Separator />
+    <section>
       <h2>Chronologie</h2>
       <ol>
         <li>
@@ -50,9 +48,7 @@ const Home = () => (
             Je travaille actuellement en tant que développeur front-end sur un
             ensemble de projets (plateforme de formation, backoffice, etc.).
           </p>
-          <div className={styles.startAt}>
-            Depuis <time dateTime="2019-03-01">2019</time>
-          </div>
+          <ArticleDate from="2019-03-01"></ArticleDate>
         </li>
         <li>
           <h3>Peaks</h3>
@@ -80,10 +76,7 @@ const Home = () => (
             </a>{" "}
             (bedrock srteaming), en tant que développeur front-end.
           </p>
-          <div className={styles.startAt}>
-            De <time dateTime="2017-03-9">2017</time> à{" "}
-            <time dateTime="2019-03-09">2019</time>
-          </div>
+          <ArticleDate from="2017-03-9" to="2019-03-09"></ArticleDate>
         </li>
         <li>
           <h3>Freelance</h3>
@@ -100,10 +93,7 @@ const Home = () => (
             </a>{" "}
             à des particuliers et des startups.
           </p>
-          <div className={styles.startAt}>
-            De <time dateTime="2013-01-01">2013</time> à{" "}
-            <time dateTime="2017-01-01">2017</time>
-          </div>
+          <ArticleDate from="2013-01-01" to="2017-01-01"></ArticleDate>
         </li>
         <li>
           <h3>Epitech</h3>
@@ -124,10 +114,7 @@ const Home = () => (
             Cela a été une des meilleures années de ma vie où j&apos;ai pu y
             découvrir une culture, des gens ainsi qu&apos;un pays magnifique.
           </p>
-          <div className={styles.startAt}>
-            De <time dateTime="2012-01-01">2012</time> à{" "}
-            <time dateTime="2017-01-01">2017</time>
-          </div>
+          <ArticleDate from="2012-01-01" to="2017-01-01"></ArticleDate>
         </li>
       </ol>
     </section>

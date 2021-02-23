@@ -49,3 +49,22 @@ a:visited {
 a:hover {
   text-decoration: underline;
 }
+
+section {
+  /* Box Model */
+  max-width: var(--container);
+  margin: auto;
+  padding: 1rem;
+}
+
+ol {
+  /* Box Model */
+  padding-left: 1rem;
+
+  /* Typography */
+  list-style: none;
+}
+
+ol p {
+  margin-left: 1rem;
+}
