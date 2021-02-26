@@ -6,19 +6,18 @@ import styles from "./ArticleDate.module.css";
 const ArticleDate = ({ from, to }) => {
   let time = null;
 
-  if (from && to) {
-    time = (
-      <>
-        De&nbsp;<time dateTime={from}>{new Date(from).getFullYear()}</time>
-        &nbsp;à&nbsp;<time dateTime={to}>{new Date(to).getFullYear()}</time>
-      </>
-    );
-  }
-  if (from) {
+  if (!to) {
     time = (
       <>
         Depuis&nbsp;
         <time dateTime={from}>{new Date(from).getFullYear()}</time>
+      </>
+    );
+  } else {
+    time = (
+      <>
+        De&nbsp;<time dateTime={from}>{new Date(from).getFullYear()}</time>
+        &nbsp;à&nbsp;<time dateTime={to}>{new Date(to).getFullYear()}</time>
       </>
     );
   }
