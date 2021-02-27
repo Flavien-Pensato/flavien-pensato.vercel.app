@@ -2,5 +2,6 @@ Sitemap: https://flavien-pensato.vercel.app/api/sitemap
 
 User-agent: *
 Allow: /*
+Allow: /blog/*
 
 Disallow: /api/*

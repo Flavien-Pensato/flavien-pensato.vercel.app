@@ -1,11 +1,31 @@
+.header {
+  /* Positionning */
+  position: sticky;
+  top: 0;
+}
+
 .nav {
   /* Box Model */
   max-width: var(--container);
   margin: auto;
-  padding: 2rem;
+  padding: 2rem 0;
 
   /* Typography */
   text-align: right;
+}
+
+html:not([data-scroll='0']) .header {
+  /* Typography */
+  background-color: rgb(var(--primary));
+
+  /* Transform */
+  transition: background-color 200ms ease;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    text-align: center;
+  }
 }
 
 .link {
@@ -13,7 +33,9 @@
   margin: 1rem 2rem;
 
   /* Typography */
-  text-decoration: none;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
 
   /* Animation */
   transition: all 0.3s;
@@ -27,6 +49,9 @@
 .link:hover {
   /* Typography */
   color: rgb(var(--primary));
-  text-decoration: underline;
-  text-underline-offset: 0.5rem;
+}
+
+html:not([data-scroll='0']) .link,
+html:not([data-scroll='0']) .link:visited {
+  color: rgb(var(--background));
 }

@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 
 const Layout = ({ meta, children }) => (
   <>
-    <Meta {...meta} />
+    {meta && <Meta {...meta} />}
     {/* <Menu /> */}
     <main>{children}</main>
     <Footer />
@@ -14,7 +14,7 @@ const Layout = ({ meta, children }) => (
 );
 
 Layout.propTypes = {
-  meta: PropTypes.shape().isRequired,
+  meta: PropTypes.shape(),
   children: PropTypes.node.isRequired,
 };
 
