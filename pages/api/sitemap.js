@@ -9,7 +9,7 @@ export default async (req, res) => {
       cacheTime: 600000,
     });
 
-    const blogs = await Promise.all(slugBlogs.map(getMetaBlogFromSlug));
+    const blogs = slugBlogs.map(getMetaBlogFromSlug);
 
     blogs.forEach((blog) => {
       smStream.write({

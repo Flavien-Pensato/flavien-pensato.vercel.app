@@ -33,8 +33,8 @@ Blog.propTypes = {
   blogs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
-export const getStaticProps = async () => {
-  const blogs = await Promise.all(slugBlogs.map(getMetaBlogFromSlug));
+export const getStaticProps = () => {
+  const blogs = slugBlogs.map(getMetaBlogFromSlug);
 
   return {
     props: {
