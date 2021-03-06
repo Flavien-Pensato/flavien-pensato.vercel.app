@@ -3,12 +3,24 @@
 
 html {
   font-size: 18px;
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 800px) {
   html {
     font-size: 12px;
   }
+}
+
+/* Anchor */
+:target::before {
+  /* Box Model */
+  display: block;
+  height: 3em;
+  margin: -3em 0 0;
+
+  /* Misc */
+  content: "";
 }
 
 body {
@@ -40,8 +52,7 @@ h5 {
   font-size: 1.2rem;
 }
 
-a,
-a:visited {
+a {
   color: rgb(var(--primary));
   text-decoration: none;
 }

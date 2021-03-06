@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import debounce from "../utils/debounce";
 
@@ -10,6 +11,8 @@ const storeScroll = () => {
 };
 
 const Menu = () => {
+  const { asPath } = useRouter();
+
   useEffect(() => {
     const debounceScroll = debounce(storeScroll);
 
@@ -26,10 +29,14 @@ const Menu = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <Link href="/">
-          <a className={styles.link}>Accueil</a>
+          <a data-active={asPath === "/"} className={styles.link}>
+            Accueil
+          </a>
         </Link>
         <Link href="/blog">
-          <a className={styles.link}>Blog</a>
+          <a data-active={asPath === "/blog"} className={styles.link}>
+            Blog
+          </a>
         </Link>
       </nav>
     </header>

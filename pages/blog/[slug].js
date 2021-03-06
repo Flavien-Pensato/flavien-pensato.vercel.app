@@ -6,12 +6,18 @@ import matter from "gray-matter";
 import renderToString from "next-mdx-remote/render-to-string";
 import hydrate from "next-mdx-remote/hydrate";
 
-// import Image from "next/image";
 import Layout from "../../layouts";
+
+import Image from "next/image";
+import CodeBlock from "../../components/CodeBlock";
+
 import { blogPath, slugBlogs } from "../../utils/blog";
 // import { Heading, Text, Pre, Code, Table } from '../components'
 
-const components = {};
+const components = {
+  img: Image,
+  code: CodeBlock,
+};
 
 const Blog = ({ source, meta }) => {
   const content = hydrate(source, { components });

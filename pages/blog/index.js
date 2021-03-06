@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 
 import { slugBlogs, getMetaBlogFromSlug } from "../../utils/blog";
+import ArticleDate from "../../components/ArticleDate";
 import Layout from "../../layouts";
 
 const Blog = ({ blogs }) => (
@@ -16,11 +17,12 @@ const Blog = ({ blogs }) => (
       <h1>Blog</h1>
       <nav>
         <ul>
-          {blogs.map(({ slug, title }) => (
+          {blogs.map(({ slug, title, createAt }) => (
             <ol key={slug}>
               <Link href={"/blog/".concat(slug)}>
                 <a>{title}</a>
               </Link>
+              <ArticleDate from={createAt} />
             </ol>
           ))}
         </ul>

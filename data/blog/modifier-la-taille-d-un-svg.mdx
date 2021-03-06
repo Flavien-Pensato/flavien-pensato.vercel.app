@@ -1,8 +1,60 @@
 ---
 title: Modifier la taille d'un svg
-description: This frontmatter description will appear below the title
+description: Dans cet article, on va décrypter le fonctionnement des svg pour comprendre comment les manipuler.
+createAt: "2021-06-03"
 ---
 
 # Modifier la taille d'un svg
 
-Bla bla bla
+Dernièrement, on m'a demandé de rajouter un svg dans une librairie de svg optimisé.
+
+En intégrant ce svg, je me suis rendu compte qu'il n'avait pas les mêmes propriétés de tailles que les autres.
+Suite à une rapide édition des propriétés *height* et *width*, le svg apparaissait devant moi avec des éléments en moins !
+
+Dans cet article, nous allons décrypter le fonctionnement des **svg** afin de comprendre comment les manipuler pour les intégrer correctement.
+
+## Sommaire
+
+* [Qu'est-ce le SVG](#whatIsSVG)
+* [Utilisation d'un svg](#howToUseSVG)
+* [Résolution du problème](#howToSolve)
+* [Liens similaires](#link)
+
+## <a name="whatIsSVG"></a>Qu'est-ce le SVG
+
+Le SVG, pour scalable vertor graphics, est un langage XML permettant l'intégration d'images vectorielles.
+Par conséquent, ces images peuvent être dimensionnées sans aucune perte de qualité.
+
+## <a name="howToUseSVG"></a>Utilisation d'un svg
+
+La plupart des éléments qui composes un svg ont des propriétés de placement et de taille&nbsp;:
+* **circle** aura **cx**, **cy** et **r**
+* **rect** aura **x**, **y** et **width**, **height**
+
+Toutes ces propriétés sont relatives à une viewBox. Par défaut, la viewBox a les valeurs suivantes "**0 0 300 150**".
+
+## <a name="howToSolve"></a>Résolution du problème
+
+Dans mon cas, j'avais un svg comme celui-ci :
+
+```svg live=true
+<svg height="90" width="90">
+  <circle cx="45" cy="45" r="45" />
+</svg>
+```
+
+Pour modifier sa taille, j'ai dû lui spécifier une *viewBox*, puis modifier sa taille comme je le souhaitais.
+
+```svg
+<svg height="40" width="40" viewBox="0 0 90 90">
+  <circle cx="45" cy="45" r="45" />
+</svg>
+```
+
+Rien de sorcier donc mais l'utilisation de *viewBox* peut être perturbant.
+
+## <a name="link"></a>Liens similaires
+
+Voici quelques liens pour améliorer ses connaissances sur les svg&nbsp;:
+* [Comprendre SVG viewBox](https://la-cascade.io/comprendre-svg-viewbox)
+* [ViewBox](https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/viewBox)
