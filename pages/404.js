@@ -3,39 +3,15 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import Layout from "../layouts";
-
 import { slugBlogs, getMetaBlogFromSlug } from "../utils/blog";
+import { NotFoundTemplate } from "../templates/notFound";
 
 const NotFound = ({ blogs }) => {
   const router = useRouter();
   const search = router.asPath.split("/").pop();
   const matchLinks = blogs.filter(({ slug }) => slug.includes(search));
 
-  return (
-    <Layout>
-      <section>
-        <h1>Page introuvable</h1>
-
-        {matchLinks.length > 0 && (
-          <>
-            <p>Lien(s) similaire(s) :</p>
-            <nav>
-              <ul>
-                {matchLinks.map(({ slug, title }) => (
-                  <ol key={slug}>
-                    <Link href={"/blog/".concat(slug)}>
-                      <a>{title}</a>
-                    </Link>
-                  </ol>
-                ))}
-              </ul>
-            </nav>
-          </>
-        )}
-      </section>
-    </Layout>
-  );
+  return <NotFoundTemplate blogs={matchLinks} />;
 };
 
 NotFound.propTypes = {

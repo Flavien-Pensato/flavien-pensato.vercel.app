@@ -5,6 +5,8 @@ import Link from "next/link";
 import { slugBlogs, getMetaBlogFromSlug } from "../../utils/blog";
 import ChronologyDate from "../../atoms/ChronologyDate";
 import Meta from "../../organims/Meta";
+import Menu from "../../molecules/Menu";
+import Footer from "../../molecules/Footer";
 
 const Blog = ({ blogs }) => (
   <>
@@ -15,21 +17,25 @@ const Blog = ({ blogs }) => (
       keywords="CSS, SVG"
       viewport="initial-scale=1.0, width=device-width"
     />
-    <section>
-      <h1>Blog</h1>
-      <nav>
-        <ul>
-          {blogs.map(({ slug, title, createAt }) => (
-            <ol key={slug}>
-              <Link href={"/blog/".concat(slug)}>
-                <a>{title}</a>
-              </Link>
-              <ChronologyDate startAt={new Date(createAt)} fixed />
-            </ol>
-          ))}
-        </ul>
-      </nav>
-    </section>
+    <Menu />
+    <main>
+      <section>
+        <h1>Blog</h1>
+        <nav>
+          <ul>
+            {blogs.map(({ slug, title, createAt }) => (
+              <ol key={slug}>
+                <Link href={"/blog/".concat(slug)}>
+                  <a>{title}</a>
+                </Link>
+                <ChronologyDate startAt={new Date(createAt)} fixed />
+              </ol>
+            ))}
+          </ul>
+        </nav>
+      </section>
+    </main>
+    <Footer />
   </>
 );
 

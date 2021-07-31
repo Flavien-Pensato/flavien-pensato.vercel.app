@@ -12,6 +12,7 @@ import Image from "next/image";
 import CodeBlock from "../../atoms/CodeBlock";
 
 import { blogPath, slugBlogs } from "../../utils/blog";
+import { BlogTemplate } from "../../templates/blog";
 
 const components = {
   img: Image,
@@ -21,12 +22,7 @@ const components = {
 const Blog = ({ source, meta }) => {
   const content = hydrate(source, { components });
 
-  return (
-    <>
-      <Meta {...meta} />
-      <section> {content}</section>
-    </>
-  );
+  return <BlogTemplate meta={meta} content={content} />;
 };
 
 Blog.propTypes = {
