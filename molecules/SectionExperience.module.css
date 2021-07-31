@@ -1,0 +1,5 @@
+.subTitle {
+  margin-left: 1rem;
+  color: rgba(var(--dark), 0.7);
+  font-size: 0.8rem;
+}

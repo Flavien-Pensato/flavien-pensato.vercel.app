@@ -3,16 +3,18 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 
 import { slugBlogs, getMetaBlogFromSlug } from "../../utils/blog";
-import ArticleDate from "../../components/ArticleDate";
-import Layout from "../../layouts";
+import ChronologyDate from "../../atoms/ChronologyDate";
+import Meta from "../../organims/Meta";
 
 const Blog = ({ blogs }) => (
-  <Layout
-    meta={{
-      title: "Flavien Pensato - Blog",
-      description: "Javascript, css, svg et bien d'autres sujets sont abordés",
-    }}
-  >
+  <>
+    <Meta
+      title="Flavien Pensato - Blog"
+      description="Javascript, css, svg et bien d'autres sujets sont abordés"
+      author="Flavien Pensato"
+      keywords="CSS, SVG"
+      viewport="initial-scale=1.0, width=device-width"
+    />
     <section>
       <h1>Blog</h1>
       <nav>
@@ -22,13 +24,13 @@ const Blog = ({ blogs }) => (
               <Link href={"/blog/".concat(slug)}>
                 <a>{title}</a>
               </Link>
-              <ArticleDate from={createAt} />
+              <ChronologyDate startAt={new Date(createAt)} fixed />
             </ol>
           ))}
         </ul>
       </nav>
     </section>
-  </Layout>
+  </>
 );
 
 Blog.propTypes = {

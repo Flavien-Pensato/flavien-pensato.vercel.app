@@ -2,7 +2,9 @@ import React from "react";
 import Head from "next/head";
 import PropTypes from "prop-types";
 
-const Meta = ({ title, viewport, description, author, keywords }) => (
+import { MetaData } from "../utils";
+
+const Meta = ({ title, viewport, description, author, keywords }: MetaData) => (
   <Head>
     <title>{title}</title>
     <meta name="viewport" content={viewport} />
