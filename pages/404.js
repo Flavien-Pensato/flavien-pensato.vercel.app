@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -12,10 +11,6 @@ const NotFound = ({ blogs }) => {
   const matchLinks = blogs.filter(({ slug }) => slug.includes(search));
 
   return <NotFoundTemplate blogs={matchLinks} />;
-};
-
-NotFound.propTypes = {
-  blogs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export const getStaticProps = () => {

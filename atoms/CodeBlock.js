@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 
@@ -36,12 +35,6 @@ const CodeBlock = ({ children, className, live }) => {
       )}
     </Highlight>
   );
-};
-
-CodeBlock.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  live: PropTypes.bool,
 };
 
 export default CodeBlock;

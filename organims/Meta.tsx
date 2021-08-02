@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import PropTypes from "prop-types";
 
 import { MetaData } from "../utils";
 
@@ -18,14 +17,6 @@ Meta.defaultProps = {
   author: "Flavien Pensato",
   keywords: "Flavien, Pensato, Lyon, React, Nextjs, Meteor, Devfront",
   viewport: "initial-scale=1.0, width=device-width",
-};
-
-Meta.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  author: PropTypes.string,
-  keywords: PropTypes.string,
-  viewport: PropTypes.string,
 };
 
 export default Meta;
