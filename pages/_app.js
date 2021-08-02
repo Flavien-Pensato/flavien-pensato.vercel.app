@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
 
-import "../styles/globals.css";
-
 import { initGA, logPageView } from "../utils/analytics";
+
+import "../styles/global";
 
 const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {

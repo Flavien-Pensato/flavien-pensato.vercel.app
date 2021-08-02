@@ -7,8 +7,8 @@ export const Chronology = ({ experiences }) => {
       <h2>Chronologie</h2>
       <ol>
         {experiences.map((experience, index) => (
-          <li>
-            <SectionExperience key={index} experience={experience} />
+          <li key={index}>
+            <SectionExperience experience={experience} />
           </li>
         ))}
       </ol>

@@ -1,8 +1,13 @@
 import React from "react";
+import { css } from "@emotion/css";
 import ChronologyDate from "../atoms/ChronologyDate";
 import { Experience } from "../utils";
 
-import styles from "./SectionExperience.module.css";
+const SubTitle = css`
+  margin-left: 1rem;
+  color: rgba(var(--dark), 0.7);
+  font-size: 0.8rem;
+`;
 
 export interface SectionExperienceProps {
   experience: Experience;
@@ -15,7 +20,7 @@ export const SectionExperience = ({
     <>
       <div>
         <h3>
-          {title}&nbsp;<i className={styles.subTitle}>{subTitle}</i>
+          {title}&nbsp;<i className={SubTitle}>{subTitle}</i>
         </h3>
       </div>
       {contents.map((content, index) => (
