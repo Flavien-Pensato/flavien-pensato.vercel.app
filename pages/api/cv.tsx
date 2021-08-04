@@ -53,10 +53,10 @@ export default (req, res) => {
         } else {
           // res.setHeader("Content-Length", buffer.size);
           res.setHeader("Content-Type", "application/pdf");
-          res.setHeader(
-            "Content-Disposition",
-            "attachment; filename=Flavien-Pensato.pdf"
-          );
+          // res.setHeader(
+          //   "Content-Disposition",
+          //   "attachment; filename=Flavien-Pensato.pdf"
+          // );
           res.status(200).send(buffer);
         }
       });
