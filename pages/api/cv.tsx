@@ -25,6 +25,7 @@ export default (req, res) => {
         }}
       />
     );
+    process.env.FONTCONFIG_PATH = path.join(process.cwd(), "public/fonts");
     const { extractCritical } = createEmotionServer(cache);
     const { ids, css } = extractCritical(app);
     const html = ReactDOMServer.renderToStaticMarkup(
@@ -46,6 +47,7 @@ export default (req, res) => {
           process.cwd(),
           "node_modules/phantomjs-prebuilt/bin/phantomjs"
         ),
+        timeout: 30000,
       })
       .toBuffer(function (err, buffer) {
         if (err) {
