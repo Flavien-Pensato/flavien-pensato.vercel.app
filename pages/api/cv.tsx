@@ -49,6 +49,7 @@ export default (req, res) => {
       })
       .toBuffer(function (err, buffer) {
         if (err) {
+          console.log(err);
           res.send(JSON.stringify(err));
         } else {
           // res.setHeader("Content-Length", buffer.size);
