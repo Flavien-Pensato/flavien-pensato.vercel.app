@@ -41,7 +41,6 @@ export default (req, res) => {
 
     pdf
       .create(html, {
-        base: "file://" + path.resolve("./public"),
         phantomPath: path.resolve(
           process.cwd(),
           "node_modules/phantomjs-prebuilt/bin/phantomjs"
