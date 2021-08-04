@@ -25,7 +25,6 @@ export default (req, res) => {
         }}
       />
     );
-    process.env.FONTCONFIG_PATH = path.join(process.cwd(), "public/fonts");
     const { extractCritical } = createEmotionServer(cache);
     const { ids, css } = extractCritical(app);
     const html = ReactDOMServer.renderToStaticMarkup(
@@ -47,12 +46,10 @@ export default (req, res) => {
           process.cwd(),
           "node_modules/phantomjs-prebuilt/bin/phantomjs"
         ),
-        timeout: 30000,
       })
       .toBuffer(function (err, buffer) {
         if (err) {
-          console.log(err);
-          res.send(JSON.stringify(err));
+          res.status(400).send(err.message);
         } else {
           // res.setHeader("Content-Length", buffer.size);
           res.setHeader("Content-Type", "application/pdf");
@@ -60,7 +57,7 @@ export default (req, res) => {
             "Content-Disposition",
             "attachment; filename=Flavien-Pensato.pdf"
           );
-          res.status(200).end(buffer);
+          res.status(200).send(buffer);
         }
       });
   } catch (e) {
