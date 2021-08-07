@@ -110,7 +110,7 @@ const Menu = () => {
             Blog
           </a>
         </Link>
-        <Link href="/api/cv">
+        <Link href="/Flavien-Pensato.pdf">
           <a target="_blank">
             <button className={DownloadButton}>Télécharger mon CV</button>
           </a>
