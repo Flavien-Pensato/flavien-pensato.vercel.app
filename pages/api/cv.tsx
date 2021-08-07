@@ -1,10 +1,12 @@
 import ReactDOMServer from "react-dom/server";
 import createEmotionServer from "@emotion/server/create-instance";
 import { cache } from "@emotion/css";
-import pdf from "html-pdf";
-import path from "path";
+import htmlToPdf from "html-pdf-node";
 
 import { CVTemplate } from "../../templates/cv";
+
+import "../../styles/global";
+
 import {
   meta,
   experiences,
@@ -39,28 +41,28 @@ export default (req, res) => {
       </html>
     );
 
-    pdf
-      .create(html, {
-        phantomPath: path.resolve(
-          process.cwd(),
-          "node_modules/phantomjs-prebuilt/bin/phantomjs"
-        ),
-      })
-      .toBuffer(function (err, buffer) {
-        if (err) {
-          res.status(400).send(err.message);
-        } else {
-          // res.setHeader("Content-Length", buffer.size);
-          res.setHeader("Content-Type", "application/pdf");
-          res.setHeader(
-            "Content-Disposition",
-            "attachment; filename=Flavien-Pensato.pdf"
-          );
-          res.status(200).send(buffer);
-        }
-      });
+    const options = {
+      format: "A4",
+      margin: {
+        top: 10,
+        right: 30,
+        bottom: 10,
+        left: 30,
+      },
+    };
+
+    const file = { content: html };
+
+    htmlToPdf.generatePdf(file, options).then((pdfBuffer) => {
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=Flavien-Pensato.pdf"
+      );
+
+      res.status(200).send(pdfBuffer);
+    });
   } catch (e) {
-    console.log(e);
     res.send(JSON.stringify(e));
   }
 };
