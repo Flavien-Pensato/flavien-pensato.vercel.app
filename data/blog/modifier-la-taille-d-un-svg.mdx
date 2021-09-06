@@ -9,16 +9,16 @@ createAt: "2021-06-03"
 Dernièrement, on m'a demandé de rajouter un svg dans une librairie de svg optimisé.
 
 En intégrant ce svg, je me suis rendu compte qu'il n'avait pas les mêmes propriétés de tailles que les autres.
-Suite à une rapide édition des propriétés *height* et *width*, le svg apparaissait devant moi avec des éléments en moins !
+Suite à une rapide édition des propriétés _height_ et _width_, le svg apparaissait devant moi avec des éléments en moins !
 
 Dans cet article, nous allons décrypter le fonctionnement des **svg** afin de comprendre comment les manipuler pour les intégrer correctement.
 
 ## Sommaire
 
-* [Qu'est-ce le SVG](#whatIsSVG)
-* [Utilisation d'un svg](#howToUseSVG)
-* [Résolution du problème](#howToSolve)
-* [Liens similaires](#link)
+- [Qu'est-ce le SVG](#whatIsSVG)
+- [Utilisation d'un svg](#howToUseSVG)
+- [Résolution du problème](#howToSolve)
+- [Liens similaires](#link)
 
 ## <a name="whatIsSVG"></a>Qu'est-ce le SVG
 
@@ -28,8 +28,9 @@ Par conséquent, ces images peuvent être dimensionnées sans aucune perte de qu
 ## <a name="howToUseSVG"></a>Utilisation d'un svg
 
 La plupart des éléments qui composes un svg ont des propriétés de placement et de taille&nbsp;:
-* **circle** aura **cx**, **cy** et **r**
-* **rect** aura **x**, **y** et **width**, **height**
+
+- **circle** aura **cx**, **cy** et **r**
+- **rect** aura **x**, **y** et **width**, **height**
 
 Toutes ces propriétés sont relatives à une viewBox. Par défaut, la viewBox a les valeurs suivantes "**0 0 300 150**".
 
@@ -43,7 +44,7 @@ Dans mon cas, j'avais un svg comme celui-ci :
 </svg>
 ```
 
-Pour modifier sa taille, j'ai dû lui spécifier une *viewBox*, puis modifier sa taille comme je le souhaitais.
+Pour modifier sa taille, j'ai dû lui spécifier une _viewBox_, puis modifier sa taille comme je le souhaitais.
 
 ```svg
 <svg height="40" width="40" viewBox="0 0 90 90">
@@ -51,10 +52,11 @@ Pour modifier sa taille, j'ai dû lui spécifier une *viewBox*, puis modifier sa
 </svg>
 ```
 
-Rien de sorcier donc mais l'utilisation de *viewBox* peut être perturbant.
+Rien de sorcier donc mais l'utilisation de _viewBox_ peut être perturbant.
 
 ## <a name="link"></a>Liens similaires
 
 Voici quelques liens pour améliorer ses connaissances sur les svg&nbsp;:
-* [Comprendre SVG viewBox](https://la-cascade.io/comprendre-svg-viewbox)
-* [ViewBox](https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/viewBox)
+
+- [Comprendre SVG viewBox](https://la-cascade.io/comprendre-svg-viewbox)
+- [ViewBox](https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/viewBox)

@@ -10,6 +10,6 @@ export interface Experience {
   title: string;
   subTitle: string;
   contents: string[];
-  startAt: Date;
-  endAt: Date;
+  startAt: string;
+  endAt: string;
 }

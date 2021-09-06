@@ -9,8 +9,8 @@ const ChronologyDateContainer = css`
 `;
 
 export interface ChronologyDateProps {
-  startAt: Date;
-  endAt?: Date;
+  startAt: string;
+  endAt?: string;
   fixed?: boolean;
 }
 
@@ -18,10 +18,8 @@ const ChronologyDate = ({ startAt, endAt, fixed }: ChronologyDateProps) => {
   if (fixed) {
     return (
       <div className={ChronologyDateContainer}>
-        <time dateTime={startAt.getFullYear().toString()}>
-          {DateTime.fromISO(startAt.toISOString())
-            .setLocale("fr")
-            .toFormat("dd LLL yyyy")}
+        <time dateTime={DateTime.fromISO(startAt).year.toString()}>
+          {DateTime.fromISO(startAt).setLocale("fr").toFormat("dd LLL yyyy")}
         </time>
       </div>
     );
@@ -29,10 +27,8 @@ const ChronologyDate = ({ startAt, endAt, fixed }: ChronologyDateProps) => {
   let time = (
     <>
       Depuis&nbsp;le&nbsp;
-      <time dateTime={startAt.getFullYear().toString()}>
-        {DateTime.fromISO(startAt.toISOString())
-          .setLocale("fr")
-          .toFormat("dd/LL/yyyy")}
+      <time dateTime={DateTime.fromISO(startAt).year.toString()}>
+        {DateTime.fromISO(startAt).setLocale("fr").toFormat("dd/LL/yyyy")}
       </time>
     </>
   );
@@ -41,16 +37,12 @@ const ChronologyDate = ({ startAt, endAt, fixed }: ChronologyDateProps) => {
     time = (
       <>
         Du&nbsp;
-        <time dateTime={startAt.getFullYear().toString()}>
-          {DateTime.fromISO(startAt.toISOString())
-            .setLocale("fr")
-            .toFormat("dd/LL/yyyy")}
+        <time dateTime={DateTime.fromISO(startAt).year.toString()}>
+          {DateTime.fromISO(startAt).setLocale("fr").toFormat("dd/LL/yyyy")}
         </time>
         &nbsp;au&nbsp;
-        <time dateTime={endAt.getFullYear().toString()}>
-          {DateTime.fromISO(endAt.toISOString())
-            .setLocale("fr")
-            .toFormat("dd/LL/yyyy")}
+        <time dateTime={DateTime.fromISO(endAt).year.toString()}>
+          {DateTime.fromISO(endAt).setLocale("fr").toFormat("dd/LL/yyyy")}
         </time>
       </>
     );

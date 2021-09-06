@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { DateTime } from "luxon";
 
 import { slugBlogs, getMetaBlogFromSlug } from "../../utils/blog";
 import ChronologyDate from "../../atoms/ChronologyDate";
@@ -22,14 +23,17 @@ const Blog = ({ blogs }) => (
         <h1>Blog</h1>
         <nav>
           <ul>
-            {blogs.map(({ slug, title, createAt }) => (
-              <ol key={slug}>
-                <Link href={"/blog/".concat(slug)}>
-                  <a>{title}</a>
-                </Link>
-                <ChronologyDate startAt={new Date(createAt)} fixed />
-              </ol>
-            ))}
+            {blogs.map(
+              ({ slug, title, createAt }) =>
+                console.log(createAt) || (
+                  <ol key={slug}>
+                    <Link href={"/blog/".concat(slug)}>
+                      <a>{title}</a>
+                    </Link>
+                    <ChronologyDate startAt={createAt} fixed />
+                  </ol>
+                )
+            )}
           </ul>
         </nav>
       </section>
@@ -37,10 +41,6 @@ const Blog = ({ blogs }) => (
     <Footer />
   </>
 );
-
-Blog.propTypes = {
-  blogs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-};
 
 export const getStaticProps = () => {
   const blogs = slugBlogs.map(getMetaBlogFromSlug);
