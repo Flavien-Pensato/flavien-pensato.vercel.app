@@ -25,7 +25,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="fr">
+      <Html lang="fr" data-scroll="0">
         <Head>
           <meta
             name="google-site-verification"
