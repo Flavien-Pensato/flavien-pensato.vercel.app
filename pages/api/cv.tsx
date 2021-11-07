@@ -14,9 +14,8 @@ import {
   presentationMessages,
 } from "../../data/landing";
 
-export default (req, res) => {
+export default (_req, res) => {
   try {
-    console.log(req.body);
     const app = ReactDOMServer.renderToString(
       <CVTemplate
         data={{

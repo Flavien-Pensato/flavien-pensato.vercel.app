@@ -23,17 +23,14 @@ const Blog = ({ blogs }) => (
         <h1>Blog</h1>
         <nav>
           <ul>
-            {blogs.map(
-              ({ slug, title, createAt }) =>
-                console.log(createAt) || (
-                  <ol key={slug}>
-                    <Link href={"/blog/".concat(slug)}>
-                      <a>{title}</a>
-                    </Link>
-                    <ChronologyDate startAt={createAt} fixed />
-                  </ol>
-                )
-            )}
+            {blogs.map(({ slug, title, createAt }) => (
+              <ol key={slug}>
+                <Link href={"/blog/".concat(slug)}>
+                  <a>{title}</a>
+                </Link>
+                <ChronologyDate startAt={createAt} fixed />
+              </ol>
+            ))}
           </ul>
         </nav>
       </section>
