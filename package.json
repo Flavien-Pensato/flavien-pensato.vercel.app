@@ -16,7 +16,7 @@
     "build-storybook": "build-storybook"
   },
   "engines": {
-    "node": "16.13.0"
+    "node": ">=14.17.0"
   },
   "dependencies": {
     "@emotion/css": "^11.1.3",
