@@ -26,6 +26,8 @@ export default async (req, res) => {
       await streamToPromise(Readable.from(links).pipe(smStream))
     ).toString();
 
+    smStream.end();
+
     // Change headers
     res.writeHead(200, {
       "Content-Type": "application/xml",
