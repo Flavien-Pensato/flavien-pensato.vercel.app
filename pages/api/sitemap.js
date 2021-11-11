@@ -1,4 +1,5 @@
 import { SitemapStream, streamToPromise } from "sitemap";
+import { Readable } from "stream";
 
 import { slugBlogs, getMetaBlogFromSlug } from "../../utils/blog";
 
@@ -11,18 +12,16 @@ export default async (req, res) => {
 
     const blogs = slugBlogs.map(getMetaBlogFromSlug);
 
-    blogs.forEach((blog) => {
-      smStream.write({
-        url: `/blog/${blog.slug}`,
-        changefreq: "daily",
-        priority: 0.9,
-      });
-    });
-
-    smStream.end();
+    const links = blogs.map((blog) => ({
+      url: `/blog/${blog.slug}`,
+      changefreq: "daily",
+      priority: 0.9,
+    }));
 
     // XML sitemap string
-    const sitemapOutput = (await streamToPromise(smStream)).toString();
+    const sitemapOutput = (
+      await streamToPromise(Readable.from(links).pipe(smStream))
+    ).toString();
 
     // Change headers
     res.writeHead(200, {
@@ -32,6 +31,8 @@ export default async (req, res) => {
     // Display output to user
     res.end(sitemapOutput);
   } catch (e) {
+    console.log(e);
+
     res.send(JSON.stringify(e));
   }
 };

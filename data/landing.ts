@@ -8,6 +8,7 @@ export const meta: MetaData = {
   keywords: "Flavien, Pensato, Lyon, React, Nextjs, Meteor, Devfront",
   viewport: "initial-scale=1.0, width=device-width",
 };
+
 export const experiences: Experience[] = [
   {
     title: "Aventus",
@@ -60,5 +61,7 @@ export const experiences: Experience[] = [
   },
 ];
 
-export const presentationTitle = "Salut,<br />Je m&apos;appelle Flavien&nbsp;Pensato"
-export const presentationMessages = "Je suis un développeur passionné et enthousiaste ! J'habite à Lyon et je travaille actuellement en Freelance."
+export const presentationTitle =
+  "Salut,<br />Je m&apos;appelle Flavien&nbsp;Pensato";
+export const presentationMessages =
+  "Je suis un développeur passionné et enthousiaste ! J'habite à Lyon et je travaille actuellement en Freelance.";

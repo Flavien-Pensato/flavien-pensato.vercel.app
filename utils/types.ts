@@ -1,9 +1,10 @@
 export interface MetaData {
-  title: string
-  viewport: string
-  description: string
-  author: string
-  keywords: string  
+  title: string;
+  viewport: string;
+  description: string;
+  type?: string;
+  author: string;
+  keywords: string;
 }
 
 export interface Experience {
