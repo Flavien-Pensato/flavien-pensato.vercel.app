@@ -6,6 +6,17 @@ export default async (req, res) => {
     const smStream = new SitemapStream({
       hostname: `https://${req.headers.host}`,
       cacheTime: 600000,
+      lastmodDateOnly: false,
+      xmlns: {
+        news: true,
+        xhtml: true,
+        image: true,
+        video: true,
+        custom: [
+          'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"',
+          'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+        ],
+      },
     });
 
     const links = [
