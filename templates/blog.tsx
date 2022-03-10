@@ -9,7 +9,7 @@ export const BlogTemplate = ({ meta, content }) => {
     <>
       <Meta {...meta} />
       <Menu />
-      <section> {content}</section>
+      <section>{content}</section>
       <Footer />
     </>
   );

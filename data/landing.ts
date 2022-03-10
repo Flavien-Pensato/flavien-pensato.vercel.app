@@ -11,6 +11,15 @@ export const meta: MetaData = {
 
 export const experiences: Experience[] = [
   {
+    title: "ITSF",
+    subTitle: "Freelance, Javascript, React, Jest, Typescript, Groovy, Java",
+    contents: [
+      '<a href="https://itsf.io/" target="_blank" rel="noreferrer" title="ITSF">ITSF</a> gère les besoins IT du groupe NJJ sur les opérateurs télécom que celle-ci rachète.',
+      "Je travaille dans l'équipe Core, principalement sur les projets fronts mais j'interviens également dans l'architecture globale des projets.",
+    ],
+    startAt: "2021-09-13",
+  },
+  {
     title: "Aventus",
     subTitle: "Freelance, Javascript, Tsoa, Mongodb, React, Typescript",
     contents: [

@@ -12,5 +12,5 @@ export interface Experience {
   subTitle: string;
   contents: string[];
   startAt: string;
-  endAt: string;
+  endAt?: string;
 }
