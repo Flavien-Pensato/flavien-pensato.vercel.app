@@ -1,0 +1,270 @@
+:root {
+  --container: 800px;
+  --primary: 19 90 159;
+  --text: 0, 0, 0;
+  --background: 255, 255, 255;
+  --dark: 0, 0, 0;
+  --white: 255, 255, 255;
+}
+
+@font-face {
+  font-weight: 200;
+  font-family: "Martel";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Martel/Martel-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: "Martel";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Martel/Martel-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: "Martel";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Martel/Martel-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: "Martel";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Martel/Martel-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: "Martel";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Martel/Martel-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 800;
+  font-family: "Martel";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Martel/Martel-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 900;
+  font-family: "Martel";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Martel/Martel-Black.ttf") format("truetype");
+}
+
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 800px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Anchor */
+:target::before {
+  /* Box Model */
+  display: block;
+  height: 3em;
+  margin: -3em 0 0;
+
+  /* Misc */
+  content: "";
+}
+
+body {
+  /* Box Model */
+  margin: 0;
+  padding: 0;
+
+  /* Typography */
+  font-family: Martel, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+h4 {
+  font-size: 1.4rem;
+}
+
+h5 {
+  font-size: 1.2rem;
+}
+
+a {
+  color: rgb(var(--primary));
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+section {
+  /* Box Model */
+  max-width: var(--container);
+  margin: auto;
+  padding: 1rem;
+}
+
+ol {
+  /* Box Model */
+  padding-left: 1rem;
+
+  /* Typography */
+  list-style: none;
+}
+
+ol p {
+  margin-left: 1rem;
+}
+
+.footer-container {
+  /* Positionning */
+  position: sticky;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Typography */
+  color: rgb(var(--white));
+  text-align: center;
+
+  /* Box Model */
+  background-color: rgb(var(--primary));
+}
+
+.footer-nav {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem 0;
+
+  a {
+    /* Box Model */
+    padding: 0 1rem;
+
+    /* Typography */
+    color: rgb(var(--white));
+    text-decoration: none;
+  }
+}
+
+.menu-header {
+  /* Positionning */
+  position: sticky;
+  top: 0;
+}
+
+html:not([data-scroll="0"]) .menu-header {
+  /* Typography */
+  background-color: rgb(var(--primary));
+
+  /* Transform */
+  transition: background-color 200ms ease;
+}
+
+.menu-nav {
+  /* Box Model */
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem 0;
+
+  /* Typography */
+  text-align: right;
+
+  @media (max-width: 800px) {
+    text-align: center;
+  }
+}
+
+.menu-link {
+  /* Box Model */
+  margin: 1rem 2rem;
+
+  /* Typography */
+  color: rgb(var(--text));
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+
+  /* Animation */
+  transition: all 0.3s;
+
+  &:hover:not([data-active="true"]),
+  &[data-active="true"] {
+    /* Typography */
+    color: rgb(var(--primary));
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+  }
+}
+
+html:not([data-scroll="0"]) .menu-link,
+html:not([data-scroll="0"]) .menu-link:hover,
+html:not([data-scroll="0"]) .menu-link:visited {
+  color: rgb(var(--background));
+}
+
+.download-button {
+  /* Box Model */
+  padding: 0.75rem 1rem;
+
+  /* Typography */
+  color: rgb(var(--white));
+  background-color: rgb(var(--primary));
+  border: none;
+  cursor: pointer;
+}
+
+html:not([data-scroll="0"]) .download-button,
+html:not([data-scroll="0"]) .download-button:hover,
+html:not([data-scroll="0"]) .download-button:visited {
+  color: rgb(var(--primary));
+  background-color: rgb(var(--white));
+}
+
+.sub-title {
+  margin-left: 1rem;
+  color: rgba(var(--dark), 0.7);
+  font-size: 0.8rem;
+}
+
+.separator-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+.separator {
+  border: 0;
+  border-top: 3px dotted rgb(19, 90, 159);
+}
+
+.chronology {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 0.8rem;
+  text-align: right;
+}

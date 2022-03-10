@@ -61,7 +61,6 @@ export const experiences: Experience[] = [
   },
 ];
 
-export const presentationTitle =
-  "Salut,<br />Je m&apos;appelle Flavien&nbsp;Pensato";
+export const presentationTitle = "Salut,<br />Je m&apos;appelle Flavien&nbsp;Pensato";
 export const presentationMessages =
   "Je suis un développeur passionné et enthousiaste ! J'habite à Lyon et je travaille actuellement en Freelance.";

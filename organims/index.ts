@@ -1,1 +1,1 @@
-export * from './chronology'
+export * from "./chronology";

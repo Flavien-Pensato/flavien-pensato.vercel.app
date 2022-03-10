@@ -5,8 +5,6 @@ import matter from "gray-matter";
 import renderToString from "next-mdx-remote/render-to-string";
 import hydrate from "next-mdx-remote/hydrate";
 
-import Meta from "../../organims/Meta";
-
 import Image from "next/image";
 import CodeBlock from "../../atoms/CodeBlock";
 

@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { DateTime } from "luxon";
 
 import { slugBlogs, getMetaBlogFromSlug } from "../../utils/blog";
 import ChronologyDate from "../../atoms/ChronologyDate";

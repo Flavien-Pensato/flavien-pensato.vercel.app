@@ -1,40 +1,8 @@
-import React from "react";
 import Link from "next/link";
-import { css } from "@emotion/css";
-
-const FooterContainer = css`
-  /* Positionning */
-  position: sticky;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  /* Typography */
-  color: rgb(var(--white));
-  text-align: center;
-
-  /* Box Model */
-  background-color: rgb(var(--primary));
-`;
-
-const FooterNav = css`
-  max-width: 800px;
-  margin: auto;
-  padding: 1rem 0;
-
-  a {
-    /* Box Model */
-    padding: 0 1rem;
-
-    /* Typography */
-    color: rgb(var(--white));
-    text-decoration: none;
-  }
-`;
 
 const Footer = () => (
-  <footer className={FooterContainer}>
-    <nav className={FooterNav}>
+  <footer className="footer-container">
+    <nav className="footer-nav">
       <Link href="https://www.linkedin.com/in/flavien-pensato-708190a7/">
         <a target="_blank" rel="noreferrer" title="Linkedin">
           <svg

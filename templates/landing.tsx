@@ -22,9 +22,7 @@ export const Landing = ({ data }) => {
       <main>
         <section>
           <h1 dangerouslySetInnerHTML={{ __html: data.presentationTitle }}></h1>
-          <p
-            dangerouslySetInnerHTML={{ __html: data.presentationMessages }}
-          ></p>
+          <p dangerouslySetInnerHTML={{ __html: data.presentationMessages }}></p>
         </section>
         <Separator />
         <Chronology experiences={data.experiences} />

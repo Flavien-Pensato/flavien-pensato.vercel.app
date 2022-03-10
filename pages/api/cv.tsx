@@ -1,18 +1,11 @@
 import ReactDOMServer from "react-dom/server";
-import createEmotionServer from "@emotion/server/create-instance";
-import { cache } from "@emotion/css";
 import htmlToPdf from "html-pdf-node";
 
 import { CVTemplate } from "../../templates/cv";
 
-import "../../styles/global";
+import "../../styles/global.css";
 
-import {
-  meta,
-  experiences,
-  presentationTitle,
-  presentationMessages,
-} from "../../data/landing";
+import { meta, experiences, presentationTitle, presentationMessages } from "../../data/landing";
 
 export default (_req, res) => {
   try {
@@ -26,15 +19,10 @@ export default (_req, res) => {
         }}
       />
     );
-    const { extractCritical } = createEmotionServer(cache);
-    const { ids, css } = extractCritical(app);
     const html = ReactDOMServer.renderToStaticMarkup(
       <html>
         <head>
-          <style
-            data-emotion={`css ${ids.join(" ")}`}
-            dangerouslySetInnerHTML={{ __html: css }}
-          />
+          <style data-emotion={`css`} dangerouslySetInnerHTML={{ __html: "" }} />
         </head>
         <body dangerouslySetInnerHTML={{ __html: app }}></body>
       </html>
@@ -54,10 +42,7 @@ export default (_req, res) => {
 
     htmlToPdf.generatePdf(file, options).then((pdfBuffer) => {
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader(
-        "Content-Disposition",
-        "attachment; filename=Flavien-Pensato.pdf"
-      );
+      res.setHeader("Content-Disposition", "attachment; filename=Flavien-Pensato.pdf");
 
       res.status(200).send(pdfBuffer);
     });

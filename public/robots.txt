@@ -1,7 +1,6 @@
-Sitemap: https://flavien-pensato.vercel.app/sitemap.xml
-
 User-agent: *
-Allow: /*
-Allow: /blog/*
-
 Disallow: /api/*
+
+Allow: /
+
+Sitemap: https://flavien-pensato.vercel.app/sitemap.xml
