@@ -1,5 +1,6 @@
 import fs from "fs";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const Sitemap = () => {};
 
 export const getServerSideProps = ({ res }) => {

@@ -3,16 +3,10 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const page = await ctx.renderPage();
     const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,
-      styles: (
-        <React.Fragment>
-          {initialProps.styles}
-          {/* <style data-emotion={`css ${ids.join(" ")}`} dangerouslySetInnerHTML={{ __html:  }} /> */}
-        </React.Fragment>
-      ),
+      styles: <React.Fragment>{initialProps.styles}</React.Fragment>,
     };
   }
 

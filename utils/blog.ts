@@ -18,7 +18,7 @@ type Meta = Pick<Blog, "type" | "title" | "createAt">;
 export const getMetaBlogFromSlug = (slug): Meta => {
   const postFilePath = path.join(blogPath, `${slug}.mdx`);
   const source = fs.readFileSync(postFilePath);
-  const { data }: { data: Meta } = matter(source);
+  const { data } = matter(source);
 
-  return { ...data, slug };
+  return { ...(data as any), slug };
 };
