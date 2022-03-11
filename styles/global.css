@@ -162,14 +162,15 @@ ol p {
   margin: auto;
   padding: 1rem 0;
 
-  a {
-    /* Box Model */
-    padding: 0 1rem;
+}
 
-    /* Typography */
-    color: rgb(var(--white));
-    text-decoration: none;
-  }
+.footer-nav a {
+  /* Box Model */
+  padding: 0 1rem;
+
+  /* Typography */
+  color: rgb(var(--white));
+  text-decoration: none;
 }
 
 

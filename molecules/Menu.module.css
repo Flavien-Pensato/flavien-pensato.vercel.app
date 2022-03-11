@@ -14,15 +14,21 @@ html:not([data-scroll="0"]) .menu {
 
 .nav {
   /* Box Model */
+  display: flex;
+  justify-content: end;
+  align-items: baseline;
+  flex-wrap: wrap;
   max-width: 800px;
   margin: auto;
   padding: 2rem 0;
 
   /* Typography */
   text-align: right;
+}
 
-  @media (max-width: 800px) {
-    text-align: center;
+@media (max-width: 800px) {
+  .nav {
+    justify-content: center;
   }
 }
 
