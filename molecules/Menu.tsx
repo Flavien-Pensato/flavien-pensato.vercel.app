@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Tag from "../atoms/Tag";
 import debounce from "../utils/debounce";
+
+import styles from "./Menu.module.css";
 
 const storeScroll = () => {
   document.documentElement.dataset.scroll = window.scrollY;
@@ -23,18 +26,19 @@ const Menu = () => {
   }, []);
 
   return (
-    <header className="menu-header">
-      <nav className="menu-nav">
+    <header className={styles.menu}>
+      <nav className={styles.nav}>
         <Link href="/">
-          <a data-active={asPath === "/"} className="menu-link">
+          <a data-active={asPath === "/"} className={styles.link}>
             Accueil
           </a>
         </Link>
         <Link href="/blog">
-          <a data-active={asPath === "/blog"} className="menu-link">
+          <a data-active={asPath === "/blog"} className={styles.link}>
             Blog
           </a>
         </Link>
+        <Tag>En poste 🧑‍💻</Tag>
         <Link href="/Flavien-Pensato.pdf">
           <a target="_blank">
             <button className="download-button">Télécharger mon CV</button>

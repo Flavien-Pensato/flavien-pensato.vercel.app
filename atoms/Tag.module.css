@@ -1,0 +1,16 @@
+.tag {
+  margin: 1rem 2rem;
+  font-size: small;
+  padding: 0.75rem 1rem;
+  color: rgb(var(--primary));
+  font-family: Arial, Helvetica, sans-serif;
+  border: solid 2px rgb(var(--primary));
+  text-transform: uppercase;
+  cursor: default;
+}
+
+html:not([data-scroll="0"]) .tag {
+  /* Typography */
+  color: rgb(var(--white));
+  border: solid 2px rgb(var(--white));
+}
