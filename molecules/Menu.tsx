@@ -7,7 +7,7 @@ import debounce from "../utils/debounce";
 import styles from "./Menu.module.css";
 
 const storeScroll = () => {
-  document.documentElement.dataset.scroll = window.scrollY;
+  document.documentElement.dataset.scroll = window.scrollY.toString();
 };
 
 const Menu = () => {
