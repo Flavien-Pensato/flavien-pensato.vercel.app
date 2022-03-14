@@ -161,7 +161,6 @@ ol p {
   max-width: 800px;
   margin: auto;
   padding: 1rem 0;
-
 }
 
 .footer-nav a {
@@ -173,7 +172,6 @@ ol p {
   text-decoration: none;
 }
 
-
 .download-button {
   /* Box Model */
   padding: 0.75rem 1rem;
@@ -181,6 +179,7 @@ ol p {
   /* Typography */
   color: rgb(var(--white));
   font-size: small;
+
   background-color: rgb(var(--primary));
   border: solid 2px rgb(var(--primary));
   cursor: pointer;
@@ -190,9 +189,9 @@ html:not([data-scroll="0"]) .download-button,
 html:not([data-scroll="0"]) .download-button:hover,
 html:not([data-scroll="0"]) .download-button:visited {
   color: rgb(var(--primary));
+
   background-color: rgb(var(--white));
 }
-
 
 .separator-container {
   max-width: 800px;
@@ -209,4 +208,10 @@ html:not([data-scroll="0"]) .download-button:visited {
   color: rgba(0, 0, 0, 0.7);
   font-size: 0.8rem;
   text-align: right;
+}
+
+@media (max-width: 800px) {
+  .desktop-only {
+    display: none;
+  }
 }

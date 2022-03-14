@@ -38,10 +38,14 @@ const Menu = () => {
             Blog
           </a>
         </Link>
-        <Tag>En poste 🧑‍💻</Tag>
+        <Tag>
+          <span className="desktop-only">En poste </span>🧑‍💻
+        </Tag>
         <Link href="/Flavien-Pensato.pdf">
           <a target="_blank">
-            <button className="download-button">Télécharger mon CV</button>
+            <button className="download-button">
+              <span className="desktop-only">Télécharger mon </span>CV
+            </button>
           </a>
         </Link>
       </nav>
