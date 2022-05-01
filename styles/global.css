@@ -76,21 +76,17 @@ html {
 
 /* Anchor */
 :target::before {
-  /* Box Model */
   display: block;
   height: 3em;
   margin: -3em 0 0;
 
-  /* Misc */
   content: "";
 }
 
 body {
-  /* Box Model */
   margin: 0;
   padding: 0;
 
-  /* Typography */
   font-family: Martel, sans-serif;
 }
 

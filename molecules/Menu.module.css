@@ -1,14 +1,11 @@
 .menu {
-  /* Positionning */
   position: sticky;
   top: 0;
 }
 
 html:not([data-scroll="0"]) .menu {
-  /* Typography */
   background-color: rgb(var(--primary));
 
-  /* Transform */
   transition: background-color 200ms ease;
 }
 
@@ -16,7 +13,7 @@ html:not([data-scroll="0"]) .menu {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  justify-content: end;
+  justify-content: flex-end;
   max-width: 800px;
   margin: auto;
   padding: 2rem 0;
@@ -26,12 +23,12 @@ html:not([data-scroll="0"]) .menu {
 
 @media (max-width: 800px) {
   .nav {
+
     justify-content: center;
   }
 }
 
 .link {
-  /* Box Model */
   margin: 1rem 2rem;
 
   color: rgb(var(--text));
@@ -44,7 +41,6 @@ html:not([data-scroll="0"]) .menu {
 
 .link:hover:not([data-active="true"]),
 .link[data-active="true"] {
-  /* Typography */
   color: rgb(var(--primary));
   text-decoration: underline;
   text-underline-offset: 0.5rem;

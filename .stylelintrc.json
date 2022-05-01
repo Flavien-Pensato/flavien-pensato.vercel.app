@@ -1,6 +1,6 @@
 {
   "extends": ["stylelint-config-rational-order", "stylelint-config-prettier"],
-  "plugins": ["stylelint-order"],
+  "plugins": ["stylelint-rational-order-plugin", "stylelint-order"],
   "rules": {
     "order/order": ["custom-properties", "declarations"],
     "order/properties-order": ["width", "height"],
