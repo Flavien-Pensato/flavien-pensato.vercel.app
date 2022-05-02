@@ -1,14 +1,17 @@
+import fs from "fs";
+import path from "path";
 import ReactDOMServer from "react-dom/server";
 import htmlToPdf from "html-pdf-node";
 
 import { CVTemplate } from "../../templates/cv";
 
-import "../../styles/global.css";
-
 import { meta, experiences, presentationTitle, presentationMessages } from "../../data/landing";
 
-export default (_req, res) => {
+export default async (_req, res) => {
   try {
+    const stylePath = path.join(process.cwd(), "styles/global.css");
+    const styles = fs.readFileSync(stylePath, "utf8");
+
     const app = ReactDOMServer.renderToString(
       <CVTemplate
         data={{
@@ -22,7 +25,7 @@ export default (_req, res) => {
     const html = ReactDOMServer.renderToStaticMarkup(
       <html>
         <head>
-          <style data-emotion={`css`} dangerouslySetInnerHTML={{ __html: "" }} />
+          <style>{styles}</style>
         </head>
         <body dangerouslySetInnerHTML={{ __html: app }}></body>
       </html>
