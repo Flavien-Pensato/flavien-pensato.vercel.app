@@ -9,7 +9,7 @@ export const blogs = await (async () => {
     .filter((pathname) => pathname.includes(".mdx"))
     .map((slugBlog) => slugBlog.replace(".mdx", ""));
 
-  const metaList = blogList.reduce((acc, path) => {
+  const metaList = blogList.reduce<any[]>((acc, path) => {
     const data = require("../pages/blog/" + path + ".mdx");
 
     if (data.meta) {
