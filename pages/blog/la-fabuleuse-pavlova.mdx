@@ -1,0 +1,41 @@
+import { BlogTemplate } from "../../templates/blog";
+
+export const meta = {
+  slug: "la-fabuleuse-pavlova",
+  title: "La Fabuleuse Pavlova",
+  description: "",
+  type: "Food",
+  createAt: "2022-05-02",
+};
+
+# La fabuleuse Pavlova
+
+## Ingredients
+
+### Meringue
+
+- 3 blancs d'oeufs
+- 150g de sucre
+
+### Chantilly
+
+- 33cl de crème liquide
+- 30g de sucre glace
+
+### Coulis
+
+- 2 mangues
+
+## Étapes
+
+- Mettre la farine dans une terrine et former un puit.
+
+- Déposer les oeufs entiers, le sucre, l'huile et le beurre.
+
+- Mélanger délicatement avec un fouet en ajoutant au fur et à mesure le lait. La pâte ainsi obtenue doit avoir une consistance d'un liquide légèrement épais.
+
+- Parfumer de rhum.
+
+- Faire chauffer une poêle antiadhésive et la huiler très légèrement. Verser une louche de pâte, la répartir dans la poêle puis attendre qu'elle soit cuite d'un côté avant de la retourner. Cuire ainsi toutes les crêpes à feu doux.
+
+export default ({ children, ...props }) => <BlogTemplate content={children} meta={meta} />;
