@@ -1,24 +1,23 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
 
-export const blogPath = path.join(process.cwd(), "data/blog");
+export const blogPath = path.join(process.cwd(), "pages/blog");
 
-export const slugBlogs = fs.readdirSync(blogPath).map((slugBlog) => slugBlog.replace(".mdx", ""));
+export const blogs = await (async () => {
+  const blogList = fs
+    .readdirSync(blogPath)
+    .filter((pathname) => pathname.includes(".mdx"))
+    .map((slugBlog) => slugBlog.replace(".mdx", ""));
 
-interface Blog {
-  type: string;
-  slug: string;
-  title: string;
-  createAt: string;
-}
+  const metaList = blogList.reduce((acc, path) => {
+    const data = require("../pages/blog/" + path + ".mdx");
 
-type Meta = Pick<Blog, "type" | "title" | "createAt">;
+    if (data.meta) {
+      acc.push(data.meta);
+    }
 
-export const getMetaBlogFromSlug = (slug): Meta => {
-  const postFilePath = path.join(blogPath, `${slug}.mdx`);
-  const source = fs.readFileSync(postFilePath);
-  const { data } = matter(source);
+    return acc;
+  }, []);
 
-  return { ...(data as any), slug };
-};
+  return metaList;
+})();

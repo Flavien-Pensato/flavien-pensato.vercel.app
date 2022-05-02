@@ -1,9 +1,12 @@
----
-title: Modifier la taille d'un svg
-description: Dans cet article, on va décrypter le fonctionnement des svg pour comprendre comment les manipuler.
-type: Tech
-createAt: "2021-06-03"
----
+import { BlogTemplate } from "../../templates/blog";
+
+export const meta = {
+  slug: "modifier-la-taille-d-un-svg",
+  title: "Modifier la taille d'un svg",
+  description: "Dans cet article, on va décrypter le fonctionnement des svg pour comprendre comment les manipuler.",
+  type: "Tech",
+  createAt: "2021-06-03",
+};
 
 # Modifier la taille d'un svg
 
@@ -61,3 +64,5 @@ Voici quelques liens pour améliorer ses connaissances sur les svg&nbsp;:
 
 - [Comprendre SVG viewBox](https://la-cascade.io/comprendre-svg-viewbox)
 - [ViewBox](https://developer.mozilla.org/fr/docs/Web/SVG/Attribute/viewBox)
+
+export default ({ children, ...props }) => <BlogTemplate content={children} meta={meta} />;

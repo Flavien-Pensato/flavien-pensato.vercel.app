@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { slugBlogs, getMetaBlogFromSlug } from "../utils/blog";
+import { blogs } from "../utils/blog";
 import { NotFoundTemplate } from "../templates/notFound";
 
 const NotFound = ({ blogs }) => {
@@ -12,8 +12,6 @@ const NotFound = ({ blogs }) => {
 };
 
 export const getStaticProps = () => {
-  const blogs = slugBlogs.map(getMetaBlogFromSlug);
-
   return {
     props: {
       blogs,

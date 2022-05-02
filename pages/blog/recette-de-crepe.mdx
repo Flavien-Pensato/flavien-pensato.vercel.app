@@ -1,9 +1,12 @@
----
-title: Recette de crêpes
-description: La meilleur recette de crêpes.
-type: Food
-createAt: "2021-11-09"
----
+import { BlogTemplate } from "../../templates/blog";
+
+export const meta = {
+  slug: "recette-de-crepe",
+  title: "Recette de crêpes",
+  description: "La meilleur recette de crêpes.",
+  type: "Food",
+  createAt: "2021-11-09",
+};
 
 # Ingredients
 
@@ -26,3 +29,5 @@ createAt: "2021-11-09"
 - Parfumer de rhum.
 
 - Faire chauffer une poêle antiadhésive et la huiler très légèrement. Verser une louche de pâte, la répartir dans la poêle puis attendre qu'elle soit cuite d'un côté avant de la retourner. Cuire ainsi toutes les crêpes à feu doux.
+
+export default ({ children, ...props }) => <BlogTemplate content={children} meta={meta} />;

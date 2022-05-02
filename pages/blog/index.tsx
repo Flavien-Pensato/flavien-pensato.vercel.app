@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
-import { slugBlogs, getMetaBlogFromSlug } from "../../utils/blog";
+import { blogs } from "../../utils/blog";
+
 import ChronologyDate from "../../atoms/ChronologyDate";
 import Meta from "../../organims/Meta";
 import Menu from "../../molecules/Menu";
@@ -38,9 +39,7 @@ const Blog = ({ blogs }) => (
   </>
 );
 
-export const getStaticProps = () => {
-  const blogs = slugBlogs.map(getMetaBlogFromSlug);
-
+export const getStaticProps = async () => {
   return {
     props: {
       blogs,

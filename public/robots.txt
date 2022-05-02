@@ -1,6 +1,9 @@
+# *
 User-agent: *
-Disallow: /api/*
-
 Allow: /
 
+# Host
+Host: https://flavien-pensato.vercel.app
+
+# Sitemaps
 Sitemap: https://flavien-pensato.vercel.app/sitemap.xml
