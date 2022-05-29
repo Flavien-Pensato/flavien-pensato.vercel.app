@@ -6,6 +6,7 @@ export const meta = {
   description: "Dans cet article, on va décrypter le fonctionnement des svg pour comprendre comment les manipuler.",
   type: "Tech",
   createAt: "2021-06-03",
+  modifyAt: "2022-05-29",
 };
 
 # Modifier la taille d'un svg
@@ -13,7 +14,7 @@ export const meta = {
 Dernièrement, on m'a demandé de rajouter un svg dans une librairie de svg optimisé.
 
 En intégrant ce svg, je me suis rendu compte qu'il n'avait pas les mêmes propriétés de tailles que les autres.
-Suite à une rapide édition des propriétés _height_ et _width_, le svg apparaissait devant moi avec des éléments en moins !
+Suite à une rapide édition des propriétés **height** et **width**, le svg apparaissait devant moi avec des éléments en moins !
 
 Dans cet article, nous allons décrypter le fonctionnement des **svg** afin de comprendre comment les manipuler pour les intégrer correctement.
 
@@ -37,7 +38,8 @@ La plupart des éléments qui composes un svg ont des propriétés de placement 
 - **rect** aura **x**, **y** et **width**, **height**
 
 Toutes ces propriétés sont relatives à une viewBox. Par défaut, la viewBox a les valeurs suivantes "**0 0 300 150**".
-Pour lire une viewBox, il suffit de prendre séparer en deux celle-ci (0 0 et 300 150). Ce qui correspond aux coordonnées du coin supérieur gauche et celles du coin inférieur droit.
+Pour lire une viewBox, il suffit de séparer en deux celle-ci (0 0 et 300 150).
+Ce qui correspond aux coordonnées du coin supérieur gauche et celles du coin inférieur droit.
 _Les coordonnées ne sont pas forcément positives._
 
 Pour résumer la viewBox est comme son nom l'indique en anglais, la partie visible de votre image. Elle influt notre vision mais pas le contenu ni sa taille comme dans mon problème actuel.
@@ -52,7 +54,7 @@ Dans mon cas, j'avais un svg comme celui-ci :
 </svg>
 ```
 
-Pour modifier sa taille, j'ai dû lui spécifier une _viewBox_, puis modifier sa taille comme je le souhaitais.
+Pour modifier sa taille, j'ai dû lui spécifier une **viewBox**, puis modifier sa taille comme je le souhaitais.
 
 ```
 <svg height="40" width="40" viewBox="0 0 90 90">
@@ -60,7 +62,7 @@ Pour modifier sa taille, j'ai dû lui spécifier une _viewBox_, puis modifier sa
 </svg>
 ```
 
-Rien de sorcier donc mais l'utilisation de _viewBox_ peut être perturbant.
+Rien de sorcier donc mais l'utilisation de **viewBox** peut être perturbant.
 
 ## <a name="link"></a>Liens similaires
 
