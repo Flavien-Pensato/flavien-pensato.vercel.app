@@ -37,12 +37,16 @@ La plupart des éléments qui composes un svg ont des propriétés de placement 
 - **rect** aura **x**, **y** et **width**, **height**
 
 Toutes ces propriétés sont relatives à une viewBox. Par défaut, la viewBox a les valeurs suivantes "**0 0 300 150**".
+Pour lire une viewBox, il suffit de prendre séparer en deux celle-ci (0 0 et 300 150). Ce qui correspond aux coordonnées du coin supérieur gauche et celles du coin inférieur droit.
+_Les coordonnées ne sont pas forcément positives._
+
+Pour résumer la viewBox est comme son nom l'indique en anglais, la partie visible de votre image. Elle influt notre vision mais pas le contenu ni sa taille comme dans mon problème actuel.
 
 ## <a name="howToSolve"></a>Résolution du problème
 
 Dans mon cas, j'avais un svg comme celui-ci :
 
-```svg live=true
+```svg
 <svg height="90" width="90">
   <circle cx="45" cy="45" r="45" />
 </svg>
@@ -50,7 +54,7 @@ Dans mon cas, j'avais un svg comme celui-ci :
 
 Pour modifier sa taille, j'ai dû lui spécifier une _viewBox_, puis modifier sa taille comme je le souhaitais.
 
-```svg
+```
 <svg height="40" width="40" viewBox="0 0 90 90">
   <circle cx="45" cy="45" r="45" />
 </svg>
