@@ -33,7 +33,7 @@ export const experiences: Experience[] = [
     title: "Unow",
     subTitle: "Salarié, React, Emotion",
     contents: [
-      'Unow est une startup parisienne et lyonnaise créée en 2013.C&apos;est un organisme de formation digital spécialisé sur le format <a href="https://fr.wikipedia.org/wiki/SPOC" target="_blank" rel="noreferrer" title="SPOC (Small Private Online Course)">SPOC</a> (Small Private Online Course) et les soft-skills.',
+      '<a href="https://www.unow.fr" target="_blank" rel="noreferrer" title="Unow">Unow</a> est une startup parisienne et lyonnaise créée en 2013. C&apos;est un organisme de formation digital spécialisé sur le format <a href="https://fr.wikipedia.org/wiki/SPOC" target="_blank" rel="noreferrer" title="SPOC (Small Private Online Course)">SPOC</a> (Small Private Online Course) et les soft-skills.',
       "Je travaille actuellement en tant que développeur front-end sur un ensemble de projets (plateforme de formation, backoffice, etc.).",
     ],
     startAt: "2019-03-01",
