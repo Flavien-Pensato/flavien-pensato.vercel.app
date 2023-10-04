@@ -5,7 +5,7 @@ export const meta: MetaData = {
   description:
     "Salut, je m'appelle Flavien Pensato. Je suis un développeur passionné et enthousiaste ! J'habite à Lyon et je travaille actuellement en freelance.",
   author: "Flavien Pensato",
-  keywords: "Flavien, Pensato, Lyon, React, Nextjs, Meteor, Devfront",
+  keywords: "Flavien, Pensato, Lyon, React, Nextjs, Meteor, Devfront, Fullstack",
   viewport: "initial-scale=1.0, width=device-width",
 };
 

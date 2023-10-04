@@ -12,7 +12,7 @@ html:not([data-scroll="0"]) .menu {
 .nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: flex-end;
   max-width: 800px;
   margin: auto;
@@ -50,4 +50,12 @@ html:not([data-scroll="0"]) .link,
 html:not([data-scroll="0"]) .link:hover,
 html:not([data-scroll="0"]) .link:visited {
   color: rgb(var(--background));
+}
+
+.avatar-img {
+  width: 30px;
+  height: 30px;
+  
+  margin: auto;
+  border-radius: 50%;
 }

@@ -5,6 +5,7 @@ import Tag from "../atoms/Tag";
 import debounce from "../utils/debounce";
 
 import styles from "./Menu.module.css";
+import Image from "next/image";
 
 const storeScroll = () => {
   document.documentElement.dataset.scroll = window.scrollY.toString();
@@ -46,6 +47,11 @@ const Menu = () => {
             <button className="download-button">
               <span className="desktop-only">Télécharger mon </span>CV
             </button>
+          </a>
+        </Link>
+        <Link href="/avatar.png">
+          <a target="_blank" className={styles.link}>
+            <Image height="40px" width="40px" src="/avatar.png" className={styles["avatar-img"]} />
           </a>
         </Link>
       </nav>
