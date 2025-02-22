@@ -1,223 +1,226 @@
 :root {
-  --container: 800px;
-  --primary: 19, 90, 159;
-  --text: 0, 0, 0;
-  --background: 255, 255, 255;
-  --dark: 0, 0, 0;
-  --white: 255, 255, 255;
+	--container: 800px;
+	--primary: 19, 90, 159;
+	--text: 0, 0, 0;
+	--background: 255, 255, 255;
+	--dark: 0, 0, 0;
+	--white: 255, 255, 255;
 }
 
 @font-face {
-  font-weight: 200;
-  font-family: "Martel";
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Martel/Martel-ExtraLight.ttf") format("truetype");
+	font-weight: 200;
+	font-family: "Martel";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Martel/Martel-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
-  font-weight: 300;
-  font-family: "Martel";
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Martel/Martel-Light.ttf") format("truetype");
+	font-weight: 300;
+	font-family: "Martel";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Martel/Martel-Light.ttf") format("truetype");
 }
 
 @font-face {
-  font-weight: 400;
-  font-family: "Martel";
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Martel/Martel-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-family: "Martel";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Martel/Martel-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-weight: 600;
-  font-family: "Martel";
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Martel/Martel-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-family: "Martel";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Martel/Martel-SemiBold.ttf") format("truetype");
 }
 
 @font-face {
-  font-weight: 700;
-  font-family: "Martel";
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Martel/Martel-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-family: "Martel";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Martel/Martel-Bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-weight: 800;
-  font-family: "Martel";
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Martel/Martel-ExtraBold.ttf") format("truetype");
+	font-weight: 800;
+	font-family: "Martel";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Martel/Martel-ExtraBold.ttf") format("truetype");
 }
 
 @font-face {
-  font-weight: 900;
-  font-family: "Martel";
-  font-style: normal;
-  font-display: swap;
-  src: url("/fonts/Martel/Martel-Black.ttf") format("truetype");
+	font-weight: 900;
+	font-family: "Martel";
+	font-style: normal;
+	font-display: swap;
+	src: url("/fonts/Martel/Martel-Black.ttf") format("truetype");
 }
 
 html {
-  font-size: 18px;
-  scroll-behavior: smooth;
+	font-size: 18px;
+	scroll-behavior: smooth;
 }
 
 @media (max-width: 800px) {
-  html {
-    font-size: 12px;
-  }
+	html {
+		font-size: 12px;
+	}
 }
 
 /* Anchor */
 :target::before {
-  display: block;
-  height: 3em;
-  margin: -3em 0 0;
+	display: block;
+	height: 3em;
+	margin: -3em 0 0;
 
-  content: "";
+	content: "";
 }
 
 body {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 
-  font-family: Martel, sans-serif;
+	font-family: Martel, sans-serif;
 }
 
 h1 {
-  font-size: 2rem;
+	font-size: 2rem;
+	margin-block: 1rem;
 }
 
 h2 {
-  font-size: 1.8rem;
+	font-size: 1.8rem;
+	margin-block: 0.75rem;
 }
 
 h3 {
-  font-size: 1.6rem;
+	font-size: 1.6rem;
+	margin-block: 0.5rem;
 }
 
 h4 {
-  font-size: 1.4rem;
+	font-size: 1.4rem;
 }
 
 h5 {
-  font-size: 1.2rem;
+	font-size: 1.2rem;
 }
 
 em {
-  font-size: 0.8em;
-  color: rgba(var(--primary), 0.5);
+	font-size: 0.8em;
+	color: rgba(var(--primary), 0.5);
 }
 
 a {
-  color: rgb(var(--primary));
-  text-decoration: none;
+	color: rgb(var(--primary));
+	text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 section {
-  /* Box Model */
-  max-width: var(--container);
-  margin: auto;
-  padding: 1rem;
+	/* Box Model */
+	max-width: var(--container);
+	margin: auto;
+	padding-inline: 1rem;
 }
 
 ol {
-  /* Box Model */
-  padding-left: 1rem;
+	/* Box Model */
+	padding-left: 1rem;
 
-  /* Typography */
-  list-style: none;
+	/* Typography */
+	list-style: none;
 }
 
 ol p {
-  margin-block: 0.5rem;
-  margin-left: 1rem;
+	margin-block: 0.5rem;
+	margin-left: 1rem;
 }
 
 ol li {
-  margin-block: 2rem;
+	margin-block: 1rem;
 }
 
 .footer-container {
-  /* Positionning */
-  position: sticky;
-  right: 0;
-  bottom: 0;
-  left: 0;
+	/* Positionning */
+	position: sticky;
+	right: 0;
+	bottom: 0;
+	left: 0;
 
-  /* Typography */
-  color: rgb(var(--white));
-  text-align: center;
+	/* Typography */
+	color: rgb(var(--white));
+	text-align: center;
 
-  /* Box Model */
-  background-color: rgb(var(--primary));
+	/* Box Model */
+	background-color: rgb(var(--primary));
 }
 
 .footer-nav {
-  max-width: 800px;
-  margin: auto;
-  padding: 1rem 0;
+	max-width: 800px;
+	margin: auto;
+	padding: 1rem 0;
 }
 
 .footer-nav a {
-  /* Box Model */
-  padding: 0 1rem;
+	/* Box Model */
+	padding: 0 1rem;
 
-  /* Typography */
-  color: rgb(var(--white));
-  text-decoration: none;
+	/* Typography */
+	color: rgb(var(--white));
+	text-decoration: none;
 }
 
 .download-button {
-  /* Box Model */
-  padding: 0.75rem 1rem;
+	/* Box Model */
+	padding: 0.75rem 1rem;
 
-  /* Typography */
-  color: rgb(var(--white));
-  font-size: small;
+	/* Typography */
+	color: rgb(var(--white));
+	font-size: small;
 
-  background-color: rgb(var(--primary));
-  border: solid 2px rgb(var(--primary));
-  cursor: pointer;
+	background-color: rgb(var(--primary));
+	border: solid 2px rgb(var(--primary));
+	cursor: pointer;
 }
 
 html:not([data-scroll="0"]) .download-button,
 html:not([data-scroll="0"]) .download-button:hover,
 html:not([data-scroll="0"]) .download-button:visited {
-  color: rgb(var(--primary));
+	color: rgb(var(--primary));
 
-  background-color: rgb(var(--white));
+	background-color: rgb(var(--white));
 }
 
 .separator-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 0 1rem;
+	max-width: 800px;
+	margin: 2rem auto;
+	padding: 0 1rem;
 }
 
 .separator {
-  border: 0;
-  border-top: 3px dotted rgb(19, 90, 159);
+	border: 0;
+	border-top: 3px dotted rgb(19, 90, 159);
 }
 
 .chronology {
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 0.8rem;
-  text-align: right;
+	color: rgba(0, 0, 0, 0.7);
+	font-size: 0.8rem;
+	text-align: right;
 }
 
 @media (max-width: 800px) {
-  .desktop-only {
-    display: none;
-  }
+	.desktop-only {
+		display: none;
+	}
 }
