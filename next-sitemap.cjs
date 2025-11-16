@@ -1,4 +1,4 @@
 module.exports = {
-    siteUrl: 'https://flavien-pensato.vercel.app',
+    siteUrl: 'https://flavien-pensato.fr',
     generateRobotsTxt: true,
 }

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://flavien-pensato.vercel.app
+Host: https://flavien-pensato.fr
 
 # Sitemaps
-Sitemap: https://flavien-pensato.vercel.app/sitemap.xml
+Sitemap: https://flavien-pensato.fr/sitemap.xml

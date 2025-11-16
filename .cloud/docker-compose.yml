@@ -18,12 +18,144 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./generate-nginx-config.sh:/usr/local/bin/generate-nginx-config.sh:+x
+      - nginx-conf:/etc/nginx/conf.d
+      - certbot-www:/var/www/certbot:rw
+      - certbot-conf:/etc/letsencrypt:ro
     depends_on:
       - app
     networks:
       - app-network
+    command:
+      - /bin/sh
+      - -c
+      - |
+        chmod +x /usr/local/bin/generate-nginx-config.sh
+        /usr/local/bin/generate-nginx-config.sh
+        nginx -t
+        (while :; do
+          sleep 30
+          if [ -f /var/www/certbot/.reload-nginx ]; then
+            rm -f /var/www/certbot/.reload-nginx
+            /usr/local/bin/generate-nginx-config.sh
+            nginx -s reload 2>/dev/null || true
+          else
+            /usr/local/bin/generate-nginx-config.sh
+            if [ -f /etc/nginx/conf.d/.config-state ] && [ "$$(cat /etc/nginx/conf.d/.config-state 2>/dev/null)" != "https" ] && [ -f /etc/letsencrypt/live/flavien-pensato.fr/fullchain.pem ]; then
+              nginx -s reload 2>/dev/null || true
+            fi
+          fi
+        done &)
+        (while :; do
+          sleep 6h
+          /usr/local/bin/generate-nginx-config.sh
+          nginx -s reload
+        done &)
+        nginx -g "daemon off;"
+
+  certbot-init:
+    image: certbot/certbot
+    container_name: certbot-init
+    volumes:
+      - certbot-www:/var/www/certbot:rw
+      - certbot-conf:/etc/letsencrypt:rw
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        sleep 15
+        CERT_PATH="/etc/letsencrypt/live/flavien-pensato.fr/fullchain.pem"
+        KEY_PATH="/etc/letsencrypt/live/flavien-pensato.fr/privkey.pem"
+        
+        # Fonction pour vérifier la validité du certificat
+        check_cert() {
+          if [ ! -f "$CERT_PATH" ] || [ ! -f "$KEY_PATH" ]; then
+            return 1
+          fi
+          if [ ! -s "$CERT_PATH" ] || [ ! -s "$KEY_PATH" ]; then
+            return 1
+          fi
+          if ! openssl x509 -in "$CERT_PATH" -noout -checkend 0 >/dev/null 2>&1; then
+            return 1
+          fi
+          return 0
+        }
+        
+        # Vérifier si le certificat existe et est valide
+        if check_cert; then
+          echo "Certificat valide deja present, pas besoin d'initialisation"
+          exit 0
+        fi
+        
+        # Si le certificat existe mais est invalide, le supprimer
+        if [ -f "$CERT_PATH" ]; then
+          echo "Certificat invalide detecte, suppression..."
+          rm -rf /etc/letsencrypt/live/flavien-pensato.fr
+          rm -rf /etc/letsencrypt/archive/flavien-pensato.fr
+          rm -rf /etc/letsencrypt/renewal/flavien-pensato.fr.conf
+        fi
+        
+        # Attendre que nginx soit prêt
+        echo "Attente que nginx soit pret..."
+        for i in 1 2 3 4 5; do
+          if wget -q --spider http://nginx/.well-known/acme-challenge/test 2>/dev/null || curl -s -o /dev/null -w "%{http_code}" http://nginx/.well-known/acme-challenge/test 2>/dev/null | grep -q "404\|403"; then
+            break
+          fi
+          sleep 2
+        done
+        
+        # Obtenir le certificat
+        echo "Tentative d'obtention du certificat SSL..."
+        if certbot certonly --webroot --webroot-path=/var/www/certbot --email flavien.pensato@gmail.com --agree-tos --no-eff-email --non-interactive -d flavien-pensato.fr; then
+          if check_cert; then
+            touch /var/www/certbot/.reload-nginx
+            echo "Certificat obtenu avec succes et valide"
+            exit 0
+          else
+            echo "ERREUR: Le certificat obtenu n'est pas valide"
+            exit 1
+          fi
+        else
+          echo "ERREUR: Echec lors de l'obtention du certificat"
+          echo "Verifiez que:"
+          echo "  - Le domaine flavien-pensato.fr pointe vers ce serveur"
+          echo "  - Les ports 80 et 443 sont ouverts"
+          echo "  - Nginx est accessible depuis Internet"
+          exit 1
+        fi
+    depends_on:
+      - nginx
+    networks:
+      - app-network
+    restart: "no"
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    restart: unless-stopped
+    volumes:
+      - certbot-www:/var/www/certbot:rw
+      - certbot-conf:/etc/letsencrypt:rw
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        trap exit TERM
+        while :; do
+          certbot renew --quiet && touch /var/www/certbot/.reload-nginx || true
+          sleep 12h
+        done
+    depends_on:
+      - nginx
+    networks:
+      - app-network
+
+volumes:
+  certbot-www:
+  certbot-conf:
+  nginx-conf:
 
 networks:
   app-network:
