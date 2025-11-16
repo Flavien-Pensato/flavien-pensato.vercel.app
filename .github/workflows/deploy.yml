@@ -1,0 +1,36 @@
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          # OPTIONAL: add your server to known_hosts automatically
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy & Build on remote server
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            set -e
+
+            echo 'Fetching latest code...'
+            if [ ! -d project ]; then
+              git clone ${{ github.server_url }}/${{ github.repository }} project
+              cd project
+            else
+              cd project
+              git fetch --all
+              git reset --hard origin/${{ github.ref_name }}
+            fi
+
+            echo 'Running build...'
+            cd .cloud
+            docker compose up -d --build
+          "
