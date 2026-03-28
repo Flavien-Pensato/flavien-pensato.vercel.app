@@ -1,5 +1,7 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from 'next/script'
+
 
 class MyDocument extends Document {
 	static async getInitialProps(ctx) {
@@ -21,7 +23,7 @@ class MyDocument extends Document {
 				<body>
 					<Main />
 					<NextScript />
-					<NextScript src="https://analytics.flavien-pensato.fr/script.js"             
+					<Script src="https://analytics.flavien-pensato.fr/script.js"             
   data-website-id="b294e060-a76c-4992-b254-453885e8454e" strategy="afterInteractive" /> 
 				</body>
 			</Html>
