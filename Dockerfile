@@ -39,7 +39,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-  CMD wget -qO /dev/null http://localhost:3000/api/health || exit 1
+  CMD wget -qO /dev/null http://127.0.0.1:3000/api/health || exit 1
 
 USER nextjs
 EXPOSE 3000
