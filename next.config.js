@@ -4,9 +4,5 @@ const withMDX = require("@next/mdx")({
 
 module.exports = withMDX({
   output: 'standalone',
-  pageExtensions: ["ts", "tsx", "mdx", "tsx"],
-  webpack: (config) => {
-    config.experiments = { ...config.experiments, topLevelAwait: true };
-    return config;
-  },
+  pageExtensions: ["ts", "tsx", "mdx"],
 });

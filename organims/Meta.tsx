@@ -1,9 +1,14 @@
-import React from "react";
 import Head from "next/head";
 
 import { MetaData } from "../utils";
 
-const Meta = ({ title, viewport, description, author, keywords }: MetaData) => (
+const Meta = ({
+  title,
+  viewport = "initial-scale=1.0, width=device-width",
+  description,
+  author = "Flavien Pensato",
+  keywords = "Flavien, Pensato, Lyon, React, Nextjs, Meteor, Devfront",
+}: MetaData) => (
   <Head>
     <title>{title}</title>
     <meta name="viewport" content={viewport} />
@@ -12,11 +17,5 @@ const Meta = ({ title, viewport, description, author, keywords }: MetaData) => (
     <meta name="keywords" content={keywords} />
   </Head>
 );
-
-Meta.defaultProps = {
-  author: "Flavien Pensato",
-  keywords: "Flavien, Pensato, Lyon, React, Nextjs, Meteor, Devfront",
-  viewport: "initial-scale=1.0, width=device-width",
-};
 
 export default Meta;

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "alwaysStrict": true,
@@ -17,8 +21,18 @@
     "strictNullChecks": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "incremental": true
   },
-  "exclude": ["node_modules", ".next", "out"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "organims/Meta.tsx"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "organims/Meta.tsx"
+  ]
 }

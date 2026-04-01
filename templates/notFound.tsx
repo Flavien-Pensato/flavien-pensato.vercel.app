@@ -20,7 +20,7 @@ export const NotFoundTemplate = ({ blogs }) => {
                   {blogs.map(({ slug, title }) => (
                     <ol key={slug}>
                       <Link href={"/blog/".concat(slug)}>
-                        <a>{title}</a>
+                        {title}
                       </Link>
                     </ol>
                   ))}

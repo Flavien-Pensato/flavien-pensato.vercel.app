@@ -3,21 +3,20 @@ import path from "path";
 
 export const blogPath = path.join(process.cwd(), "pages/blog");
 
-export const blogs = await (async () => {
+export async function getBlogs() {
   const blogList = fs
     .readdirSync(blogPath)
     .filter((pathname) => pathname.includes(".mdx"))
     .map((slugBlog) => slugBlog.replace(".mdx", ""));
 
-  const metaList = blogList.reduce<any[]>((acc, path) => {
-    const data = require("../pages/blog/" + path + ".mdx");
+  const metaList: any[] = [];
 
+  for (const slug of blogList) {
+    const data = await import("../pages/blog/" + slug + ".mdx");
     if (data.meta) {
-      acc.push(data.meta);
+      metaList.push(data.meta);
     }
-
-    return acc;
-  }, []);
+  }
 
   return metaList;
-})();
+}

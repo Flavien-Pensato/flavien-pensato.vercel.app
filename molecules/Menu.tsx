@@ -28,32 +28,25 @@ const Menu = () => {
 	return (
 		<header className={styles.menu}>
 			<nav className={styles.nav}>
-				<Link href="/">
-					<a data-active={asPath === "/"} className={styles.link}>
-						Accueil
-					</a>
+				<Link href="/" data-active={asPath === "/"} className={styles.link}>
+					Accueil
 				</Link>
-				<Link href="/blog">
-					<a data-active={asPath === "/blog"} className={styles.link}>
-						Blog
-					</a>
+				<Link href="/blog" data-active={asPath === "/blog"} className={styles.link}>
+					Blog
 				</Link>
-				<Link href="/Flavien-Pensato.pdf">
-					<a target="_blank">
-						<button className="download-button">
-							<span className="desktop-only">Télécharger mon </span>CV
-						</button>
-					</a>
+				<Link href="/Flavien-Pensato.pdf" target="_blank">
+					<button className="download-button">
+						<span className="desktop-only">Télécharger mon </span>CV
+					</button>
 				</Link>
-				<Link href="/avatar.png">
-					<a target="_blank" className={styles.link}>
-						<Image
-							height="40px"
-							width="40px"
-							src="/avatar.png"
-							className={styles["avatar-img"]}
-						/>
-					</a>
+				<Link href="/avatar.png" target="_blank" className={styles.link}>
+					<Image
+						height={40}
+						width={40}
+						src="/avatar.png"
+						alt="Avatar"
+						className={styles["avatar-img"]}
+					/>
 				</Link>
 			</nav>
 		</header>

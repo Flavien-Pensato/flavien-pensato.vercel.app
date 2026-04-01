@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { blogs } from "../utils/blog";
+import { getBlogs } from "../utils/blog";
 import { NotFoundTemplate } from "../templates/notFound";
 
 const NotFound = ({ blogs }) => {
@@ -11,7 +11,8 @@ const NotFound = ({ blogs }) => {
 	return <NotFoundTemplate blogs={matchLinks} />;
 };
 
-export const getStaticProps = () => {
+export const getStaticProps = async () => {
+	const blogs = await getBlogs();
 	return {
 		props: {
 			blogs,

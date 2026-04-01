@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { blogs } from "../../utils/blog";
+import { getBlogs } from "../../utils/blog";
 
 import ChronologyDate from "../../atoms/ChronologyDate";
 import Meta from "../../organims/Meta";
@@ -26,7 +26,7 @@ const Blog = ({ blogs }) => (
             {blogs.map(({ type, slug, title, createAt }) => (
               <ol key={slug}>
                 <Link href={"/blog/".concat(slug)}>
-                  <a>{type ? `[${type}] ${title}` : title}</a>
+                  {type ? `[${type}] ${title}` : title}
                 </Link>
                 <ChronologyDate startAt={createAt} fixed />
               </ol>
@@ -40,6 +40,7 @@ const Blog = ({ blogs }) => (
 );
 
 export const getStaticProps = async () => {
+  const blogs = await getBlogs();
   return {
     props: {
       blogs,
